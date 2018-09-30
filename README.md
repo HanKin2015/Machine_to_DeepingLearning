@@ -1,12 +1,15 @@
 # 1、GitHub创建本地仓库操作
-```github
+```
 # 本地创建
 git init 
 git add .
 git commit -m "new create"
 git push 地址 master
 
-# 创建orignal
+# 创建origin
+git remote 不带参数，列出已经存在的远程分支
+git remote -v | --verbose 列出详细信息，在每一个名字后面列出其远程url
+git remote add [shortname] [url]
 
 # 克隆
 git clone 地址

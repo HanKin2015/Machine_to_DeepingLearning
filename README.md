@@ -13,6 +13,9 @@ git remote add [shortname] [url]
 
 # 克隆
 git clone 地址
+
+# 使用下面语句后就可以git push上传
+git push --set-upstream origin master
 ```
 
 # 2、比赛源代码管理

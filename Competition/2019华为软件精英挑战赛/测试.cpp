@@ -133,7 +133,11 @@ void TestCPJ()
 
 int main()
 {
-    TestCPJ();
+    //TestCPJ();
+    string str = "hj.txt";
+    FILE *file = fopen(str.data(), "w");
+    fprintf(file, "dasda");
+    fclose(file);
     return 0;
 }
 

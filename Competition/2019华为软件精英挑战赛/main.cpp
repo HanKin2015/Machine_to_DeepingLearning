@@ -31,6 +31,7 @@ void Split(const string str, vector<int>& v)
 int G[1005][1005];  // 0则无边，不为0即有边，值为道路编号
 const int maxRoadId = 100005, maxCarId = 100005;
 vector<int> edge[maxRoadId];  // 里面存储道路的两个端点，即路口编号
+set<int> V, E;
 
 // 结构体：道路、汽车
 struct S_Road
@@ -61,6 +62,7 @@ bool ReadFile_road()
         vector<int> v;  // #(道路id，道路长度，最高限速，车道数目，起始点id，终点id，是否双向)
         Split(str, v);
         int id = v[0];
+        E.insert(id);
         road[id].id = v[0];
         road[id].length = v[1];
         road[id].maxSpeed = v[2];
@@ -68,13 +70,6 @@ bool ReadFile_road()
         road[id].startId = v[4];
         road[id].endId = v[5];
         road[id].isDoubleSide = v[6];
-        /*
-        cout << str << endl;
-        for (int i: v) {
-            cout << i << ' ';
-        }
-        cout << endl;
-        */
         cnt++;
         //G[edge[v[0]][0]][edge[v[0]][1]] = v[0];  发现不用这么存图，路口相当于是链表存储边
         //G[edge[v[0]][1]][edge[v[0]][0]] = v[0];
@@ -123,6 +118,7 @@ bool ReadFile_car()
 }
 
 // 路口
+int maxVertex = 0;
 bool ReadFile_cross()
 {
     string cross = folder + "/cross.txt"; // 65点
@@ -132,6 +128,7 @@ bool ReadFile_cross()
         cout << "The file" << cross << "not exist" << endl;
         return 0;
     }
+    int maxID = -1, minID = INT_MAX;
     while(!feof(F_cross)) {
         char str[1005];
         //fscanf(F_cross, "%s\n", str);  // 遇到第一个空格字符时，它会停止读取
@@ -139,20 +136,18 @@ bool ReadFile_cross()
         if (str[0] == '#') continue;
         vector<int> v;    // #(结点id,道路id,道路id,道路id,道路id)一定是四个，但-1为空
         Split(str, v);
-        /*
-        cout << str << endl;
-        for (int i: v) {
-            cout << i << ' ';
-        }
-        cout << endl;
-        */
         cnt++;
-
+        if (v[0] > maxID) maxID = v[0];
+        if (v[0] < minID) minID = v[0];
+        V.insert(v[0]);
         for(int i = 1; i <= 4; i++) {
             if (v[i] != -1) edge[v[i]].push_back(v[0]);
         }
     }
+
     cout << "Number of cross = " << cnt << endl;
+    printf("minID = %d, maxID = %d\n", minID, maxID);
+    maxVertex = maxID;
     fclose(F_cross);
     return true;
 }
@@ -181,19 +176,43 @@ void Test()
     return;
 }
 
-// dfs找到路径，bfs最短路径，推荐bfs
-void bfs()
+const int maxn = 1e3 + 5;
+const int inf = INT_MAX / 2;   // 要进行加法，不宜取最大值
+int dis[maxn][maxn];
+void Floyd(int n)    // 节点ID最大值
 {
-    queue<int> Q;
-    while(!Q.empty()) {
-
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            dis[i][j] = inf;
+        }
+        dis[i][i] = 0;
+    }
+    for (int i : E) {
+        dis[edge[i][0]][edge[i][1]] = road[i].length;
+        dis[edge[i][1]][edge[i][0]] = road[i].length;
+    }
+    for (int u = 1; u <= n; u++) {
+        for (int v = 1; v <= n; v++) {
+            for (int k = 1; k <= n; k++) {
+               dis[u][v] = min(dis[u][v], dis[u][k] + dis[k][v]);
+            }
+        }
     }
     return;
 }
+
+void cal()
+{
+
+    return;
+}
+
 
 int main()
 {
     Init();
     //Test();
+    Floyd(maxVertex);
+    cout << dis[2][5] << endl;
     return 0;
 }

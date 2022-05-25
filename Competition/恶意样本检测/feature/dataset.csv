@@ -1,0 +1,2 @@
+,DebugRVA,DebugSize,Dll,ExportRVA,ExportSize,IATRVA,ImageVersion,LinkerVersion,NumberOfSections,OSVersion,ResSize,StackReserveSize,filename
+api-ms-win-core-string-l1-1-0.dll,4096,56,1344,4368,498,0,10,12,2,10,984,262144,./data/api-ms-win-core-string-l1-1-0.dll

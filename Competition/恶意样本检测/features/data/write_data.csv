@@ -1,0 +1,14 @@
+,filename,DebugSize,DebugRVA,ImageVersion,OSVersion,ExportRVA,ExportSize,IATRVA,ResSize,LinkerVersion,NumberOfSections,StackReserveSize,Dll
+api-ms-win-core-string-l1-1-0.dll,./data/write/api-ms-win-core-string-l1-1-0.dll,56,4096,10,10,4368,498,0,984,12,2,262144,1344
+Backdoor.Win32.Agent.avuh_134e.exe,./data/write/Backdoor.Win32.Agent.avuh_134e.exe,0,0,0,4,0,0,24576,980,6,4,1048576,0
+Backdoor.Win32.Agent.avuh_c2ef.exe,./data/write/Backdoor.Win32.Agent.avuh_c2ef.exe,0,0,0,4,0,0,24576,980,6,4,1048576,0
+Backdoor.Win32.Agent.biss_01ec.exe,./data/write/Backdoor.Win32.Agent.biss_01ec.exe,0,0,0,4,0,0,12288,121916,6,4,1048576,0
+Backdoor.Win32.Bifrose.aci_34c4.exe,./data/write/Backdoor.Win32.Bifrose.aci_34c4.exe,1,268435456,0,4,0,0,0,0,6,1,1048576,35072
+Backdoor.Win32.Bifrose.dnhg_51aa.exe,./data/write/Backdoor.Win32.Bifrose.dnhg_51aa.exe,0,0,0,4,0,0,8192,9908,6,4,1048576,0
+Backdoor.Win32.Bifrose.fxv_5dc5.exe,./data/write/Backdoor.Win32.Bifrose.fxv_5dc5.exe,0,0,0,4,4096,4352,0,2400,6,2,1048576,0
+Backdoor.Win32.Bifrose.fxv_781b.exe,./data/write/Backdoor.Win32.Bifrose.fxv_781b.exe,0,0,0,4,4096,4352,0,2400,6,2,1048576,0
+Backdoor.Win32.Hupigon.abw_4e54.exe,./data/write/Backdoor.Win32.Hupigon.abw_4e54.exe,0,0,1,4,0,0,4096,763648,6,3,1048576,0
+Backdoor.Win32.IRCBot.tip_a5bf.exe,./data/write/Backdoor.Win32.IRCBot.tip_a5bf.exe,0,0,1,4,0,0,0,16780,2,6,2097152,0
+Backdoor.Win32.Poison.brut_e1a9.exe,./data/write/Backdoor.Win32.Poison.brut_e1a9.exe,0,0,0,4,0,0,0,1597,6,3,1048576,0
+Backdoor.Win32.Poison.cmve_e214.exe,./data/write/Backdoor.Win32.Poison.cmve_e214.exe,0,0,0,5,0,0,131112,760,9,3,1048576,32768
+Backdoor.Win32.Poison.pg_67c0.exe,./data/write/Backdoor.Win32.Poison.pg_67c0.exe,0,0,4,4,0,0,512,0,5,2,1048576,0

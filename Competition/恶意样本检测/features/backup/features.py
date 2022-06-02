@@ -1,14 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-文 件 名: get_dataset.py
-文件描述: 使用字典暴力破解登陆ftp
-作    者: HeJian
-创建日期: 2022.05.27
-修改日期：2022.05.27
-
-Copyright (c) 2022 HeJian. All rights reserved.
-"""
-
 import os
 import pefile
 import pandas as pd
@@ -40,23 +29,6 @@ class PEFile:
         return sample
 
 def pe2vec(direct):
-    """生成数据文件
-
-    遍历文件夹，获取文件夹中所有pe文件信息
-    
-    Parameters
-    ------------
-    source_path : str
-        源文件路径
-    data_size : int
-        源文件大小
-        
-    Returns
-    -------
-    bool
-        成功True, 失败False
-    """
-
     dataset = {}
     
     for subdir, dirs, files in os.walk(direct):

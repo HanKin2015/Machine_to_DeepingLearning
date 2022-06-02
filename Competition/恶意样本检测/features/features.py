@@ -1,59 +1,117 @@
-import os
-import pefile
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
-class PEFile:
-    def __init__(self, filename):
-        self.pe = pefile.PE(filename, fast_load=True)
-        self.filename   = filename
-        #pe.OPTIONAL_HEADER.DATA_DIRECTORY 数据目录表，保存了各种表的RVA及大小，数据的起始RVA和数据块的长度
-        self.ExportRVA  = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[0].VirtualAddress  #导出表
-        self.ExportSize = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[0].Size            #
-        self.ResSize    = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[2].Size            #资源表
-                                                                                    #
-        self.DebugSize  = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[6].Size            #调试表
-        self.DebugRVA   = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[6].VirtualAddress  #
-        self.IATRVA     = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[12].VirtualAddress #导入地址表（Import Address Table）地址
-        self.ImageVersion = self.pe.OPTIONAL_HEADER.MajorImageVersion               #可运行于操作系统的主版本号
-        self.OSVersion = self.pe.OPTIONAL_HEADER.MajorOperatingSystemVersion        #要求操作系统最低版本号的主版本号
-        self.LinkerVersion = self.pe.OPTIONAL_HEADER.MajorLinkerVersion             #链接程序的主版本号
-        self.StackReserveSize =self.pe.OPTIONAL_HEADER.SizeOfStackReserve           #初始化时的栈大小
-        self.Dll =self.pe.OPTIONAL_HEADER.DllCharacteristics                        #DllMain()函数何时被调用，默认为 0
-        self.NumberOfSections = self.pe.FILE_HEADER.NumberOfSections                #区块表的个数
-
-    def Construct(self):
-        sample = {}
-        for attr, k in self.__dict__.items():
-            if(attr != "pe"):
-                sample[attr] = k
-        return sample
-
-def pe2vec(direct):
-    dataset = {}
+# 数据集路径
+DATASET_PATH = './dataset/'
+# 训练集白样本数据集路径
+TRAIN_WHITE_DATASET_PATH = DATASET_PATH+'train_white_dataset.csv'
+# 训练集黑样本数据集路径
+TRAIN_BLACK_DATASET_PATH = DATASET_PATH+'train_black_dataset.csv'
+# 测试集样本数据集路径
+TEST_DATASET_PATH = DATASET_PATH+'test_dataset.csv'
     
-    for subdir, dirs, files in os.walk(direct):
-        for f in files:
-            file_path = os.path.join(subdir, f)
-            try:
-                pe = PEFile(file_path)
-                dataset[str(f)] = pe.Construct()
-            except Exception as e:
-                print('file:{}, {}'.format(f, e))
-    return dataset
-
-def vec2csv(dataset, filename):
-    df = pd.DataFrame(dataset)
-    infected = df.transpose()
-    infected.to_csv(filename, sep=',', encoding='utf-8')
-
-if __name__ == '__main__':
-    black_data = './data/black/'
-    black_dataset_path = './data/black_data.csv'
-    write_data = './data/write/'
-    write_dataset_path = './data/write_data.csv'
     
-    black_dataset = pe2vec(black_data)
-    vec2csv(black_dataset, black_dataset_path)
     
-    write_dataset = pe2vec(write_data)
-    vec2csv(write_dataset, write_dataset_path)
+def get_dataset(csv_path):
+    """获取数据集
+
+    读取csv文件，并做简单的特征处理
+    
+    Parameters
+    ------------
+    csv_path : str
+        数据集csv文件路径
+        
+    Returns
+    -------
+    dataset : pandas.DataFrame
+        数据集
+    """
+    
+    dataset = pd.read_csv(csv_path)
+    logger.info('dataset[{}] before shape: {}'.format(csv_path, dataset.shape))
+    
+    # 1.删除异常的样本数据
+    exception_dataset = dataset[dataset['ExceptionError'] > 0]
+    dataset = dataset[dataset['ExceptionError'] == 0]
+    
+    # 2.删除部分特征数据
+    #drop_columns = ['ExceptionError', 'HasDebug', 'HasTls', 'HasResources', 'HasRelocations',
+    #            'ImageBase', 'ImageSize','EpAddress', 'TimeDateStamp', 'NumberOfExFunctions', 'NumberOfImFunctions']
+    #drop_columns = ['LinkerVersion', 'ExportRVA', 'ExportSize', 'ResourceSize', 'DebugRVA',
+    #            'DebugSize', 'IATRVA', 'ImageVersion', 'OSVersion', 'StackReserveSize', 'Dll', 'NumberOfSections']
+    #drop_columns = ['NumberOfSections', 'TimeDateStamp', 'ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'HasResources', 'HasDebug', 'HasTls', 'DebugSize', 'StackReserveSize']
+    
+    #drop_columns = ['ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections']
+
+    #dataset = dataset.drop(['ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections', 'ExceptionError'], axis=1)
+    #dataset = dataset.drop(drop_columns, axis=1)
+    dataset = dataset.drop('ExceptionError', axis=1)
+    
+    # 3.缺失值处理，用前一个值填充
+    #dataset = dataset.fillna(method='ffill')
+    
+    logger.info('dataset[{}] after shape: {}'.format(csv_path, dataset.shape))
+    return exception_dataset, dataset
+
+    
+    
+    
+train_black_dataset = pd.read_csv(TRAIN_BLACK_DATASET_PATH)
+train_white_dataset = pd.read_csv(TRAIN_WHITE_DATASET_PATH)
+test_dataset = pd.read_csv(TEST_DATASET_PATH)
+#train_black_dataset.describe()
+# 6000 4000 9857
+train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape
+
+dataset = [train_black_dataset, train_white_dataset, test_dataset]
+print(train_black_dataset[train_black_dataset['ExceptionError'] > 0].shape[0],
+      train_white_dataset[train_white_dataset['ExceptionError'] > 0].shape[0],
+      test_dataset[test_dataset['ExceptionError'] > 0].shape[0])
+
+train_black_dataset_useful = train_black_dataset[train_black_dataset['ExceptionError'] == 0]
+train_black_dataset_exceptional = train_black_dataset[train_black_dataset['ExceptionError'] > 0]
+train_white_dataset_useful = train_white_dataset[train_white_dataset['ExceptionError'] == 0]
+train_white_dataset_exceptional = train_white_dataset[train_white_dataset['ExceptionError'] > 0]
+print(train_black_dataset_useful.shape, train_black_dataset_exceptional.shape, train_white_dataset_useful.shape, train_white_dataset_exceptional.shape)
+
+
+train_black_dataset = train_black_dataset_useful
+train_white_dataset = train_white_dataset_useful
+train_black_dataset.loc[:, 'label'] = 0
+train_white_dataset.loc[:, 'label'] = 1
+
+import seaborn
+%matplotlib inline
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+import warnings                      # 消除警告
+warnings.filterwarnings("ignore")
+def change_outlier_to_mean(feature, threshold):
+    tmp = int(train_black_dataset[train_black_dataset[feature] < threshold][feature].mean())
+    train_black_dataset.loc[train_black_dataset[feature] > threshold, feature] = tmp
+    
+    tmp = int(train_white_dataset[train_white_dataset[feature] < threshold][feature].mean())
+    train_white_dataset.loc[train_white_dataset[feature] > threshold, feature] = tmp
+    
+    tmp = int(test_dataset[test_dataset[feature] < threshold][feature].mean())
+    test_dataset.loc[test_dataset[feature] > threshold, feature] = tmp
+change_outlier_to_mean('StackReserveSize', 1e8)
+change_outlier_to_mean('NumberOfExFunctions', 20000)
+change_outlier_to_mean('ExportRVA', 3e7)
+change_outlier_to_mean('DebugRVA', 3e7)
+change_outlier_to_mean('IATRVA', 3e7)
+change_outlier_to_mean('StackReserveSize', 2e7)
+
+
+drop_columns = ['ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp',
+ 'DebugSize', 'ResourceSize', 'NumberOfSections', 'label']
+train_black_dataset.drop(drop_columns, axis=1).to_csv('./hj/train_black_dataset.csv', sep=',', encoding='utf-8', index=False)
+train_white_dataset.drop(drop_columns, axis=1).to_csv('./hj/train_white_dataset.csv', sep=',', encoding='utf-8', index=False)
+test_dataset.drop(drop_columns, axis=1).to_csv('./hj/test_dataset.csv', sep=',', encoding='utf-8', index=False)
+
+hj = train_black_dataset[train_black_dataset['ImageSize'] > 10000]

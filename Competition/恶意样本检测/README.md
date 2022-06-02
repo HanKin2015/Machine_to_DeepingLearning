@@ -216,7 +216,7 @@ PE文件同样可以使用字节的信息熵来当作特征。我们把PE文件�
 我的环境直接可以引用lief库，无可以进行安装：pip install lief
 
 
-
+这个网站特别有意思，可以学习别人写的代码学习pefile：https://codingdict.com/sources/py/pefile/17317.html
 
 
 

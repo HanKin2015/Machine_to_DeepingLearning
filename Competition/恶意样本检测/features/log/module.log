@@ -1,0 +1,920 @@
+2022-06-04 15:58:03 file.py[main:85] INFO: directory ./backup/ has 8 data files.
+2022-06-04 15:58:03 file.py[<module>:93] INFO: process spend 0.0 s.
+2022-06-04 15:59:17 file.py[main:85] INFO: directory ./backup/ has 8 data files.
+2022-06-04 15:59:17 file.py[<module>:93] INFO: process spend 0.001 s.
+2022-06-04 15:59:32 file.py[main:85] INFO: directory ./backup/ has 1 data files.
+2022-06-04 15:59:32 file.py[<module>:93] INFO: process spend 0.001 s.
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/amazing.py
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/debug
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[amazing.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[debug] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/features.ipynb
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/features.py
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/get_file_type.py
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/study_features.ipynb
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[features.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[get_dataset_v1.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/training - print版本.py
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[get_file_type.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/training-拆分前.py
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[study_features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[__init__:18] INFO: file path: ./backup/usb.py
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[study_pefile.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[training - print版本.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[training - 多模型选择.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[training-拆分前.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_file_info:123] INFO: file[usb.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:19:29 file.py[get_dataset:157] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/amazing.py
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/debug
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[amazing.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[debug] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/features.ipynb
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/features.py
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/get_file_type.py
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/study_features.ipynb
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[features.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[get_dataset_v1.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/training - print版本.py
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[get_file_type.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/training-拆分前.py
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[study_features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[__init__:18] INFO: file path: ./backup/usb.py
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[study_pefile.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[training - print版本.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[training - 多模型选择.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[training-拆分前.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_file_info:123] INFO: file[usb.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:20:12 file.py[get_dataset:157] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-04 18:20:12 file.py[main:162] INFO: directory ./backup/ has 0 data files.
+2022-06-04 18:20:12 file.py[main:164] INFO: []
+2022-06-04 18:20:12 file.py[<module>:172] INFO: process spend 0.025 s.
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/amazing.py
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/debug
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[amazing.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[debug] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/features.ipynb
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/features.py
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/get_file_type.py
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/study_features.ipynb
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[features.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[get_dataset_v1.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/training - print版本.py
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[get_file_type.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/training-拆分前.py
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[study_features.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[__init__:18] INFO: file path: ./backup/usb.py
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[study_pefile.ipynb] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[training - print版本.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[training - 多模型选择.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[training-拆分前.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_file_info:123] INFO: file[usb.py] get info failed, error[name 'get_file_md5' is not defined].
+2022-06-04 18:21:08 file.py[get_dataset:157] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-04 18:21:08 file.py[main:162] INFO: directory ./backup/ has 0 data files.
+2022-06-04 18:21:08 file.py[main:164] INFO: []
+2022-06-04 18:21:08 file.py[<module>:172] INFO: process spend 0.022 s.
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/amazing.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/debug
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/features.ipynb
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/features.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/get_file_type.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/study_features.ipynb
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/training - print版本.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/training-拆分前.py
+2022-06-04 18:21:24 file.py[__init__:18] INFO: file path: ./backup/usb.py
+2022-06-04 18:21:24 file.py[get_dataset:157] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-04 18:21:24 file.py[main:162] INFO: directory ./backup/ has 12 data files.
+2022-06-04 18:21:24 file.py[main:164] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 0.0}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0.0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 0.08}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 0.0}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 0.01}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 0.0}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 0.1}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 0.04}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 0.01}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 0.01}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 0.01}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 0.0}]
+2022-06-04 18:21:24 file.py[<module>:172] INFO: process spend 0.018 s.
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/amazing.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/debug
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/features.ipynb
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/features.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/get_file_type.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/training - print版本.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 00:18:56 file.py[__init__:18] INFO: file path: ./backup/usb.py
+2022-06-05 00:18:56 file.py[get_dataset:156] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 00:18:56 file.py[main:161] INFO: directory ./backup/ has 12 data files.
+2022-06-05 00:18:56 file.py[main:163] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232}]
+2022-06-05 00:18:56 file.py[<module>:171] INFO: process spend 0.017 s.
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:32:40 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:32:40 file.py[get_dataset:153] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:32:40 file.py[main:158] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:32:40 file.py[main:160] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:32:40 file.py[<module>:168] INFO: process spend 0.029 s.
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:33:16 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:33:16 file.py[get_dataset:153] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:33:16 file.py[main:158] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:33:16 file.py[main:160] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:33:16 file.py[<module>:168] INFO: process spend 0.025 s.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/debug: 0.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/features.py: 2844.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:34:34 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/training - print版本.py: -1.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/training - 多模型选择.py: -1.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/training-拆分前.py: -1.
+2022-06-05 22:34:34 file.py[get_file_usage_size:63] INFO: ./backup/usb.py: 232.
+2022-06-05 22:34:34 file.py[get_dataset:153] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:34:34 file.py[main:158] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:34:34 file.py[main:160] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:34:34 file.py[<module>:168] INFO: process spend 0.039 s.
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[amazing.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[debug] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[features.ipynb] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[features.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[get_dataset_v1.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[get_file_type.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:35:21 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[study_features.ipynb] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[study_pefile.ipynb] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[training - print版本.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[training - 多模型选择.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[training-拆分前.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_file_info:119] INFO: file[usb.py] get info failed, error[bytes or integer address expected instead of str instance].
+2022-06-05 22:35:21 file.py[get_dataset:153] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-05 22:35:21 file.py[main:158] INFO: directory ./backup/ has 0 data files.
+2022-06-05 22:35:21 file.py[main:160] INFO: []
+2022-06-05 22:35:21 file.py[<module>:168] INFO: process spend 0.042 s.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/debug: 0.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/features.py: 2844.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:36:51 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/training - print版本.py: -1.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/training - 多模型选择.py: -1.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/training-拆分前.py: -1.
+2022-06-05 22:36:51 file.py[get_file_usage_size:62] INFO: ./backup/usb.py: 232.
+2022-06-05 22:36:51 file.py[get_dataset:152] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:36:51 file.py[main:157] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:36:51 file.py[main:159] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:36:51 file.py[<module>:167] INFO: process spend 0.045 s.
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/debug: 0.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/features.py: 2844.
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:40:20 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:40:20 file.py[get_file_usage_size:62] INFO: ./backup/usb.py: 232.
+2022-06-05 22:40:20 file.py[get_dataset:152] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:40:20 file.py[main:157] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:40:20 file.py[main:159] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:40:20 file.py[<module>:167] INFO: process spend 0.049 s.
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/debug: 0.
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/features.py: 2844.
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[amazing.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[debug] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[features.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[features.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:44:16 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[get_dataset_v1.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[get_file_type.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_usage_size:63] INFO: ./backup/usb.py: 232.
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[study_features.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[study_pefile.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[training - print版本.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[training - 多模型选择.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[training-拆分前.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_file_info:134] INFO: file[usb.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:16 file.py[get_dataset:168] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-05 22:44:16 file.py[main:173] INFO: directory ./backup/ has 0 data files.
+2022-06-05 22:44:16 file.py[main:175] INFO: []
+2022-06-05 22:44:16 file.py[<module>:183] INFO: process spend 0.056 s.
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/debug: 0.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/features.py: 2844.
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[debug] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[amazing.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[features.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:44:48 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[get_dataset_v1.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[features.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[get_file_type.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_usage_size:63] INFO: ./backup/usb.py: 232.
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[study_features.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[study_pefile.ipynb] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[training - print版本.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[training - 多模型选择.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[training-拆分前.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_file_info:134] INFO: file[usb.py] get info failed, error[get_file_usage_size_by_shell() takes 2 positional arguments but 3 were given].
+2022-06-05 22:44:48 file.py[get_dataset:168] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-05 22:44:48 file.py[main:173] INFO: directory ./backup/ has 0 data files.
+2022-06-05 22:44:48 file.py[main:175] INFO: []
+2022-06-05 22:44:48 file.py[<module>:183] INFO: process spend 0.053 s.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/debug: 0.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/features.py: 2844.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:45:23 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:45:23 file.py[get_file_usage_size:63] INFO: ./backup/usb.py: 232.
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[amazing.py] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[debug] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[features.py] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[features.ipynb] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[get_dataset_v1.py] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[get_file_type.py] get info failed, error[list index out of range].
+2022-06-05 22:45:23 file.py[get_file_info:134] INFO: file[study_features.ipynb] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_file_info:134] INFO: file[study_pefile.ipynb] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_file_info:134] INFO: file[training-拆分前.py] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_file_info:134] INFO: file[usb.py] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_file_info:134] INFO: file[training - 多模型选择.py] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_file_info:134] INFO: file[training - print版本.py] get info failed, error[list index out of range].
+2022-06-05 22:45:24 file.py[get_dataset:168] INFO: ./backup/ has 12 samples which got pe info failed .
+2022-06-05 22:45:24 file.py[main:173] INFO: directory ./backup/ has 0 data files.
+2022-06-05 22:45:24 file.py[main:175] INFO: []
+2022-06-05 22:45:24 file.py[<module>:183] INFO: process spend 0.507 s.
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/debug: 0.
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/features.py: 2844.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:49:41 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:49:41 file.py[get_file_usage_size:62] INFO: ./backup/usb.py: 232.
+2022-06-05 22:49:41 file.py[get_dataset:152] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:49:41 file.py[main:157] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:49:41 file.py[main:159] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 22:49:41 file.py[<module>:167] INFO: process spend 0.098 s.
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/debug: 0.
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/features.py: 2844.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:50:21 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:50:21 file.py[get_file_usage_size:62] INFO: ./backup/usb.py: 232.
+2022-06-05 22:50:21 file.py[get_dataset:153] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:50:21 file.py[main:158] INFO: directory ./backup/ has 12 data files.
+2022-06-05 22:50:21 file.py[main:160] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232}]
+2022-06-05 22:50:21 file.py[<module>:168] INFO: process spend 0.059 s.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/debug: 0.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/features.py: 2844.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:51:42 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/procexp（中文）64.exe: 1412608.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:51:42 file.py[get_file_usage_size:62] INFO: ./backup/usb.py: 232.
+2022-06-05 22:51:42 file.py[get_dataset:153] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:51:42 file.py[main:158] INFO: directory ./backup/ has 13 data files.
+2022-06-05 22:51:42 file.py[main:160] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232}]
+2022-06-05 22:51:42 file.py[<module>:168] INFO: process spend 0.059 s.
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/amazing.py: 568.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/debug: 0.
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/features.ipynb: 81390.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/features.py: 2844.
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/get_dataset_v1.py: 6657.
+2022-06-05 22:55:29 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/get_file_type.py: 1833.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/study_features.ipynb: 103896.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/study_pefile.ipynb: 43543.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/procexp（中文）64.exe: 1412608.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/training - print版本.py: 9068.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/training - 多模型选择.py: 10352.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/training-拆分前.py: 10844.
+2022-06-05 22:55:29 file.py[get_file_usage_size:65] INFO: ./backup/usb.py: 232.
+2022-06-05 22:55:29 file.py[get_dataset:156] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:55:29 file.py[main:161] INFO: directory ./backup/ has 13 data files.
+2022-06-05 22:55:29 file.py[main:163] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232}]
+2022-06-05 22:55:29 file.py[<module>:171] INFO: process spend 0.062 s.
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/debug: 0 True True True.
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 22:58:54 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/procexp（中文）64.exe: 1412608 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 22:58:54 file.py[get_file_usage_size:66] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 22:58:54 file.py[get_dataset:157] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 22:58:54 file.py[main:162] INFO: directory ./backup/ has 13 data files.
+2022-06-05 22:58:54 file.py[main:164] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232}]
+2022-06-05 22:58:54 file.py[<module>:172] INFO: process spend 0.072 s.
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/amazing.py
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/debug
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/features.py
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:00:19 file.py[__init__:19] INFO: file path: ./backup/usb.py
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:00:19 file.py[get_file_usage_size:66] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:00:19 file.py[get_dataset:157] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:00:19 file.py[main:162] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:00:19 file.py[main:164] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232}]
+2022-06-05 23:00:19 file.py[<module>:172] INFO: process spend 0.068 s.
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/amazing.py
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/debug
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/features.py
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[debug] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[amazing.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[features.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[features.ipynb] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[__init__:20] INFO: file path: ./backup/usb.py
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[get_dataset_v1.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[get_file_type.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:06:47 file.py[get_file_usage_size:68] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[study_features.ipynb] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[study_pefile.ipynb] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[procexp（中文）64.exe] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[training - print版本.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[training - 多模型选择.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[training-拆分前.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_file_info:132] INFO: file[usb.py] get info failed, error[name 'win32con' is not defined].
+2022-06-05 23:06:47 file.py[get_dataset:166] INFO: ./backup/ has 13 samples which got pe info failed .
+2022-06-05 23:06:47 file.py[main:171] INFO: directory ./backup/ has 0 data files.
+2022-06-05 23:06:47 file.py[main:173] INFO: []
+2022-06-05 23:06:47 file.py[<module>:181] INFO: process spend 0.085 s.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[amazing.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[debug] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[features.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:07:14 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[features.ipynb] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[get_dataset_v1.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[get_file_type.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:07:14 file.py[get_file_usage_size:69] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[study_features.ipynb] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[study_pefile.ipynb] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[procexp（中文）64.exe] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[training - print版本.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[training - 多模型选择.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[training-拆分前.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_file_info:133] INFO: file[usb.py] get info failed, error[name 'FILE_ATTRIBUTE_SYSTEM' is not defined].
+2022-06-05 23:07:14 file.py[get_dataset:167] INFO: ./backup/ has 13 samples which got pe info failed .
+2022-06-05 23:07:14 file.py[main:172] INFO: directory ./backup/ has 0 data files.
+2022-06-05 23:07:14 file.py[main:174] INFO: []
+2022-06-05 23:07:14 file.py[<module>:182] INFO: process spend 0.078 s.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/amazing.py: 0 0 0.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/debug: 0 0 0.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/features.ipynb: 0 0 0.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/features.py: 0 0 0.
+2022-06-05 23:07:51 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/get_dataset_v1.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/get_file_type.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:07:51 file.py[get_file_usage_size:69] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/study_features.ipynb: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/study_pefile.ipynb: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/procexp（中文）64.exe: 1 2 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/training - print版本.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/training - 多模型选择.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/training-拆分前.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_file_attributes:77] INFO: ./backup/usb.py: 0 0 0.
+2022-06-05 23:07:51 file.py[get_dataset:167] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:07:51 file.py[main:172] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:07:51 file.py[main:174] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 23:07:51 file.py[<module>:182] INFO: process spend 0.095 s.
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[amazing.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[debug] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[features.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[features.ipynb] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[get_dataset_v1.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[get_file_type.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:11:16 file.py[get_file_usage_size:69] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[study_features.ipynb] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[study_pefile.ipynb] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[procexp（中文）64.exe] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[training - print版本.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[training - 多模型选择.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[training-拆分前.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_file_info:133] INFO: file[usb.py] get info failed, error[name 'is_readonly' is not defined].
+2022-06-05 23:11:16 file.py[get_dataset:167] INFO: ./backup/ has 13 samples which got pe info failed .
+2022-06-05 23:11:16 file.py[main:172] INFO: directory ./backup/ has 0 data files.
+2022-06-05 23:11:16 file.py[main:174] INFO: []
+2022-06-05 23:11:16 file.py[<module>:182] INFO: process spend 0.085 s.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/amazing.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/debug: False 0 0.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:12:30 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/features.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/features.ipynb: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/get_dataset_v1.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/get_file_type.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:12:30 file.py[get_file_usage_size:69] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/study_features.ipynb: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/study_pefile.ipynb: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/procexp（中文）64.exe: True 2 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/training - print版本.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/training - 多模型选择.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/training-拆分前.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_file_attributes:77] INFO: ./backup/usb.py: False 0 0.
+2022-06-05 23:12:30 file.py[get_dataset:167] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:12:30 file.py[main:172] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:12:30 file.py[main:174] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 23:12:30 file.py[<module>:182] INFO: process spend 0.09 s.
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/amazing.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/debug: False False False.
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:12:58 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/features.ipynb: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/features.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/get_dataset_v1.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/get_file_type.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:12:58 file.py[get_file_usage_size:69] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/study_features.ipynb: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/study_pefile.ipynb: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/procexp（中文）64.exe: True True False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/training - print版本.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/training - 多模型选择.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/training-拆分前.py: False False False.
+2022-06-05 23:12:58 file.py[get_file_attributes:77] INFO: ./backup/usb.py: False False False.
+2022-06-05 23:12:58 file.py[get_dataset:167] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:12:58 file.py[main:172] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:12:58 file.py[main:174] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': None}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': None}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': None}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': None}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': None}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': None}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': None}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': None}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': None}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': None}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': None}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': None}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': None}]
+2022-06-05 23:12:58 file.py[<module>:182] INFO: process spend 0.093 s.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:15:35 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:15:35 file.py[get_file_usage_size:73] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:15:35 file.py[get_dataset:171] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:15:35 file.py[main:176] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:15:35 file.py[main:178] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608, 'is_readonly': True, 'is_hiden': True, 'is_system': False, 'is_execute': True}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}]
+2022-06-05 23:15:35 file.py[<module>:186] INFO: process spend 0.073 s.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/amazing.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=29, tm_hour=11, tm_min=16, tm_sec=44, tm_wday=6, tm_yday=149, tm_isdst=0) 2022-05-29 11:16:44.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/debug: False False False time.struct_time(tm_year=2022, tm_mon=6, tm_mday=4, tm_hour=15, tm_min=59, tm_sec=7, tm_wday=5, tm_yday=155, tm_isdst=0) 2022-06-04 15:59:07.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/features.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=27, tm_hour=13, tm_min=21, tm_sec=52, tm_wday=4, tm_yday=147, tm_isdst=0) 2022-05-27 13:21:52.
+2022-06-05 23:18:09 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/features.ipynb: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=29, tm_hour=23, tm_min=25, tm_sec=12, tm_wday=6, tm_yday=149, tm_isdst=0) 2022-05-29 23:25:12.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/get_dataset_v1.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=28, tm_hour=12, tm_min=37, tm_sec=44, tm_wday=5, tm_yday=148, tm_isdst=0) 2022-05-28 12:37:44.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/get_file_type.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=29, tm_hour=15, tm_min=15, tm_sec=27, tm_wday=6, tm_yday=149, tm_isdst=0) 2022-05-29 15:15:27.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:18:09 file.py[get_file_usage_size:74] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/study_features.ipynb: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=29, tm_hour=22, tm_min=5, tm_sec=44, tm_wday=6, tm_yday=149, tm_isdst=0) 2022-05-29 22:05:44.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/study_pefile.ipynb: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=30, tm_hour=22, tm_min=18, tm_sec=10, tm_wday=0, tm_yday=150, tm_isdst=0) 2022-05-30 22:18:10.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/procexp（中文）64.exe: True True False time.struct_time(tm_year=2021, tm_mon=9, tm_mday=18, tm_hour=11, tm_min=0, tm_sec=32, tm_wday=5, tm_yday=261, tm_isdst=0) 2021-09-18 11:00:32.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/training - print版本.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=31, tm_hour=21, tm_min=0, tm_sec=8, tm_wday=1, tm_yday=151, tm_isdst=0) 2022-05-31 21:00:08.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/training - 多模型选择.py: False False False time.struct_time(tm_year=2022, tm_mon=6, tm_mday=1, tm_hour=9, tm_min=6, tm_sec=35, tm_wday=2, tm_yday=152, tm_isdst=0) 2022-06-01 09:06:35.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/training-拆分前.py: False False False time.struct_time(tm_year=2022, tm_mon=6, tm_mday=1, tm_hour=23, tm_min=36, tm_sec=46, tm_wday=2, tm_yday=152, tm_isdst=0) 2022-06-01 23:36:46.
+2022-06-05 23:18:09 file.py[get_file_attributes:88] INFO: ./backup/usb.py: False False False time.struct_time(tm_year=2022, tm_mon=5, tm_mday=30, tm_hour=22, tm_min=9, tm_sec=6, tm_wday=0, tm_yday=150, tm_isdst=0) 2022-05-30 22:09:06.
+2022-06-05 23:18:09 file.py[get_dataset:178] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:18:09 file.py[main:183] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:18:09 file.py[main:185] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204.494422, 'FileCreateTime': 1653792605.659461, 'FileAccessTime': 1653792605.73075, 'FileUsageSize': 568, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547.1848516, 'FileCreateTime': 1654329547.1848516, 'FileAccessTime': 1654329547.1848516, 'FileUsageSize': 0, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912.9309454, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653815591.1799688, 'FileUsageSize': 81390, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912.4709845, 'FileCreateTime': 1653449054.0071173, 'FileAccessTime': 1653449054.0715704, 'FileUsageSize': 2844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664.6291876, 'FileCreateTime': 1653713031.565711, 'FileAccessTime': 1653713031.565711, 'FileUsageSize': 6657, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527.9670782, 'FileCreateTime': 1653808145.0862188, 'FileAccessTime': 1653808145.157508, 'FileUsageSize': 1833, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032.3984375, 'FileCreateTime': 1654440697.7424688, 'FileAccessTime': 1654440697.7424688, 'FileUsageSize': 1412608, 'is_readonly': True, 'is_hiden': True, 'is_system': False, 'is_execute': True}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144.7727423, 'FileCreateTime': 1653543688.8733282, 'FileAccessTime': 1653543688.8733282, 'FileUsageSize': 103896, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290.6653204, 'FileCreateTime': 1653627230.0618048, 'FileAccessTime': 1653627230.0618048, 'FileUsageSize': 43543, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008.9485235, 'FileCreateTime': 1654002037.808875, 'FileAccessTime': 1654002037.808875, 'FileUsageSize': 9068, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595.4905157, 'FileCreateTime': 1654049370.512, 'FileAccessTime': 1654049370.512, 'FileUsageSize': 10352, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806.7229376, 'FileCreateTime': 1653824759.612586, 'FileAccessTime': 1653824759.6799688, 'FileUsageSize': 10844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746.1809454, 'FileCreateTime': 1653919562.016883, 'FileAccessTime': 1653919562.0911016, 'FileUsageSize': 232, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}]
+2022-06-05 23:18:09 file.py[<module>:193] INFO: process spend 0.102 s.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/amazing.py
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/debug
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/features.ipynb
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/features.py
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/amazing.py: 568 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/debug: 0 True True True.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/get_dataset_v1.py
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/get_file_type.py
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/procexp（中文）64.exe
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/features.py: 2844 True True True.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/study_features.ipynb
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/features.ipynb: 81390 True True True.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/study_pefile.ipynb
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/training - print版本.py
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/get_dataset_v1.py: 6657 True True True.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/training - 多模型选择.py
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/get_file_type.py: 1833 True True True.
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/training-拆分前.py
+2022-06-05 23:19:07 file.py[__init__:21] INFO: file path: ./backup/usb.py
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/study_features.ipynb: 103896 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/study_pefile.ipynb: 43543 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/procexp（中文）64.exe: 1412608 True False True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/training - print版本.py: 9068 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/training - 多模型选择.py: 10352 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/training-拆分前.py: 10844 True True True.
+2022-06-05 23:19:07 file.py[get_file_usage_size:74] INFO: ./backup/usb.py: 232 True True True.
+2022-06-05 23:19:07 file.py[get_dataset:178] INFO: ./backup/ has 0 samples which got pe info failed .
+2022-06-05 23:19:07 file.py[main:183] INFO: directory ./backup/ has 13 data files.
+2022-06-05 23:19:07 file.py[main:185] INFO: [{'FileName': 'amazing.py', 'FileMD5': '92f4c9ace279eb2a2a630fd82e6c6c13', 'FileSize': 568, 'FileModifyTime': 1653794204, 'FileCreateTime': 1653792605, 'FileAccessTime': 1653792605, 'FileUsageSize': 568, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'debug', 'FileMD5': 'd41d8cd98f00b204e9800998ecf8427e', 'FileSize': 0, 'FileModifyTime': 1654329547, 'FileCreateTime': 1654329547, 'FileAccessTime': 1654329547, 'FileUsageSize': 0, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.ipynb', 'FileMD5': 'f4c894351779e9fe55abec43e2886f5c', 'FileSize': 81390, 'FileModifyTime': 1653837912, 'FileCreateTime': 1653543688, 'FileAccessTime': 1653815591, 'FileUsageSize': 81390, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'features.py', 'FileMD5': '29e9695cabb187f815e4bc9393862e98', 'FileSize': 2844, 'FileModifyTime': 1653628912, 'FileCreateTime': 1653449054, 'FileAccessTime': 1653449054, 'FileUsageSize': 2844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_dataset_v1.py', 'FileMD5': 'aa0b4701ec70e5d0d6ec1a51c0acbc57', 'FileSize': 6657, 'FileModifyTime': 1653712664, 'FileCreateTime': 1653713031, 'FileAccessTime': 1653713031, 'FileUsageSize': 6657, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'get_file_type.py', 'FileMD5': '5f265c9a2d4b1384fa049b3fd095160e', 'FileSize': 1833, 'FileModifyTime': 1653808527, 'FileCreateTime': 1653808145, 'FileAccessTime': 1653808145, 'FileUsageSize': 1833, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'procexp（中文）64.exe', 'FileMD5': '9ef4a00ea4d03dd429f78394dac7b7c9', 'FileSize': 1412608, 'FileModifyTime': 1631934032, 'FileCreateTime': 1654440697, 'FileAccessTime': 1654440697, 'FileUsageSize': 1412608, 'is_readonly': True, 'is_hiden': True, 'is_system': False, 'is_execute': True}, {'FileName': 'study_features.ipynb', 'FileMD5': '307c130abc2a4300b29cfd0306eafe9d', 'FileSize': 103896, 'FileModifyTime': 1653833144, 'FileCreateTime': 1653543688, 'FileAccessTime': 1653543688, 'FileUsageSize': 103896, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'study_pefile.ipynb', 'FileMD5': '455c15fd16e0f712cd051dc82c8e5d16', 'FileSize': 43543, 'FileModifyTime': 1653920290, 'FileCreateTime': 1653627230, 'FileAccessTime': 1653627230, 'FileUsageSize': 43543, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - print版本.py', 'FileMD5': '03feb5b8947a82a6e8607932736da044', 'FileSize': 9068, 'FileModifyTime': 1654002008, 'FileCreateTime': 1654002037, 'FileAccessTime': 1654002037, 'FileUsageSize': 9068, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training - 多模型选择.py', 'FileMD5': 'aa4b99b307a647f43c573bf8d8f022c0', 'FileSize': 10352, 'FileModifyTime': 1654045595, 'FileCreateTime': 1654049370, 'FileAccessTime': 1654049370, 'FileUsageSize': 10352, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'training-拆分前.py', 'FileMD5': 'd732459d6e74bd1abdd259309a7a997d', 'FileSize': 10844, 'FileModifyTime': 1654097806, 'FileCreateTime': 1653824759, 'FileAccessTime': 1653824759, 'FileUsageSize': 10844, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}, {'FileName': 'usb.py', 'FileMD5': 'd87f6c51e06a1a2cbdaef469a9584739', 'FileSize': 232, 'FileModifyTime': 1653919746, 'FileCreateTime': 1653919562, 'FileAccessTime': 1653919562, 'FileUsageSize': 232, 'is_readonly': False, 'is_hiden': False, 'is_system': False, 'is_execute': True}]
+2022-06-05 23:19:08 file.py[<module>:193] INFO: process spend 0.08 s.

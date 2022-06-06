@@ -2,17 +2,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 数据集路径
-DATASET_PATH = './dataset/'
-# 训练集白样本数据集路径
-TRAIN_WHITE_DATASET_PATH = DATASET_PATH+'train_white_dataset.csv'
-# 训练集黑样本数据集路径
-TRAIN_BLACK_DATASET_PATH = DATASET_PATH+'train_black_dataset.csv'
-# 测试集样本数据集路径
-TEST_DATASET_PATH = DATASET_PATH+'test_dataset.csv'
-    
-    
-    
+DATA_PATH                    = './data/'                 # 原始数据路径
+DATASET_PATH                 = './dataset/'              # 特征工程后数据集路径
+TRAIN_WHITE_DATASET_FILENAME = 'train_white_dataset.csv' # 训练集白样本数据集文件名
+TRAIN_BLACK_DATASET_FILENAME = 'train_black_dataset.csv' # 训练集黑样本数据集路径
+TRAIN_DATASET_FILENAME       = 'train_dataset.csv'       # 训练集样本数据集文件名
+TEST_DATASET_FILENAME        = 'test_dataset.csv'        # 测试集样本数据集文件名
+TRAIN_DIRTY_DATASET_PATH     = DATASET_PATH+'train_dirty_dataset.csv' # 训练集脏数据集路径
+TEST_DIRTY_DATASET_PATH      = DATASET_PATH+'dirty_test_dataset.csv'  # 测试集脏数据集路径
+
 def get_dataset(csv_path):
     """获取数据集
 
@@ -30,23 +28,13 @@ def get_dataset(csv_path):
     """
     
     dataset = pd.read_csv(csv_path)
-    logger.info('dataset[{}] before shape: {}'.format(csv_path, dataset.shape))
+    
     
     # 1.删除异常的样本数据
     exception_dataset = dataset[dataset['ExceptionError'] > 0]
     dataset = dataset[dataset['ExceptionError'] == 0]
     
     # 2.删除部分特征数据
-    #drop_columns = ['ExceptionError', 'HasDebug', 'HasTls', 'HasResources', 'HasRelocations',
-    #            'ImageBase', 'ImageSize','EpAddress', 'TimeDateStamp', 'NumberOfExFunctions', 'NumberOfImFunctions']
-    #drop_columns = ['LinkerVersion', 'ExportRVA', 'ExportSize', 'ResourceSize', 'DebugRVA',
-    #            'DebugSize', 'IATRVA', 'ImageVersion', 'OSVersion', 'StackReserveSize', 'Dll', 'NumberOfSections']
-    #drop_columns = ['NumberOfSections', 'TimeDateStamp', 'ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'HasResources', 'HasDebug', 'HasTls', 'DebugSize', 'StackReserveSize']
-    
-    #drop_columns = ['ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections']
-
-    #dataset = dataset.drop(['ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections', 'ExceptionError'], axis=1)
-    #dataset = dataset.drop(drop_columns, axis=1)
     dataset = dataset.drop('ExceptionError', axis=1)
     
     # 3.缺失值处理，用前一个值填充
@@ -58,12 +46,7 @@ def get_dataset(csv_path):
     
     
     
-train_black_dataset = pd.read_csv(TRAIN_BLACK_DATASET_PATH)
-train_white_dataset = pd.read_csv(TRAIN_WHITE_DATASET_PATH)
-test_dataset = pd.read_csv(TEST_DATASET_PATH)
-#train_black_dataset.describe()
-# 6000 4000 9857
-train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape
+
 
 dataset = [train_black_dataset, train_white_dataset, test_dataset]
 print(train_black_dataset[train_black_dataset['ExceptionError'] > 0].shape[0],
@@ -115,3 +98,49 @@ train_white_dataset.drop(drop_columns, axis=1).to_csv('./hj/train_white_dataset.
 test_dataset.drop(drop_columns, axis=1).to_csv('./hj/test_dataset.csv', sep=',', encoding='utf-8', index=False)
 
 hj = train_black_dataset[train_black_dataset['ImageSize'] > 10000]
+
+def 
+
+def features_processing(dataset):
+
+def read_csv(filename):
+    """从csv文件读取数据集
+    """
+    
+    path = DATA_PATH + filename
+    dataset = pd.read_csv(path)
+    return dataset
+
+def save_csv(dataset, filename):
+    """数据集保存到csv文件
+    """
+    
+    path = DATASET_PATH + filename
+    dataset.to_csv(path, sep=',', encoding='utf-8', index=False)
+
+def main():
+    # 获取数据集
+    train_black_dataset = read_csv(TRAIN_BLACK_DATASET_FILENAME)
+    train_white_dataset = read_csv(TRAIN_WHITE_DATASET_FILENAME)
+    test_dataset        = read_csv(TEST_DATASET_FILENAME)
+    logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
+    
+    # 添加标签
+    train_black_dataset['label'] = 0
+    train_white_dataset['label'] = 1
+    
+    # 黑白样本合并
+    train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
+    
+    #train_black_dataset.describe()
+    # 6000 4000 9857
+    train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape
+    features_processing(dataset)
+    
+if __name__ == '__main__':
+    start_time = time.time()
+
+    main()
+
+    end_time = time.time()
+    logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

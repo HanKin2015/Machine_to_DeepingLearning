@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+import os
+os.environ['NUMEXPR_MAX_THREADS'] = '64'
+import time
+from log import logger
 
 DATA_PATH                    = './data/'                 # 原始数据路径
 DATASET_PATH                 = './dataset/'              # 特征工程后数据集路径
@@ -8,100 +11,114 @@ TRAIN_WHITE_DATASET_FILENAME = 'train_white_dataset.csv' # 训练集白样本数
 TRAIN_BLACK_DATASET_FILENAME = 'train_black_dataset.csv' # 训练集黑样本数据集路径
 TRAIN_DATASET_FILENAME       = 'train_dataset.csv'       # 训练集样本数据集文件名
 TEST_DATASET_FILENAME        = 'test_dataset.csv'        # 测试集样本数据集文件名
-TRAIN_DIRTY_DATASET_PATH     = DATASET_PATH+'train_dirty_dataset.csv' # 训练集脏数据集路径
-TEST_DIRTY_DATASET_PATH      = DATASET_PATH+'dirty_test_dataset.csv'  # 测试集脏数据集路径
+TRAIN_DIRTY_DATASET_FILENAME = 'train_dirty_dataset.csv' # 训练集脏数据集文件名
+TEST_DIRTY_DATASET_FILENAME  = 'test_dirty_dataset.csv'  # 测试集脏数据集文件名
 
-def get_dataset(csv_path):
-    """获取数据集
+# 创建数据集路径文件夹
+if not os.path.exists(DATASET_PATH):
+    os.makedirs(DATASET_PATH)
 
-    读取csv文件，并做简单的特征处理
-    
-    Parameters
-    ------------
-    csv_path : str
-        数据集csv文件路径
-        
-    Returns
-    -------
-    dataset : pandas.DataFrame
-        数据集
+def exception_value_processing_by_delete(dataset, feature, lower_threshold, upper_threshold):
+    """异常值处理（删除）
+    """
+
+def exception_value_processing_by_median(dataset, feature, lower_threshold, upper_threshold):
+    """异常值处理（取中位数）
     """
     
-    dataset = pd.read_csv(csv_path)
+def exception_value_processing_by_mean(dataset, feature, lower_threshold, upper_threshold):
+    """异常值处理（取平均值）
+    """
     
+    df = dataset[(lower_threshold <= dataset[feature]) & (dataset[feature] <= upper_threshold)]
+    logger.debug('{}<{},{}>: {}/{}.'.format(feature, lower_threshold, upper_threshold, df.shape[0], dataset.shape[0]))
+    dataset.loc[dataset[feature] < lower_threshold, feature] = int(df[feature].mean())
+    dataset.loc[dataset[feature] > upper_threshold, feature] = int(df[feature].mean())
+    return dataset
+
+def missing_value_processing(dataset):
+    """缺失值处理
+    """
     
-    # 1.删除异常的样本数据
-    exception_dataset = dataset[dataset['ExceptionError'] > 0]
-    dataset = dataset[dataset['ExceptionError'] == 0]
+    # 用前一个值填充
+    dataset = dataset.fillna(method='ffill')
+    return dataset
+
+def exception_value_processing(dataset):
+    exception_values = [
+        ['StackReserveSize', 0, 2e7],
+        ['NumberOfExFunctions', 0, 1000],
+        ['ExportRVA', 0, 2e7],
+        ['DebugRVA', 0, 1e7],
+        ['IATRVA', 0, 1e7],
+        ['ImageSize', 6000, 5e7],
+        ]
+
+    for exception_value in exception_values:
+        feature, lower_threshold, upper_threshold = [elem for elem in exception_value]
+        dataset = exception_value_processing_by_mean(dataset, feature, lower_threshold, upper_threshold)
+    dataset.loc[dataset['NumberOfExFunctions'] == -1, 'NumberOfExFunctions'] = 0
+    dataset.loc[dataset['NumberOfImFunctions'] == -1, 'NumberOfImFunctions'] = 0
+    return dataset
+
+def delete_uncorrelated_features(dataset):
+    """删除相关性低的特征
+    """
     
-    # 2.删除部分特征数据
-    dataset = dataset.drop('ExceptionError', axis=1)
+    uncorrelated_features = ['ExceptionError', 'TimeDateStamp', 'TS_obj', 'DayName',
+        'HourBin', 'Hour', 'Minute', 'Second']
+    dataset.drop(uncorrelated_features, axis=1, inplace=True)
+    return dataset
+
+def datetime_processing(dataset):
+    """日期时间处理
+    """
     
-    # 3.缺失值处理，用前一个值填充
-    #dataset = dataset.fillna(method='ffill')
+    dataset['TimeDateStamp'] = dataset['TimeDateStamp'].apply(lambda x: time.strftime("%Y-%m-%d %X", time.localtime(x)))
+    ts_objs = np.array([pd.Timestamp(item) for item in np.array(dataset['TimeDateStamp'])])
+    dataset['TS_obj'] = ts_objs
+
+    # 日期处理（DayName需要转换成数值特征）
+    dataset['Year']       = dataset['TS_obj'].apply(lambda x: x.year)
+    dataset['Month']      = dataset['TS_obj'].apply(lambda x: x.month)
+    dataset['Day']        = dataset['TS_obj'].apply(lambda x: x.day)
+    dataset['DayOfWeek']  = dataset['TS_obj'].apply(lambda x: x.dayofweek)
+    dataset['DayName']    = dataset['TS_obj'].apply(lambda x: x.day_name())
+    dataset['DayOfYear']  = dataset['TS_obj'].apply(lambda x: x.dayofyear)
+    dataset['WeekOfYear'] = dataset['TS_obj'].apply(lambda x: x.weekofyear)
+    dataset['Quarter']    = dataset['TS_obj'].apply(lambda x: x.quarter)
+    day_name_map = {'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5,
+        'Saturday': 6, 'Sunday': 7}
+    dataset['DayNameBinMap'] = dataset['DayName'].map(day_name_map)
+
+    # 时间处理
+    dataset['Hour']       = dataset['TS_obj'].apply(lambda x: x.hour)
+    dataset['Minute']     = dataset['TS_obj'].apply(lambda x: x.minute)
+    dataset['Second']     = dataset['TS_obj'].apply(lambda x: x.second)
+    #dataset['MUsecond']   = dataset['TS_obj'].apply(lambda x: x.microsecond)
+    #dataset['UTC_offset'] = dataset['TS_obj'].apply(lambda x: x.utcoffset())
+
+    ## 按照早晚切分时间
+    hour_bins = [-1, 5, 11, 16, 21, 23]
+    bin_names = ['LateNight', 'Morning', 'Afternoon', 'Evening', 'Night']
+    dataset['HourBin'] = pd.cut(dataset['Hour'], bins=hour_bins, labels=bin_names)
+    hour_bin_dummy_features = pd.get_dummies(dataset['HourBin'])
+    dataset = pd.concat([dataset, hour_bin_dummy_features], axis=1)
     
-    logger.info('dataset[{}] after shape: {}'.format(csv_path, dataset.shape))
-    return exception_dataset, dataset
-
-    
-    
-    
-
-
-dataset = [train_black_dataset, train_white_dataset, test_dataset]
-print(train_black_dataset[train_black_dataset['ExceptionError'] > 0].shape[0],
-      train_white_dataset[train_white_dataset['ExceptionError'] > 0].shape[0],
-      test_dataset[test_dataset['ExceptionError'] > 0].shape[0])
-
-train_black_dataset_useful = train_black_dataset[train_black_dataset['ExceptionError'] == 0]
-train_black_dataset_exceptional = train_black_dataset[train_black_dataset['ExceptionError'] > 0]
-train_white_dataset_useful = train_white_dataset[train_white_dataset['ExceptionError'] == 0]
-train_white_dataset_exceptional = train_white_dataset[train_white_dataset['ExceptionError'] > 0]
-print(train_black_dataset_useful.shape, train_black_dataset_exceptional.shape, train_white_dataset_useful.shape, train_white_dataset_exceptional.shape)
-
-
-train_black_dataset = train_black_dataset_useful
-train_white_dataset = train_white_dataset_useful
-train_black_dataset.loc[:, 'label'] = 0
-train_white_dataset.loc[:, 'label'] = 1
-
-import seaborn
-%matplotlib inline
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-import warnings                      # 消除警告
-warnings.filterwarnings("ignore")
-def change_outlier_to_mean(feature, threshold):
-    tmp = int(train_black_dataset[train_black_dataset[feature] < threshold][feature].mean())
-    train_black_dataset.loc[train_black_dataset[feature] > threshold, feature] = tmp
-    
-    tmp = int(train_white_dataset[train_white_dataset[feature] < threshold][feature].mean())
-    train_white_dataset.loc[train_white_dataset[feature] > threshold, feature] = tmp
-    
-    tmp = int(test_dataset[test_dataset[feature] < threshold][feature].mean())
-    test_dataset.loc[test_dataset[feature] > threshold, feature] = tmp
-change_outlier_to_mean('StackReserveSize', 1e8)
-change_outlier_to_mean('NumberOfExFunctions', 20000)
-change_outlier_to_mean('ExportRVA', 3e7)
-change_outlier_to_mean('DebugRVA', 3e7)
-change_outlier_to_mean('IATRVA', 3e7)
-change_outlier_to_mean('StackReserveSize', 2e7)
-
-
-drop_columns = ['ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp',
- 'DebugSize', 'ResourceSize', 'NumberOfSections', 'label']
-train_black_dataset.drop(drop_columns, axis=1).to_csv('./hj/train_black_dataset.csv', sep=',', encoding='utf-8', index=False)
-train_white_dataset.drop(drop_columns, axis=1).to_csv('./hj/train_white_dataset.csv', sep=',', encoding='utf-8', index=False)
-test_dataset.drop(drop_columns, axis=1).to_csv('./hj/test_dataset.csv', sep=',', encoding='utf-8', index=False)
-
-hj = train_black_dataset[train_black_dataset['ImageSize'] > 10000]
-
-def 
+    return dataset
 
 def features_processing(dataset):
+    # 缺失值处理
+    #dataset = missing_value_processing(dataset)
+    # 异常值处理
+    #dataset = exception_value_processing(dataset)
+    # 日期时间处理
+    datetime_processing(dataset)
+    # 离散值处理
+    # 删除不相关的特征（相关性低）
+    dataset = delete_uncorrelated_features(dataset)
+    
+    return dataset
 
 def read_csv(filename):
     """从csv文件读取数据集
@@ -132,11 +149,28 @@ def main():
     # 黑白样本合并
     train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
     
-    #train_black_dataset.describe()
-    # 6000 4000 9857
-    train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape
-    features_processing(dataset)
+    # 去除脏数据
+    train_dirty_dataset = train_dataset[train_dataset['ExceptionError'] > 0]
+    test_dirty_dataset  = test_dataset[test_dataset['ExceptionError'] > 0]
+    save_csv(train_dirty_dataset, TRAIN_DIRTY_DATASET_FILENAME)
+    save_csv(test_dirty_dataset, TEST_DIRTY_DATASET_FILENAME)
+    train_dataset = train_dataset[train_dataset['ExceptionError'] == 0]
+    test_dataset  = test_dataset[test_dataset['ExceptionError'] == 0]
+    logger.info('train_dirty_dataset: ({}, {}), test_dirty_dataset: ({}, {}).'.format(
+        train_dirty_dataset.shape[0], train_dirty_dataset.shape[1],
+        test_dirty_dataset.shape[0], test_dirty_dataset.shape[1],))
     
+    # 特征工程
+    train_dataset = features_processing(train_dataset)
+    test_dataset  = features_processing(test_dataset)
+    logger.info('train_dataset: ({}, {}), test_dataset: ({}, {}).'.format(
+        train_dataset.shape[0], train_dataset.shape[1],
+        test_dataset.shape[0], test_dataset.shape[1],))
+    
+    # 保存数据集
+    save_csv(train_dataset, TRAIN_DATASET_FILENAME)
+    save_csv(test_dataset, TEST_DATASET_FILENAME)
+
 if __name__ == '__main__':
     start_time = time.time()
 

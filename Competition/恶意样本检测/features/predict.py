@@ -11,6 +11,7 @@ os.environ['NUMEXPR_MAX_THREADS'] = '64'
 DATASET_PATH = './dataset/'
 # 测试集样本数据集路径
 TEST_DATASET_PATH = DATASET_PATH+'test_dataset.csv'
+TEST_DIRTY_DATASET_PATH = DATASET_PATH+'test_dirty_dataset.csv'  # 测试集脏数据集文件名
 # 模型路径
 MODEL_PATH = './model/malicious_sample_detection.model'
 # 预测结果存储路径
@@ -32,19 +33,21 @@ def main():
     # 获取数据集
     test_dataset = pd.read_csv(TEST_DATASET_PATH)
     logger.info('test dataset shape: ({}, {}).'.format(test_dataset.shape[0], test_dataset.shape[1]))
-    special_dataset = test_dataset.query('ExceptionError > 0')
-    test_dataset = test_dataset.query('ExceptionError == 0')
-    
+    test_dirty_dataset = pd.read_csv(TEST_DIRTY_DATASET_PATH)
+    logger.info('test_dataset: ({}, {}), test_dirty_dataset: ({}, {}).'.format(
+        test_dataset.shape[0], test_dataset.shape[1],
+        test_dirty_dataset.shape[0], test_dirty_dataset.shape[1],))
+
     # 模型预测结果
     file_name1 = test_dataset['FileName']
-    x = test_dataset.drop(['FileName', 'ExceptionError'], axis=1, inplace=False)
+    x = test_dataset.drop(['FileName'], axis=1, inplace=False)
     X = np.asarray(x)
     model = load_model(MODEL_PATH)
     result1 = model.predict(X)
     
     # 异常样本特殊处理
-    file_name2 = special_dataset['FileName']
-    result2 = special_treatment(special_dataset)
+    file_name2 = test_dirty_dataset['FileName']
+    result2 = special_treatment(test_dirty_dataset)
     
     # 存储结果
     file_name = file_name1.append(file_name2)

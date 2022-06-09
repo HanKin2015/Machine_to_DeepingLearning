@@ -31,13 +31,14 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 import pickle
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+from sklearn.feature_selection import VarianceThreshold
 
 # 数据集路径
 DATASET_PATH = './dataset/'
-# 训练集白样本数据集路径
-TRAIN_WHITE_DATASET_PATH = DATASET_PATH+'train_white_dataset.csv'
-# 训练集黑样本数据集路径
-TRAIN_BLACK_DATASET_PATH = DATASET_PATH+'train_black_dataset.csv'
+# 训练集样本数据集路径
+TRAIN_DATASET_PATH = DATASET_PATH+'train_dataset.csv'
 # 模型路径
 MODEL_PATH = './model/'
 # 恶意样本检测模型路径
@@ -48,49 +49,6 @@ MODEL_SCORE_PATH = MODEL_PATH+'score'
 # 创建模型文件夹
 if not os.path.exists(MODEL_PATH):
     os.makedirs(MODEL_PATH)
-
-def get_dataset(csv_path):
-    """获取数据集
-
-    读取csv文件，并做简单的特征处理
-    
-    Parameters
-    ------------
-    csv_path : str
-        数据集csv文件路径
-        
-    Returns
-    -------
-    dataset : pandas.DataFrame
-        数据集
-    """
-    
-    dataset = pd.read_csv(csv_path)
-    logger.info('dataset[{}] before shape: {}'.format(csv_path, dataset.shape))
-    
-    # 1.删除异常的样本数据
-    exception_dataset = dataset[dataset['ExceptionError'] > 0]
-    dataset = dataset[dataset['ExceptionError'] == 0]
-    
-    # 2.删除部分特征数据
-    #drop_columns = ['ExceptionError', 'HasDebug', 'HasTls', 'HasResources', 'HasRelocations',
-    #            'ImageBase', 'ImageSize','EpAddress', 'TimeDateStamp', 'NumberOfExFunctions', 'NumberOfImFunctions']
-    #drop_columns = ['LinkerVersion', 'ExportRVA', 'ExportSize', 'ResourceSize', 'DebugRVA',
-    #            'DebugSize', 'IATRVA', 'ImageVersion', 'OSVersion', 'StackReserveSize', 'Dll', 'NumberOfSections']
-    #drop_columns = ['NumberOfSections', 'TimeDateStamp', 'ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'HasResources', 'HasDebug', 'HasTls', 'DebugSize', 'StackReserveSize']
-    
-    #drop_columns = ['ExceptionError', 'ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections']
-
-    #dataset = dataset.drop(['ImageBase', 'ImageSize', 'EpAddress', 'ExportSize', 'TimeDateStamp', 'DebugSize', 'ResourceSize', 'NumberOfSections', 'ExceptionError'], axis=1)
-    #dataset = dataset.drop(drop_columns, axis=1)
-    dataset = dataset.drop('ExceptionError', axis=1)
-    
-    # 3.缺失值处理，用前一个值填充
-    #dataset = dataset.fillna(method='ffill')
-    
-    logger.info('dataset[{}] after shape: {}'.format(csv_path, dataset.shape))
-    return exception_dataset, dataset
-
 
 def model_score(model_name, y_test, y_pred):
     """模型得分
@@ -130,6 +88,13 @@ def model_score(model_name, y_test, y_pred):
         round(recall, 4), round(error_ratio, 4), round(score*100, 2)))
     return round(score*100, 2)
 
+def save_test_pred(X_test, y_test, y_pred, score):
+    df = pd.DataFrame(X_test)
+    df['y_test'] = y_test.reshape(-1,1)
+    df['y_pred'] = y_pred.reshape(-1,1)
+    logger.info('test_pred result shape: {}'.format(df.shape))
+    df.to_csv('he/{}.csv'.format(score), index=False, header=False)
+
 def random_forest_model(X_train, X_test, y_train, y_test):
     """随机森林模型
 
@@ -158,6 +123,8 @@ def random_forest_model(X_train, X_test, y_train, y_test):
     y_pred = RFC.predict(X_test)
 
     score = model_score('RandomForestClassifier', y_test, y_pred)
+    
+    save_test_pred(X_test, y_test, y_pred, score)
     return RFC, score
 
 def extra_trees_model(X_train, X_test, y_train, y_test):
@@ -224,38 +191,45 @@ def gradient_boosting_model(X_train, X_test, y_train, y_test):
     score = model_score('GradientBoostingClassifier', y_test, y_pred)
     return GBDT, score
 
-def save_model(model, score):
-    """保存模型
+def save_training_model(model, score):
+    """保存训练模型
     """
     
     buffer = pickle.dumps(model)
     with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
         fd.write(buffer)
     with open(MODEL_SCORE_PATH, 'w') as fd:
-        fd.write(score)
+        fd.write(str(score))
+
+def save_feature_selection_model(model):
+    """保存特征选择模型
+    """
+    
+    buffer = pickle.dumps(model)
+    with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
+        fd.write(buffer)
+    with open(MODEL_SCORE_PATH, 'w') as fd:
+        fd.write(str(score))
+
 
 def main():
     # 获取数据集
-    train_black_exdataset, train_black_dataset = get_dataset(TRAIN_BLACK_DATASET_PATH)
-    train_white_exdataset, train_white_dataset = get_dataset(TRAIN_WHITE_DATASET_PATH)
-    logger.info([train_white_exdataset.shape, train_white_dataset.shape])
-    
-    # 添加标签
-    train_black_dataset['label'] = 0
-    train_white_dataset['label'] = 1
-    
-    # 黑白样本合并
-    train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
+    train_dataset = pd.read_csv(TRAIN_DATASET_PATH)
+    logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
     
     # 划分训练集和测试集 70% 30%
-    x = train_dataset.drop(['label', 'FileName'], axis=1)
-    y = train_dataset['label']
-    X = np.asarray(x)
-    y = np.asarray(y)
+    X = train_dataset.drop(['label', 'FileName'], axis=1).values
+    y = train_dataset['label'].values
+
     best_model = None
     best_score  = 0
-    for k, (train_indices, test_indices) in enumerate(KFold(10, shuffle=True, random_state=0).split(y), start=1):
-        #X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    
+    RFC = RandomForestClassifier(n_estimators=50).fit(X, y)
+    select = SelectFromModel(RFC, prefit=True)
+    X = select.transform(X)
+    
+    for k, (train_indices, test_indices) in enumerate(KFold(5, shuffle=True, random_state=0).split(y), start=1):
+        #X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.2, random_state=0)
         X_train,X_test,y_train,y_test = X[train_indices], X[test_indices], y[train_indices], y[test_indices]
         logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
         
@@ -269,7 +243,7 @@ def main():
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)
-    save_model(best_model, best_score)
+    save_training_model(best_model, best_score)
 
 if __name__ == '__main__':
     start_time = time.time()

@@ -1,3 +1,4 @@
+import time
 from log import logger
 import get_data
 import features
@@ -5,6 +6,7 @@ import training
 import predict
 
 def main():
+    features.main()
     training.main()
     
 if __name__ == '__main__':

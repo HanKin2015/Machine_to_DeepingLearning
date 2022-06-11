@@ -44,7 +44,7 @@ def get_filetype9(filename):
     byte_list = struct.unpack('B' * max_len, byte)
     # 转为16进制
     code = ''.join([('%X' % each).zfill(2) for each in byte_list])
-    print(code)
+    print('code: {}'.format(code))
     # 根据标识符筛选判断文件格式
     result = list(filter(lambda x: code.startswith(x), type_dict))
     if result:
@@ -53,13 +53,19 @@ def get_filetype9(filename):
         return 'unknown'
 
 import filetype
-def get_filetype(filename):
-    ft1=filetype.guess(filename)
+import os
+def get_filetype(root, file):
+    file_path = os.path.join(root, file)
+    ft1 = filetype.guess(file_path)
     if ft1 is None:
-        print('无法判断该文件类型')
-    print('文件扩展名为：{}'.format(ft1.extension))
-    print('文件类型为：{}'.format(ft1.mime))
+        print('{} 无法判断该文件类型'.format(file))
+    print('{} 文件扩展名为:{}, 文件类型为:{}.'.format(file, ft1.extension, ft1.mime))
 
 if __name__ == '__main__':
-    p = r'./AIFirst_data/train/white/e8dfc7c639118035f263fbc0e10ab11998100ec9'
-    print(get_filetype(p))
+    #root = r'./AIFirst_data/train/white/'
+    #file = 'e8dfc7c639118035f263fbc0e10ab11998100ec9'
+    #get_filetype(root, file)
+    for root, dirs, files in os.walk('./'):
+        for file in files:
+            get_filetype(root, file)
+

@@ -117,11 +117,29 @@ System32\
 download
 wget  curl
 http://
+
+ftp
+smtp
+
 ```
 
 
 这次比赛确实属于入门很容易的，网上有大量的资源，非常适合初学者了解ai的流程，也真正响应了公司举办比赛的初衷。不过我想说的是简单并不代表真的简单，如果要做到终端然后再做好真的很不容易，简单举几个栗子，大家有兴趣也可以一同思考一下呀，比如大家抽取特征保存的的模型是不是都快百兆级别了，而且这才是1w训练样本哦，如果千万、亿级别以上又当如何？能放到端侧运行吗？资源占用情况？其次训练时间，超大量的样本训练ai，是得设计分布式训练的，资源如何调度？第三，加壳(几十种加壳类别)、特殊pe格式(GO、Pyinstaller、.net、安装包)怎么处理？保证误报(万分之一)又该怎么解决？等等问题，因此XXX目前还是国内唯一能把PE AI检测做到终端的主流安全厂商。
 
+ 
 
 
 
+使用lief分析的pe文件预测：https://github.com/elastic/ember/blob/master/ember/features.py
+imphash分析：https://malwology.com/2018/08/24/python-for-malware-analysis-getting-started/
+上面的翻译：https://www.cnblogs.com/17bdw/p/9894947.html
+时间戳获取地区：https://cloud.tencent.com/developer/article/1927823
+
+论文解读：https://cloud.tencent.com/developer/article/1910311
+https://github.com/eastmountyxz/AI-Security-Paper
+pefile官方文档：https://pefile.readthedocs.io/en/latest/modules/pefile.html
+找到一个github，作者根据《基于数据科学的恶意软件分析》学习：https://github.com/hija/MalwareDataScience/blob/master/chapter08/MalwareClassifier.ipynb
+可以找到很多关于pefile的代码：https://codingdict.com/sources/py/pefile/17317.html
+https://vimsky.com/examples/detail/python-attribute-pefile.DIRECTORY_ENTRY.html
+
+机器学习方法检测恶意文件：https://blog.csdn.net/zourzh123/article/details/81607330

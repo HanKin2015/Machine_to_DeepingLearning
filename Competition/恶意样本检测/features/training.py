@@ -34,6 +34,8 @@ import pickle
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import VarianceThreshold
+from sklearn.model_selection import RepeatedStratifiedKFold
+from sklearn.ensemble import StackingClassifier
 
 # 数据集路径
 DATASET_PATH = './dataset/'
@@ -125,7 +127,8 @@ def random_forest_model(X_train, X_test, y_train, y_test):
         分数
     """
 
-    RFC = RandomForestClassifier(n_estimators=98).fit(X_train, y_train)
+    """
+    RFC = RandomForestClassifier().fit(X_train, y_train)
     selector = SelectFromModel(RFC, prefit=True)
     save_feature_selector(selector)
     
@@ -133,12 +136,12 @@ def random_forest_model(X_train, X_test, y_train, y_test):
     X_train = selector.transform(X_train)
     X_test  = selector.transform(X_test)
     logger.info('X_train after selector shape: ({}, {}).'.format(X_train.shape[0], X_train.shape[1]))
-
+    """
     # K折交叉验证与学习曲线的联合使用来获取最优K值
     scores_cross = []
     Ks = []
-    for k in range(70, 120):
-        RFC = RandomForestClassifier(n_estimators=k)  # 实例化模型对象
+    for k in range(86, 87):
+        RFC = RandomForestClassifier(n_estimators=k, n_jobs=-1, oob_score=True, class_weight='balanced')  # 实例化模型对象
         score_cross = cross_val_score(RFC, X_train, y_train, cv=10).mean()  # 根据训练数据进行交叉验证，并返回交叉验证的评分
         scores_cross.append(score_cross)
         Ks.append(k)
@@ -189,11 +192,42 @@ def XGB_model(X_train, X_test, y_train, y_test):
 def lightgbm_model(X_train, X_test, y_train, y_test):
     """lightgbm模型训练
     """
+    params = {
+          # 这些参数需要学习
+          'boosting_type': 'gbdt',
+          #'boosting_type': 'dart',
+          'objective': 'multiclass',
+          'metric': 'multi_logloss',  # 评测函数，这个比较重要
+          'min_child_weight': 1.5,
+          'num_leaves': 2**5,
+          'lambda_l2': 10,
+          'subsample': 0.7,
+          'colsample_bytree': 0.7,
+          'colsample_bylevel': 0.7,
+          'tree_method': 'exact',
+          'seed': 2022,
+          'learning_rate': 0.01, # 学习率 重要
+          'num_class': 2,  # 重要
+          'silent': True,
+          }
+    #LGB = lgb.LGBMClassifier(params).fit(X_train, y_train)
+    X_test, X_valid, y_test, y_valid = train_test_split(X_test, y_test, test_size=0.5, random_state=0)
+
+    train_matrix = lgb.Dataset(X_train, label=y_train)
+    test_matrix = lgb.Dataset(X_test, label=y_test)
+
+    num_round = 200  # 训练的轮数
+    early_stopping_rounds = 10
+    LGB = lgb.train(params, 
+                  train_matrix,
+                  num_round,
+                  valid_sets=test_matrix,
+                  early_stopping_rounds=early_stopping_rounds)
+    y_pred = LGB.predict(X_test, num_iteration=LGB.best_iteration).astype(int)
     
-    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
-    y_pred = LGB.predict(X_test).astype(int)
-    
-    score = model_score('LGBMClassifier', y_test, y_pred)
+    logger.info('score : ', np.mean((y_pred[:,1]>0.5)==y_valid))
+    #score = model_score('LGBMClassifier', y_test, y_pred)
+    score = np.mean((y_pred[:,1]>0.5)==y_valid)
     return LGB, score
 
 def MLP_model(X_train, X_test, y_train, y_test):
@@ -229,15 +263,37 @@ def gradient_boosting_model(X_train, X_test, y_train, y_test):
     score = model_score('GradientBoostingClassifier', y_test, y_pred)
     return GBDT, score
 
+def fusion_model(X, y):
+    """将RF、XGBoost、LightGBM融合（单层Stacking）
+    """
+    
+    # 模型列表
+    models = [('RFC', RandomForestClassifier()), 
+              ('XGB', xgb.XGBClassifier()),
+              ('LGB', lgb.LGBMClassifier())
+             ]
+    # 创建stacking模型
+    model = StackingClassifier(models)
+    # 设置验证集数据划分方式
+    cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+    # 验证模型精度
+    n_scores = cross_val_score(model, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
+    # 打印模型的精度
+    logger.info('Mean Accuracy: %.3f (%.3f)' % (np.mean(n_scores), np.std(n_scores)))
+
 def save_training_model(model, score):
     """保存训练模型
     """
     
-    buffer = pickle.dumps(model)
-    with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
-        fd.write(buffer)
-    with open(MODEL_SCORE_PATH, 'w') as fd:
-        fd.write(str(score))
+    before_score = 0
+    with open(MODEL_SCORE_PATH, 'r') as fd:
+        before_score = fd.read()
+    if score > float(before_score):
+        buffer = pickle.dumps(model)
+        with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
+            fd.write(buffer)
+        with open(MODEL_SCORE_PATH, 'w') as fd:
+            fd.write(str(score))
 
 def save_feature_selector(selector):
     """保存特征选择模型
@@ -256,17 +312,18 @@ def main():
     X = train_dataset.drop(['label', 'FileName'], axis=1).values
     y = train_dataset['label'].values
 
-    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
         
     # 模型训练
-    model, score = random_forest_model(X_train, X_test, y_train, y_test)
+    #model, score = random_forest_model(X_train, X_test, y_train, y_test)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
-    #model, score = lightgbm_model(X_train, X_test, y_train, y_test)
+    model, score = lightgbm_model(X_train, X_test, y_train, y_test)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)
-    save_training_model(model, score)
+    #fusion_model(X, y)
+    #save_training_model(model, score)
 
 if __name__ == '__main__':
     start_time = time.time()

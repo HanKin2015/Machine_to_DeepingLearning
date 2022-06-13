@@ -9,7 +9,7 @@ import time
 from log import logger
 import pandas as pd
 
-SAMPLE_PATH      = './AIFirst_data/'
+SAMPLE_PATH      = './test/'    #AIFirst_data
 TRAIN_WHITE_PATH = SAMPLE_PATH+'train/white/' # 训练集白样本路径
 TRAIN_BLACK_PATH = SAMPLE_PATH+'train/black/' # 训练集黑样本路径
 TEST_PATH        = SAMPLE_PATH+'test/'        # 测试集样本路径
@@ -30,17 +30,22 @@ if not os.path.exists(DATA_PATH):
     os.makedirs(DATA_PATH)
 
 def extract_strings(filepath):
+    '''This methods extracts the strings from a file using the strings command in unix os'''
     strings = subprocess.Popen(['strings', filepath], stdout=subprocess.PIPE).communicate()[0].decode('utf-8').split('\n')
     return strings
     
 def get_string_features(all_strings):
     data_features = []
-    hasher = FeatureHasher(10000)
+    hasher = FeatureHasher(20000) # We initialize the featurehasher using 20,000 features
     for all_string in all_strings:
+        # store string features in dictionary form
         string_features = {}
         for string in all_string:
             string_features[string] = 1
+
+        # hash the features using the hashing trick
         hashed_features = hasher.transform([string_features])
+        # do some data munging to get the feature array
         hashed_features = hashed_features.todense()
         hashed_features = numpy.asarray(hashed_features)
         hashed_features = hashed_features[0]
@@ -48,9 +53,6 @@ def get_string_features(all_strings):
     return data_features
 
 def training(train_black_path, train_white_path):
-    """简单训练一下测试效果
-    """
-    
     train_black_dataset = pd.read_csv(train_black_path, header=None)
     train_white_dataset = pd.read_csv(train_white_path, header=None)
     
@@ -69,10 +71,7 @@ def training(train_black_path, train_white_path):
     logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
     logger.info([x for x in clf.feature_importances_ if x > 0.1])
 
-def training_custom(train_black_path, train_white_path):
-    """测试自定义指定字符串特征数据集
-    """
-
+def training_(train_black_path, train_white_path):
     train_black_dataset = pd.read_csv(train_black_path, header=None)
     train_white_dataset = pd.read_csv(train_white_path, header=None)
     
@@ -96,7 +95,7 @@ def save2csv(data, csv_path):
     """
     
     df = pd.DataFrame(data)
-    df.to_csv(csv_path, sep=',', encoding='utf-8', index=False, header=False)
+    df.to_csv(csv_path, sep=',', encoding='utf-8', index=False)
 
 def string_features_processing(sample_path, save_path):
     """字符串特征处理（获取）
@@ -120,6 +119,7 @@ def main():
     test_features = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
 
     training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    training_(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
 
 if __name__ == '__main__':
     start_time = time.time()

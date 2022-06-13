@@ -9,7 +9,7 @@ import time
 from log import logger
 import pandas as pd
 
-SAMPLE_PATH      = './AIFirst_data/'
+SAMPLE_PATH      = './test/'    #AIFirst_data
 TRAIN_WHITE_PATH = SAMPLE_PATH+'train/white/' # 训练集白样本路径
 TRAIN_BLACK_PATH = SAMPLE_PATH+'train/black/' # 训练集黑样本路径
 TEST_PATH        = SAMPLE_PATH+'test/'        # 测试集样本路径
@@ -30,17 +30,22 @@ if not os.path.exists(DATA_PATH):
     os.makedirs(DATA_PATH)
 
 def extract_strings(filepath):
+    '''This methods extracts the strings from a file using the strings command in unix os'''
     strings = subprocess.Popen(['strings', filepath], stdout=subprocess.PIPE).communicate()[0].decode('utf-8').split('\n')
     return strings
     
 def get_string_features(all_strings):
     data_features = []
-    hasher = FeatureHasher(10000)
+    hasher = FeatureHasher(20000) # We initialize the featurehasher using 20,000 features
     for all_string in all_strings:
+        # store string features in dictionary form
         string_features = {}
         for string in all_string:
             string_features[string] = 1
+
+        # hash the features using the hashing trick
         hashed_features = hasher.transform([string_features])
+        # do some data munging to get the feature array
         hashed_features = hashed_features.todense()
         hashed_features = numpy.asarray(hashed_features)
         hashed_features = hashed_features[0]
@@ -48,7 +53,7 @@ def get_string_features(all_strings):
     return data_features
 
 def training(train_black_path, train_white_path):
-    """简单训练一下测试效果
+    """
     """
     
     train_black_dataset = pd.read_csv(train_black_path, header=None)
@@ -68,11 +73,29 @@ def training(train_black_path, train_white_path):
     clf.fit(X_train, y_train)
     logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
     logger.info([x for x in clf.feature_importances_ if x > 0.1])
+    
+def training_stratify(train_black_path, train_white_path):
+    train_black_dataset = pd.read_csv(train_black_path, header=None)
+    train_white_dataset = pd.read_csv(train_white_path, header=None)
+    
+    train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
+    logger.info('train_dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
 
-def training_custom(train_black_path, train_white_path):
-    """测试自定义指定字符串特征数据集
-    """
+    train_dataset = train_dataset.astype(int)
+    
+    X = train_dataset.values
+    y = [0 for _ in range(train_black_dataset.shape[0])] + [1 for _ in range(train_white_dataset.shape[0])]
+    logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
+    logger.info('y len: {}.'.format(len(y)))
 
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2022, stratify=y)
+
+    clf = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=2022)
+    clf.fit(X_train, y_train)
+    logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
+    logger.info([x for x in clf.feature_importances_ if x > 0.1])
+
+def training_(train_black_path, train_white_path):
     train_black_dataset = pd.read_csv(train_black_path, header=None)
     train_white_dataset = pd.read_csv(train_white_path, header=None)
     
@@ -81,6 +104,38 @@ def training_custom(train_black_path, train_white_path):
 
     X = train_dataset.loc[:, 1::].values
     y = [0 for _ in range(train_black_dataset.shape[0])] + [1 for _ in range(train_white_dataset.shape[0])]
+    logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
+    logger.info('y len: {}.'.format(len(y)))
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2022)
+
+    clf = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=2022)
+    clf.fit(X_train, y_train)
+    logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
+    logger.info([x for x in clf.feature_importances_ if x > 0.1])
+
+def training_x(train_black_features, train_white_features):
+    """很有意思去掉这个也提高了class_weight="balanced"
+    """
+    
+    X = train_black_features + train_white_features
+    y = [0 for _ in range(len(train_black_features))] + [1 for _ in range(len(train_white_features))]
+    logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
+    logger.info('y len: {}.'.format(len(y)))
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2022)
+
+    clf = RandomForestClassifier(n_estimators=100, random_state=2022)
+    clf.fit(X_train, y_train)
+    logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
+    logger.info([x for x in clf.feature_importances_ if x > 0.1])
+
+def training_y(train_black_features, train_white_features):
+    """
+    """
+    
+    X =  train_white_features + train_black_features
+    y = [1 for _ in range(len(train_white_features))] + [0 for _ in range(len(train_black_features))]
     logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
     logger.info('y len: {}.'.format(len(y)))
 
@@ -119,7 +174,14 @@ def main():
     train_black_features = string_features_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
     test_features = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
 
+    training_x(train_black_features, train_white_features)
+    training_x(train_white_features, train_black_features)
+    training_y(train_black_features, train_white_features)
     training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    training(TRAIN_WHITE_STRING_FEATURES_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
+    training_stratify(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    training_stratify(TRAIN_WHITE_STRING_FEATURES_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
+    training_(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
 
 if __name__ == '__main__':
     start_time = time.time()

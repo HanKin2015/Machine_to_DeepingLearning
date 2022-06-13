@@ -4,7 +4,7 @@
 文件描述: 通过pefile库获取pe文件信息
 作    者: HeJian
 创建日期: 2022.05.27
-修改日期：2022.06.06
+修改日期：2022.06.11
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
@@ -68,7 +68,7 @@ def get_index(directory_name):
 class PEFile:
     def __init__(self, root, file):
         file_path = os.path.join(root, file)
-        self.FileName       = file                                                   # PE文件名
+        self.FileName       = file
         self.ExceptionError = 0
         try:
             pe = pefile.PE(file_path)
@@ -78,23 +78,36 @@ class PEFile:
             logger.error('file {} pefile parse failed, {}.'.format(file, err))
             return
 
-        file_header_members = ['Machine', 'NumberOfSections', 'SizeOfOptionalHeader', 'Characteristics', 'TimeDateStamp']
+        # DOS_HEADER
+        dos_header_members = ['e_magic', 'e_cblp', 'e_cp', 'e_crlc', 'e_cparhdr', 'e_minalloc', 'e_maxalloc', 'e_ss', 'e_sp',
+            'e_csum', 'e_ip', 'e_cs', 'e_lfarlc', 'e_ovno', 'e_res', 'e_oemid', 'e_oeminfo', 'e_res2', 'e_lfanew']
+        for dos_header_member in dos_header_members:
+            exec('self.{} = pe.DOS_HEADER.{}'.format(dos_header_member, dos_header_member))
+        
+        # NT_HEADERS
+        nt_header_members = ['Signature']
+        for nt_header_member in nt_header_members:
+            exec('self.{} = pe.NT_HEADERS.{}'.format(nt_header_member, nt_header_member))
+            
+        # FILE_HEADER
+        file_header_members = ['Machine', 'NumberOfSections', 'TimeDateStamp', 'PointerToSymbolTable', 'NumberOfSymbols', 'SizeOfOptionalHeader', 'Characteristics']
         for file_header_member in file_header_members:
             exec('self.{} = pe.FILE_HEADER.{}'.format(file_header_member, file_header_member))
         
-        optional_header_members = ['MajorLinkerVersion', 'MinorLinkerVersion', 'SizeOfCode', 'SizeOfInitializedData',
-            'SizeOfUninitializedData', 'AddressOfEntryPoint', 'BaseOfCode', 'BaseOfData', 'ImageBase',
+        # OPTIONAL_HEADER(BaseOfData字段可能不存在)
+        optional_header_members = ['Magic', 'MajorLinkerVersion', 'MinorLinkerVersion', 'SizeOfCode', 'SizeOfInitializedData',
+            'SizeOfUninitializedData', 'AddressOfEntryPoint', 'BaseOfCode', 'ImageBase',
             'SectionAlignment', 'FileAlignment', 'MajorOperatingSystemVersion', 'MinorOperatingSystemVersion',
-            'MajorImageVersion', 'MinorImageVersion', 'MajorSubsystemVersion',  'MinorSubsystemVersion', 'SizeOfImage',
+            'MajorImageVersion', 'MinorImageVersion', 'MajorSubsystemVersion',  'MinorSubsystemVersion', 'Reserved1', 'SizeOfImage',
             'SizeOfHeaders', 'CheckSum', 'Subsystem', 'DllCharacteristics', 'SizeOfStackReserve', 'SizeOfStackCommit', 
             'SizeOfHeapReserve', 'SizeOfHeapCommit', 'LoaderFlags', 'NumberOfRvaAndSizes']
         for optional_header_member in optional_header_members:
-            exec('self.{} = 0'.format(optional_header_member))
-            try:
-                exec('self.{} = pe.OPTIONAL_HEADER.{}'.format(optional_header_member, optional_header_member))
-            except Exception as e:
-                logger.debug('file[{}] Structure object has no {}.'.format(file, optional_header_member))
-                exec('self.{} = -1'.format(optional_header_member))
+            exec('self.{} = pe.OPTIONAL_HEADER.{}'.format(optional_header_member, optional_header_member))
+        self.BaseOfData = 0
+        if hasattr(pe.OPTIONAL_HEADER, 'BaseOfData'):
+            self.BaseOfData = pe.OPTIONAL_HEADER.BaseOfData
+        
+        # PE Sections
         Entropy          = []
         SizeOfRawData    = []
         Misc_VirtualSize = []
@@ -112,84 +125,105 @@ class PEFile:
         self.SectionsMinMisc_VirtualSize  = min(Misc_VirtualSize) if Misc_VirtualSize else 0
         self.SectionMaxMisc_VirtualSize   = max(Misc_VirtualSize) if Misc_VirtualSize else 0
         
+        # Directories
         # pe.OPTIONAL_HEADER.DATA_DIRECTORY 数据目录表，保存了各种表数据的起始RVA及数据块的长度
-        if pe.OPTIONAL_HEADER.DATA_DIRECTORY:
-            try:
-                self.ExportRVA    = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('EXPORT')].VirtualAddress  # 导出表的RVA
-                self.ExportSize   = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('EXPORT')].Size            # 导出表的大小
-                self.ExportNb = 0
-                if pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('EXPORT')].Size:
-                    try:
-                        self.ExportNb = len(pe.DIRECTORY_ENTRY_EXPORT)
-                    except Exception as e:
-                        logger.debug('file[{}] get EXPORT info failed, error[{}].'.format(file, e))
-                        self.ExportNb = -1
-                #self.ImportRVA       = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('IMPORT')].VirtualAddress  # 导入表的RVA
-                #self.ImportSize      = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('IMPORT')].Size            # 导入表的大小
-                self.ImportNbDLL     = 0
-                self.ImportNb        = 0
-                self.ImportNbOrdinal = 0
-                if pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('IMPORT')].Size:
-                    try:
-                        dll = []
-                        for entry in pe.DIRECTORY_ENTRY_IMPORT:
-                            dll.append(entry.dll)
-                            for function in entry.imports:
-                                if function.ordinal:
-                                    self.ImportNbOrdinal += function.ordinal
-                        self.ImportNbDLL = len(set(dll))
-                        self.ImportNb = len(pe.DIRECTORY_ENTRY_IMPORT)
-                    except Exception as e:
-                        logger.debug('file[{}] get DIRECTORY_ENTRY_IMPORT info failed, error[{}].'.format(file, e))
-                        self.ImportNbDLL     = -1
-                        self.ImportNb        = -1
-                        self.ImportNbOrdinal = -1
+        if len(pe.OPTIONAL_HEADER.DATA_DIRECTORY) != 16:
+            self.ExceptionError = exception_error['list index out of range']
+            logger.debug('this pe file invalid, {}.'.format('list index out of range'))
+            return
+        for i in range(16):
+            RVA_key  = 'DirectoryRVA{}'.format(i)
+            Size_key = 'DirectorySize{}'.format(i)
+            exec('self.{} = pe.OPTIONAL_HEADER.DATA_DIRECTORY[{}].VirtualAddress'.format(RVA_key, i))
+            exec('self.{} = pe.OPTIONAL_HEADER.DATA_DIRECTORY[{}].Size'.format(Size_key, i))
 
-                self.ResourceSize = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('RESOURCE')].Size            # 资源表的大小
-                self.ResourcesNb = 0
-                if pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('RESOURCE')].Size:
-                    try:
-                        self.ResourcesNb = pe.DIRECTORY_ENTRY_RESOURCE.struct.NumberOfIdEntries
-                    except Exception as e:
-                        logger.debug('file[{}] get DIRECTORY_ENTRY_RESOURCE info failed, error[{}].'.format(file, e))
-                        self.ResourcesNb = -1
-                self.BaseRelocSize = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('BASERELOC')].Size
-                self.DebugRVA      = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('DEBUG')].VirtualAddress  # 调试表的RVA
-                self.DebugSize     = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('DEBUG')].Size            # 调试表的大小
-                self.TlsSize       = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('TLS')].Size
-                self.IATRVA        = pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('IAT')].VirtualAddress # 导入地址表（Import Address Table）地址
-                self.LoadConfigurationSize = 0
-                if pe.OPTIONAL_HEADER.DATA_DIRECTORY[get_index('LOAD_CONFIG')].Size:
-                    try:
-                        self.LoadConfigurationSize = pe.DIRECTORY_ENTRY_LOAD_CONFIG.struct.Size
-                    except Exception as e:
-                        logger.debug('file[{}] has no DIRECTORY_ENTRY_LOAD_CONFIG.'.format(file))
-                        self.LoadConfigurationSize = -1
-                
-                try:
-                    self.HasVS_VERSIONINFO = bool(len(pe.VS_VERSIONINFO))
-                except Exception as e:
-                    logger.debug('file[{}] has no VS_VERSIONINFO.'.format(file))
-                    self.HasVS_VERSIONINFO = False
-                try:
-                    self.HasVS_FIXEDFILEINFO = bool(len(pe.VS_FIXEDFILEINFO))
-                except Exception as e:
-                    logger.debug('file[{}] has no VS_FIXEDFILEINFO.'.format(file))
-                    self.HasVS_FIXEDFILEINFO = False
-                
-            except Exception as e:
-                err = str(e).replace("'", "")
-                self.ExceptionError = exception_error[err]
-                logger.debug('other error, {}.'.format(err))
-                return
+        # Exported symbols
+        exported_symbols_members = ['Characteristics', 'TimeDateStamp', 'MajorVersion', 'MinorVersion', 'Name', 'Base',
+            'NumberOfFunctions', 'NumberOfNames', 'AddressOfFunctions', 'AddressOfNames', 'AddressOfNameOrdinals']
+        for exported_symbols_member in exported_symbols_members:
+            key = 'Export{}'.format(exported_symbols_member)
+            if not hasattr(pe, 'DIRECTORY_ENTRY_EXPORT'):
+                exec('self.{} = 0'.format(key))
+            else:
+                exec('self.{} = pe.DIRECTORY_ENTRY_EXPORT.struct.{}'.format(key, exported_symbols_member))
 
+        # Imported symbols
+        self.ImportNbDLL     = 0
+        self.ImportNb        = 0
+        self.ImportNbOrdinal = 0
+        if hasattr(pe, 'DIRECTORY_ENTRY_IMPORT'):
+            dll = []
+            for entry in pe.DIRECTORY_ENTRY_IMPORT:
+                dll.append(entry.dll)
+                for function in entry.imports:
+                    if function.ordinal:
+                        self.ImportNbOrdinal += function.ordinal
+            self.ImportNbDLL = len(set(dll))
+            self.ImportNb = len(pe.DIRECTORY_ENTRY_IMPORT)
+
+        # Resource directory
+        self.ResourcesNb = 0
+        self.ResourcesNumberOfNamedEntries = 0
+        self.ResourcesMajorVersion = 0
+        if hasattr(pe, 'DIRECTORY_ENTRY_RESOURCE'):
+            self.ResourcesNb = pe.DIRECTORY_ENTRY_RESOURCE.struct.NumberOfIdEntries
+            self.ResourcesNumberOfNamedEntries = pe.DIRECTORY_ENTRY_RESOURCE.struct.NumberOfNamedEntries
+            self.ResourcesMajorVersion = pe.DIRECTORY_ENTRY_RESOURCE.struct.MajorVersion
+            
+        # LOAD_CONFIG
+        self.LoadConfigSize = 0
+        if hasattr(pe, 'DIRECTORY_ENTRY_LOAD_CONFIG'):
+            self.LoadConfigSize = pe.DIRECTORY_ENTRY_LOAD_CONFIG.struct.Size
+
+        # Debug information
+        self.DebugNb = 0
+        if hasattr(pe, 'DIRECTORY_ENTRY_DEBUG'):
+            self.DebugNb = len(pe.DIRECTORY_ENTRY_DEBUG)
+
+        # Version Information
+        version_info_members = ['Length', 'ValueLength', 'Type']
+        for version_info_member in version_info_members:
+            key = 'VS_VERSIONINFO{}'.format(version_info_member)
+            if not hasattr(pe, 'VS_VERSIONINFO'):
+                exec('self.{} = 0'.format(key))
+            else:
+                exec('self.{} = pe.VS_VERSIONINFO[0].{}'.format(key, version_info_member))
+
+        fixversion_info_members = ['Signature', 'StrucVersion', 'FileVersionMS', 'FileVersionLS', 'ProductVersionMS', 'ProductVersionLS',
+            'FileFlagsMask', 'FileFlags', 'FileOS', 'FileType', 'FileSubtype', 'FileDateMS', 'FileDateLS']
+        for fixversion_info_member in fixversion_info_members:
+            key = 'VS_FIXEDFILEINFO{}'.format(fixversion_info_member)
+            if not hasattr(pe, 'VS_FIXEDFILEINFO'):
+                exec('self.{} = 0'.format(key))
+            else:
+                exec('self.{} = pe.VS_FIXEDFILEINFO[0].{}'.format(key, fixversion_info_member))
+        self.FileInfoNb = 0
+        if hasattr(pe, 'FileInfo'):
+            self.FileInfoNb = len(pe.FileInfo)
+        """
+        file_info_members = ['Length', 'ValueLength', 'Type']
+        for file_info_member in file_info_members:
+            string_key = 'StringFileInfo{}'.format(file_info_member)
+            var_key = 'VarFileInfo{}'.format(file_info_member)
+            if not hasattr(pe, 'FileInfo') or len(pe.FileInfo) == 0 or len(pe.FileInfo[0]) == 0:
+                exec('self.{} = 0'.format(string_key))
+                exec('self.{} = 0'.format(var_key))
+            elif len(pe.FileInfo[0]) == 2:
+                    exec('self.{} = pe.FileInfo[0][0].{}'.format(string_key, file_info_member))
+                    exec('self.{} = pe.FileInfo[0][1].{}'.format(var_key, file_info_member))
+            elif len(pe.FileInfo[0]) == 1:
+                if pe.FileInfo[0][0].name == 'StringFileInfo':
+                    exec('self.{} = pe.FileInfo[0][0].{}'.format(string_key, file_info_member))
+                    exec('self.{} = 0'.format(var_key))
+                if pe.FileInfo[0][0].name == 'VarFileInfo':
+                    exec('self.{} = 0'.format(string_key))
+                    exec('self.{} = pe.FileInfo[0][0].{}'.format(var_key, file_info_member))
+        """
     def construct(self):
         sample = {}
         for key, value in self.__dict__.items():
             sample[key] = value
         return sample
-
-
 
 def get_pefile_info(root, file):
     """获取PE文件信息
@@ -284,19 +318,26 @@ def data_processing(data_path, csv_path):
     """
     dataset = get_dataset(data_path)
     dataset_to_csv(dataset, csv_path)
+    del dataset
 
 def main():
+    logger.info('::: PE-Analysis :::')
     data_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_DATASET_PATH)
     data_processing(TRAIN_WHITE_PATH, TRAIN_WHITE_DATASET_PATH)
     data_processing(TEST_PATH, TEST_DATASET_PATH)
 
+def debug():
+    root = 'C:\\Users\\Administrator\\AppData\\Local\\口袋助理\\files\\'
+    file = 'procexp（中文）64.exe'
+    #pe = PEFile(root, file)
+    pe = PEFile(TRAIN_BLACK_PATH, '000057b32c463c4bcda99933faf15dd4')
+    print(pe.construct())
+
 if __name__ == '__main__':
     start_time = time.time()
 
+    #debug()
     main()
-    #root = './AIFirst_data/train/black/'
-    #file = 'dsdsd'
-    #pe = PEFile(root, file)
     
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

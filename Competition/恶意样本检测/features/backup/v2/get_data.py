@@ -213,7 +213,10 @@ def get_pefile_info(root, file):
         pe = PEFile(root, file)
         return pe.construct()
     except Exception as e:
-        logger.error('file[{}] get info failed, error[{}].'.format(file, e))
+        #logger.error('file[{}] get info failed, error[{}].'.format(file, e))
+        err = str(e).replace("'", "")
+        self.ExceptionError = exception_error[err]
+        logger.error('other error, {}.'.format(err))
 
 def get_dataset(data_path):
     """获取数据集

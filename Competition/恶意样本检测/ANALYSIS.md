@@ -143,3 +143,50 @@ pefile官方文档：https://pefile.readthedocs.io/en/latest/modules/pefile.html
 https://vimsky.com/examples/detail/python-attribute-pefile.DIRECTORY_ENTRY.html
 
 机器学习方法检测恶意文件：https://blog.csdn.net/zourzh123/article/details/81607330
+
+# 模型融合
+https://blog.csdn.net/weixin_52561314/article/details/124480003
+
+#方向又错了
+其实也不怪，主要是找不到可以优化的方法了。不过最近又发现了新的方法。
+
+基于深度学习的恶意软件分类器：https://bbs.pediy.com/thread-271558-1.htm
+
+## 原理
+通过将程序的16进制序列按照一定的规则转换为灰度图作为输入数据，随后使用VGG16深度卷积神经网络作为模型，利用深度卷积神经网络在图像识别上的准确性来来构建恶意程序分类器。该实验将会在两个公开数据集上进行测试，两个公开数据集的数据分别属于不同的恶意程序家族。因此，构建的分类器要解决的问题将是一个多分类问题。
+Pytorch版本：1.8.1
+CUDA版本：11.4
+
+灰度图的生成：《Malware Images: Visualization and Automatic  Classification》
+https://www.researchgate.net/profile/Shanmugavadivel-Karthikeyan/publication/228811247_Malware_Images_Visualization_and_Automatic_Classification/links/0deec53bee6c992ef1000000/Malware-Images-Visualization-and-Automatic-Classification.pdf
+
+当程序被编译器编译完成以后，将会以二进制的形式保存在磁盘中。但是程序解析的时候，都是按照一个字节（8比特）来解析，所以解析器一般是按照16进制形式展现一个程序的二进制文件。
+
+而每个字节的大小在0-255的范围内，这个范围和像素点的范围是一样的。因此，可以考虑将程序的每个字节当成一个像素点，转换成一个二维的数组，然后生成相应的灰度图。
+
+这里就有一个问题，每个程序的字节数是不同的。因此，需要按照一定的规则来指定生成的图像的宽和高，作者在论文中给出的参考：
+![](https://bbs.pediy.com/upload/attach/202202/835440_UYUB8CGVDBBNCJC.jpg)
+
+根据文件大小的不同来固定生成的图像的宽度，剩余的字节就填充到高度去，以此，来生成相应的灰度图来表征程序。此外，作者认为，生成灰度图的时候，应当把程序的PE头部分删除，只留下节区，因为节区中的内容才保存了程序要执行的指令，使用到的数据等到。如下图所示，可以看到不同节区生成的灰度图的纹理存在着明显的不同。
+
+最终生成的灰度图如下图所示，其中上面三张图是其中一个类别的恶意程序生成的灰度图，而下面的三张图则是另一类别恶意程序生成的灰度图。从中可以看到，不同家族的恶意程序所生成的灰度图的纹理存在非常明显的差异，这就给模型的训练带来的便利。
+
+
+
+
+利用机器学习进行恶意代码分类：https://zhuanlan.kanxue.com/article-13391.htm
+方法简述
+Kaggle比赛中最重要的环节就是特征工程，特征的好坏直接决定了比赛成绩。在这次Kaggle的比赛中冠军队伍选取了三个“黄金”特征：恶意代码图像、OpCode n-gram和Headers个数，其他一些特征包括ByteCode n-gram，指令频数等。机器学习部分采用了随机森林算法，并用到了xgboost和pypy加快训练速度。
+
+本文主要关注恶意代码图像和OpCode n-gram，以及随机森林算法的应用。
+《基于纹理指纹的恶意代码变种检测方法研究》
+
+# 反汇编
+相似性：https://github.com/hija/MalwareDataScience/blob/master/chapter05/similarity.py
+
+
+
+
+
+
+

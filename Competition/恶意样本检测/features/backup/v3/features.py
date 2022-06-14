@@ -184,12 +184,12 @@ def main():
     logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
     
     # 扩展的特征
-    train_black_dataset = extended_features(train_black_dataset, TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
-    train_white_dataset = extended_features(train_white_dataset, TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
-    test_dataset        = extended_features(test_dataset, TEST_PATH, TEST_STRING_FEATURES_PATH)
-    #train_black_dataset = extended_custom_features(train_black_dataset, TRAIN_BLACK_CUSTOM_STRINGS_PATH)
-    #train_white_dataset = extended_custom_features(train_white_dataset, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
-    #test_dataset        = extended_custom_features(test_dataset, TEST_CUSTOM_STRINGS_PATH)
+    #train_black_dataset = extended_features(train_black_dataset, TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
+    #train_white_dataset = extended_features(train_white_dataset, TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    #test_dataset        = extended_features(test_dataset, TEST_PATH, TEST_STRING_FEATURES_PATH)
+    train_black_dataset = extended_custom_features(train_black_dataset, TRAIN_BLACK_CUSTOM_STRINGS_PATH)
+    train_white_dataset = extended_custom_features(train_white_dataset, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
+    test_dataset        = extended_custom_features(test_dataset, TEST_CUSTOM_STRINGS_PATH)
     logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
     
     # 添加标签

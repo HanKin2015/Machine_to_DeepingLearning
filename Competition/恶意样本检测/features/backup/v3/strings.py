@@ -48,7 +48,7 @@ def get_string_features(all_strings):
     return data_features
 
 def training(train_black_path, train_white_path):
-    """简单训练一下字符串数据集效果
+    """简单训练一下测试效果
     """
     
     train_black_dataset = pd.read_csv(train_black_path, header=None)
@@ -57,11 +57,29 @@ def training(train_black_path, train_white_path):
     train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
     logger.info('train_dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
 
-    if type(train_dataset.iloc[0, 0]) is str:
-        X = train_dataset.loc[:, 1::].values
-    else:
-        X = train_dataset.values
-        
+    X = train_dataset.values
+    y = [0 for _ in range(train_black_dataset.shape[0])] + [1 for _ in range(train_white_dataset.shape[0])]
+    logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
+    logger.info('y len: {}.'.format(len(y)))
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2022)
+
+    clf = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=2022)
+    clf.fit(X_train, y_train)
+    logger.info('Random Forest Classifier on hold-out (70% Train, 30% Test): {}.'.format(clf.score(X_test, y_test)))
+    logger.info([x for x in clf.feature_importances_ if x > 0.1])
+
+def training_custom(train_black_path, train_white_path):
+    """测试自定义指定字符串特征数据集
+    """
+
+    train_black_dataset = pd.read_csv(train_black_path, header=None)
+    train_white_dataset = pd.read_csv(train_white_path, header=None)
+    
+    train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
+    logger.info('train_dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
+
+    X = train_dataset.loc[:, 1::].values
     y = [0 for _ in range(train_black_dataset.shape[0])] + [1 for _ in range(train_white_dataset.shape[0])]
     logger.info('X shape: ({}, {}).'.format(len(X), len(X[0])))
     logger.info('y len: {}.'.format(len(y)))
@@ -99,18 +117,14 @@ def string_features_processing(sample_path, save_path):
 def main():
     train_white_features = string_features_processing(TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
     train_black_features = string_features_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
-    test_features        = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
+    test_features = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
 
     training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
 
 if __name__ == '__main__':
     start_time = time.time()
 
-    #main()
-    
-    # 测试自定义指定字符串特征数据集
-    training(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
-    training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    main()
 
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

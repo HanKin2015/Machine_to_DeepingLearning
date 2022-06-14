@@ -36,9 +36,6 @@ from sklearn.feature_selection import chi2
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.ensemble import StackingClassifier
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RandomizedSearchCV
 
 # 数据集路径
 DATASET_PATH = './dataset/'
@@ -52,9 +49,6 @@ MALICIOUS_SAMPLE_DETECTION_MODEL_PATH = MODEL_PATH+'malicious_sample_detection.m
 MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector'
 # 模型分数路径
 MODEL_SCORE_PATH = MODEL_PATH+'score'
-# RF模型路径
-# XGB模型路径
-# LGB模型路径
 
 # 创建模型文件夹
 if not os.path.exists(MODEL_PATH):
@@ -106,52 +100,12 @@ def save_test_pred(X_test, y_test, y_pred, score):
     df.to_csv('he/{}.csv'.format(score), index=False, header=False)
 
 def feature_selection_model(model):
-    """模型特征选优
-    """
-    
-    RFC = RandomForestClassifier().fit(X, y)
+    RFC = RandomForestClassifier(n_estimators=50).fit(X, y)
     select = SelectFromModel(RFC, prefit=True)
     X = select.transform(X)
     return select
 
-def get_RF_best_params(X, y):
-    random_seed=44
-    random_forest_seed=np.random.randint(low=1,high=230)
-
-    # Search optimal hyperparameter
-    n_estimators_range=[int(x) for x in np.linspace(start=50,stop=3000,num=60)]
-    max_features_range=['auto','sqrt']
-    max_depth_range=[int(x) for x in np.linspace(10,500,num=50)]
-    max_depth_range.append(None)
-    min_samples_split_range=[2,5,10]
-    min_samples_leaf_range=[1,2,4,8]
-    bootstrap_range=[True,False]
-
-    random_forest_hp_range={'n_estimators':n_estimators_range,
-                            'max_features':max_features_range,
-                            'max_depth':max_depth_range,
-                            'min_samples_split':min_samples_split_range,
-                            'min_samples_leaf':min_samples_leaf_range
-                            # 'bootstrap':bootstrap_range
-                            }
-    logger.info(random_forest_hp_range)
-
-    random_forest_model_test_base=RandomForestRegressor()
-    random_forest_model_test_random=RandomizedSearchCV(estimator=random_forest_model_test_base,
-                                                       param_distributions=random_forest_hp_range,
-                                                       n_iter=200,
-                                                       n_jobs=-1,
-                                                       cv=3,
-                                                       verbose=1,
-                                                       random_state=random_forest_seed
-                                                       )
-    random_forest_model_test_random.fit(X, y)
-
-    best_hp_now = random_forest_model_test_random.best_params_
-    logger.info(best_hp_now)
-    return best_hp_now
-
-def random_forest_model(X, y):
+def random_forest_model(X_train, X_test, y_train, y_test):
     """随机森林模型
 
     根据比赛规则计算
@@ -183,13 +137,29 @@ def random_forest_model(X, y):
     X_test  = selector.transform(X_test)
     logger.info('X_train after selector shape: ({}, {}).'.format(X_train.shape[0], X_train.shape[1]))
     """
-
-    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    # K折交叉验证与学习曲线的联合使用来获取最优K值
+    scores_cross = []
+    Ks = []
+    for k in range(86, 87):
+        RFC = RandomForestClassifier(n_estimators=k, n_jobs=-1, oob_score=True, class_weight='balanced')  # 实例化模型对象
+        score_cross = cross_val_score(RFC, X_train, y_train, cv=10).mean()  # 根据训练数据进行交叉验证，并返回交叉验证的评分
+        scores_cross.append(score_cross)
+        Ks.append(k)
+        
+    # 转为数组类型
+    scores_arr = np.array(scores_cross)
+    Ks_arr = np.array(Ks)
+    # 绘制学习曲线
+    #plt.plot(Ks, scores_cross)
+    #plt.show()
     
-    params = get_RF_best_params(X, y)
+    # 获取最高的评分，以及最高评分对应的数组下标，从而获得最优的K值
+    score_best = scores_arr.max()  # 在存储评分的array中找到最高评分
+    index_best = scores_arr.argmax()  # 找到array中最高评分所对应的下标
+    Ks_best = Ks_arr[index_best]  # 根据下标找到最高评分所对应的K值
+    logger.info('Ks_best: {}.'.format(Ks_best)) 
 
-    RFC = RandomForestClassifier(params=params)
+    RFC = RandomForestClassifier(n_estimators=Ks_best)
     RFC.fit(X_train, y_train)
     y_pred = RFC.predict(X_test)
 
@@ -302,15 +272,10 @@ def fusion_model(X, y):
               ('XGB', xgb.XGBClassifier()),
               ('LGB', lgb.LGBMClassifier())
              ]
-             
     # 创建stacking模型
     model = StackingClassifier(models)
     # 设置验证集数据划分方式
-    cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=0)
-    # 查看单一模型精度
-    logger.info('RFC: {}.'.format(cross_val_score(RandomForestClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
-    logger.info('XGB: {}.'.format(cross_val_score(xgb.XGBClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
-    logger.info('LGB: {}.'.format(cross_val_score(lgb.LGBMClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
+    cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
     # 验证模型精度
     n_scores = cross_val_score(model, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
     # 打印模型的精度
@@ -346,15 +311,18 @@ def main():
     # 划分训练集和测试集 80% 20%
     X = train_dataset.drop(['label', 'FileName'], axis=1).values
     y = train_dataset['label'].values
+
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
         
     # 模型训练
-    #model, score = random_forest_model(X, y)
+    #model, score = random_forest_model(X_train, X_test, y_train, y_test)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
-    #model, score = lightgbm_model(X_train, X_test, y_train, y_test)
+    model, score = lightgbm_model(X_train, X_test, y_train, y_test)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)
-    fusion_model(X, y)
+    #fusion_model(X, y)
     #save_training_model(model, score)
 
 if __name__ == '__main__':

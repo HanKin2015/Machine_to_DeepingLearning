@@ -1,31 +1,14 @@
-import pandas as pd
-import numpy as np
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '64'
-import time
-from log import logger
+# -*- coding: utf-8 -*-
+"""
+文 件 名: features.py
+文件描述: 训练模型
+作    者: HeJian
+创建日期: 2022.05.29
+修改日期：2022.05.30
+Copyright (c) 2022 HeJian. All rights reserved.
+"""
 
-TRAIN_WHITE_PATH = './AIFirst_data/train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = './AIFirst_data/train/black/' # 训练集黑样本路径
-TEST_PATH        = './AIFirst_data/test/'        # 测试集样本路径
-DATA_PATH                        = './data/'                         # 原始数据路径
-DATASET_PATH                     = './dataset/'                      # 特征工程后数据集路径
-TRAIN_WHITE_DATASET_FILENAME     = 'train_white_dataset.csv'         # 训练集白样本数据集文件名
-TRAIN_BLACK_DATASET_FILENAME     = 'train_black_dataset.csv'         # 训练集黑样本数据集路径
-TRAIN_DATASET_FILENAME           = 'train_dataset.csv'               # 训练集样本数据集文件名
-TEST_DATASET_FILENAME            = 'test_dataset.csv'                # 测试集样本数据集文件名
-TRAIN_DIRTY_DATASET_FILENAME     = 'train_dirty_dataset.csv'         # 训练集脏数据集文件名
-TEST_DIRTY_DATASET_FILENAME      = 'test_dirty_dataset.csv'          # 测试集脏数据集文件名
-TRAIN_WHITE_CUSTOM_STRINGS_PATH  = 'train_white_strings.csv'         # 训练集白样本自定义字符串数据集文件名
-TRAIN_BLACK_CUSTOM_STRINGS_PATH  = 'train_black_strings.csv'         # 训练集黑样本自定义字符串数据集文件名
-TEST_CUSTOM_STRINGS_PATH         = 'test_strings.csv'                # 测试集样本自定义字符串数据集文件名
-TRAIN_WHITE_STRING_FEATURES_PATH = 'train_white_string_features.csv' # 训练集白样本字符串特征数据集文件名
-TRAIN_BLACK_STRING_FEATURES_PATH = 'train_black_string_features.csv' # 训练集黑样本字符串特征数据集文件名
-TEST_STRING_FEATURES_PATH        = 'test_string_features.csv'        # 测试集样本字符串特征数据集文件名
-
-# 创建数据集路径文件夹
-if not os.path.exists(DATASET_PATH):
-    os.makedirs(DATASET_PATH)
+from common import *
 
 def exception_value_processing_by_delete(dataset, feature, lower_threshold, upper_threshold):
     """异常值处理（删除）

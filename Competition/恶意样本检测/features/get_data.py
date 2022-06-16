@@ -8,29 +8,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '64'
-import pefile
-import pandas as pd
-import time
-from log import logger
-from concurrent.futures import ThreadPoolExecutor
-import numpy as np
-
-TRAIN_WHITE_PATH = './AIFirst_data/train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = './AIFirst_data/train/black/' # 训练集黑样本路径
-TEST_PATH        = './AIFirst_data/test/'        # 测试集样本路径
-DATA_PATH        = './data/'                     # 数据路径
-TRAIN_WHITE_DATASET_PATH = DATA_PATH+'train_white_dataset.csv' # 训练集白样本数据集路径
-TRAIN_BLACK_DATASET_PATH = DATA_PATH+'train_black_dataset.csv' # 训练集黑样本数据集路径
-TEST_DATASET_PATH        = DATA_PATH+'test_dataset.csv'        # 测试集样本数据集路径
-
-# 线程数量
-THREAD_NUM = 64
-
-# 创建数据文件夹
-if not os.path.exists(DATA_PATH):
-    os.makedirs(DATA_PATH)
+from common import *
 
 directory_names = (
     'IMAGE_DIRECTORY_ENTRY_EXPORT',

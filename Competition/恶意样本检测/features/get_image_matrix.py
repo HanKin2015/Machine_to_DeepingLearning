@@ -9,44 +9,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import subprocess
-import os
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import tree
-from sklearn.feature_extraction import FeatureHasher
-from sklearn.model_selection import train_test_split
-import time
-from log import logger
-import pandas as pd
-from PIL import Image
-import binascii
-import pefile
-from capstone import *
-import re
-from collections import *
-from concurrent.futures import ThreadPoolExecutor
-
-SAMPLE_PATH                      = './AIFirst_data/'                           # 样本数据集存储路径
-TRAIN_WHITE_PATH                 = SAMPLE_PATH+'train/white/'                  # 训练集白样本路径
-TRAIN_BLACK_PATH                 = SAMPLE_PATH+'train/black/'                  # 训练集黑样本路径
-TEST_PATH                        = SAMPLE_PATH+'test/'                         # 测试集样本路径
-DATA_PATH                        = './data/'                                   # 数据路径
-TRAIN_WHITE_GRAY_IMAGES_PATH     = './gray_images/train/white/'                # 训练集白样本灰度图像存储路径
-TRAIN_BLACK_GRAY_IMAGES_PATH     = './gray_images/train/black/'                # 训练集黑样本灰度图像存储路径
-TEST_GRAY_IMAGES_PATH            = './gray_images/test/'                       # 测试集样本灰度图像存储路径
-TRAIN_WHITE_IMAGE_MATRIX_PATH    = DATA_PATH+'train_white_image_matrix.csv'    # 训练集白样本图像矩阵数据集存储路径
-TRAIN_BLACK_IMAGE_MATRIX_PATH    = DATA_PATH+'train_black_image_matrix.csv'    # 训练集黑样本图像矩阵数据集存储路径
-TEST_IMAGE_MATRIX_PATH           = DATA_PATH+'test_image_matrix.csv'           # 测试集样本图像矩阵数据集存储路径
-
-TRAIN_BLACK_0_3000_IMAGE_MATRIX_PATH = DATA_PATH+'train_black_0_3000_image_matrix.csv'    # 训练集黑样本图像矩阵数据集存储路径
-TRAIN_BLACK_3000_IMAGE_MATRIX_PATH   = DATA_PATH+'train_black_3000_image_matrix.csv'    # 训练集黑样本图像矩阵数据集存储路径
-TEST_0_3000_IMAGE_MATRIX_PATH        = DATA_PATH+'test_0_3000_image_matrix.csv'          # 测试集样本操作指令码3-gram特征存储路径
-TEST_3000_6000_IMAGE_MATRIX_PATH     = DATA_PATH+'test_3000_6000_image_matrix.csv'
-TEST_6000_IMAGE_MATRIX_PATH          = DATA_PATH+'test_6000_image_matrix.csv'          # 测试集样本操作指令码3-gram特征存储路径
-
-# 线程数量
-THREAD_NUM = 64
+from common import *
 
 def get_image_width(file_path):
     """获取图像宽度

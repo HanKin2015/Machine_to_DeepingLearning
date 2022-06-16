@@ -8,51 +8,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '64'
-import pandas as pd
-import numpy as np
-import time
-import datetime
-from log import logger
-from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import train_test_split # 随机划分为训练子集和测试子集
-from sklearn.model_selection import cross_val_score  # 模型评价：训练误差和测试误差
-from sklearn.feature_selection import SelectFromModel# 特征选择(三种方法)
-from sklearn.metrics import roc_auc_score            # 评价指标
-from sklearn.metrics import f1_score                 # F1
-#from sklearn.cross_validation import StratifiedKFold # K折交叉验证
-from sklearn.model_selection import KFold            # K折交叉验证
-from sklearn.ensemble import RandomForestClassifier  # RFC随机森林分类
-from sklearn.ensemble import ExtraTreesClassifier    # ETC极端随机树分类
-import xgboost as xgb                                # XGB
-import lightgbm as lgb                               # LGB
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
-import pickle
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.model_selection import RepeatedStratifiedKFold
-from sklearn.ensemble import StackingClassifier
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RandomizedSearchCV
-
-DATASET_PATH                             = './dataset/'                                     # 数据集路径
-TRAIN_DATASET_PATH                       = DATASET_PATH+'train_dataset.csv'                 # 训练集样本数据集路径
-MODEL_PATH                               = './model/'                                       # 模型路径
-MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.model'    # 恶意样本检测训练模型路径
-MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
-MODEL_SCORE_PATH                         = MODEL_PATH+'score'                               # 模型分数路径
-# RF模型路径
-# XGB模型路径
-# LGB模型路径
-
-# 创建模型文件夹
-if not os.path.exists(MODEL_PATH):
-    os.makedirs(MODEL_PATH)
+from common import *
 
 def model_score(model_name, y_test, y_pred):
     """模型得分

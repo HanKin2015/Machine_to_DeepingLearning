@@ -9,42 +9,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import subprocess
-import os
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import tree
-from sklearn.feature_extraction import FeatureHasher
-from sklearn.model_selection import train_test_split
-import time
-from log import logger
-import pandas as pd
-from PIL import Image
-import binascii
-import pefile
-from capstone import *
-import re
-from collections import *
-from concurrent.futures import ThreadPoolExecutor
-
-SAMPLE_PATH      = './AIFirst_data/'
-TRAIN_WHITE_PATH = SAMPLE_PATH+'train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = SAMPLE_PATH+'train/black/' # 训练集黑样本路径
-TEST_PATH        = SAMPLE_PATH+'test/'        # 测试集样本路径
-DATA_PATH        = './data/'                  # 数据路径
-TRAIN_WHITE_STRING_FEATURES_PATH = DATA_PATH+'train_white_string_features.csv' # 训练集白样本字符串特征数据集路径
-TRAIN_BLACK_STRING_FEATURES_PATH = DATA_PATH+'train_black_string_features.csv' # 训练集黑样本字符串特征数据集路径
-TEST_STRING_FEATURES_PATH        = DATA_PATH+'test_string_features.csv'        # 测试集样本数字符串特征据集路径
-TRAIN_WHITE_CUSTOM_STRINGS_PATH  = DATA_PATH+'train_white_strings.csv'         # 训练集白样本自定义字符串数据集路径
-TRAIN_BLACK_CUSTOM_STRINGS_PATH  = DATA_PATH+'train_black_strings.csv'         # 训练集黑样本自定义字符串数据集路径
-TEST_CUSTOM_STRINGS_PATH         = DATA_PATH+'test_strings.csv'                # 测试集样本自定义字符串数据集路径
-
-TRAIN_WHITE_GRAY_IMAGES_PATH = './gray_images/train/white/'
-TRAIN_BLACK_GRAY_IMAGES_PATH = './gray_images/train/black/'
-TEST_GRAY_IMAGES_PATH        = './gray_images/test/'
-
-# 线程数量
-THREAD_NUM = 64
+from common import *
 
 def get_image_width(file_path):
     """获取图像宽度
@@ -85,26 +50,39 @@ def binary_file_to_grayscale_image(root, file, save_path):
     im = Image.fromarray(matrix)    #转换为图像
     im.save('{}{}.png'.format(save_path, file))
 
-def gray_image_progressing(data_path, save_path):
+def gray_image_progressing(data_path, save_path, file_index_start=0, file_index_end=-1):
     """灰度图像处理
     """
 
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    count = 0
+    file_index = 0
+    is_progressing = False
     with ThreadPoolExecutor(max_workers=THREAD_NUM) as pool:
         for root, dirs, files in os.walk(data_path):
             for file in files:
-                pool.submit(binary_file_to_grayscale_image, root, file, save_path)
-                count += 1
+                if file_index == file_index_start:
+                   is_progressing = True
+                
+                if is_progressing:
+                    pool.submit(binary_file_to_grayscale_image, root, file, save_path)
+                
+                file_index += 1
+                if file_index == file_index_end:
+                    is_progressing = False
     
-    logger.info('directory[{}] transform {} binary files to gray images done.'.format(data_path, count))
+    logger.info('directory[{}] transform {} binary files to gray images done[{}, {}].'.format(data_path, file_index, file_index_start, file_index_end))
 
 def main():
-    gray_image_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_GRAY_IMAGES_PATH)
-    gray_image_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_GRAY_IMAGES_PATH)
-    gray_image_progressing(TEST_PATH, TEST_GRAY_IMAGES_PATH)
+    #gray_image_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_GRAY_IMAGES_PATH)
+    #gray_image_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_GRAY_IMAGES_PATH)
+    #gray_image_progressing(TEST_PATH, TEST_GRAY_IMAGES_PATH)
+
+    # 数据分段解析处理
+    gray_image_progressing(TEST_PATH, TEST_GRAY_IMAGES_PATH, 0, 3000)
+    gray_image_progressing(TEST_PATH, TEST_GRAY_IMAGES_PATH, 3000, 6000)
+    gray_image_progressing(TEST_PATH, TEST_GRAY_IMAGES_PATH, 6000)
 
 def debug():
     """调试

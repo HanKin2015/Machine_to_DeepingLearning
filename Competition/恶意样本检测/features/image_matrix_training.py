@@ -8,15 +8,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split # 随机划分为训练子集和测试子集
-from sklearn.model_selection import cross_val_score  # 模型评价：训练误差和测试误差
-from sklearn.metrics import confusion_matrix
-import pandas as pd
-import numpy as np
-from log import logger
-import os
-import time
+from common import *
 
 DATA_PATH                                = './data/'                                        # 数据路径
 DATASET_PATH                             = './dataset/'                                     # 数据集路径

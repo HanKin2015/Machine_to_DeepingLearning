@@ -1,38 +1,14 @@
-import subprocess
-import os
-import numpy
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import tree
-from sklearn.feature_extraction import FeatureHasher
-from sklearn.model_selection import train_test_split
-import time
-from log import logger
-import pandas as pd
-import pickle
+# -*- coding: utf-8 -*-
+"""
+文 件 名: training.py
+文件描述: 训练模型
+作    者: HeJian
+创建日期: 2022.05.29
+修改日期：2022.06.16
+Copyright (c) 2022 HeJian. All rights reserved.
+"""
 
-SAMPLE_PATH      = './AIFirst_data/'
-TRAIN_WHITE_PATH = SAMPLE_PATH+'train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = SAMPLE_PATH+'train/black/' # 训练集黑样本路径
-TEST_PATH        = SAMPLE_PATH+'test/'        # 测试集样本路径
-DATA_PATH        = './data/'                  # 数据路径
-TRAIN_WHITE_STRING_FEATURES_PATH = DATA_PATH+'train_white_string_features.csv' # 训练集白样本数据集路径
-TRAIN_BLACK_STRING_FEATURES_PATH = DATA_PATH+'train_black_string_features.csv' # 训练集黑样本数据集路径
-TEST_STRING_FEATURES_PATH        = DATA_PATH+'test_string_features.csv'        # 测试集样本数据集路径
-
-TRAIN_WHITE_CUSTOM_STRINGS_PATH = DATA_PATH+'train_white_strings.csv' # 训练集白样本数据集路径
-TRAIN_BLACK_CUSTOM_STRINGS_PATH = DATA_PATH+'train_black_strings.csv' # 训练集黑样本数据集路径
-TEST_CUSTOM_STRINGS_PATH        = DATA_PATH+'test_strings.csv'        # 测试集样本数据集路径
-
-MODEL_PATH                     = './model/'                             # 模型路径
-DIRTY_DATASET_MODEL_PATH       = MODEL_PATH+'dirty_dataset_rfc.model'   # 脏样本训练模型路径
-DIRTY_DATASET_MODEL_SCORE_PATH = MODEL_PATH+'dirty_dataset_model_score' # 脏样本模型分数路径
-
-# 线程数量
-THREAD_NUM = 64
-
-# 创建数据文件夹
-if not os.path.exists(DATA_PATH):
-    os.makedirs(DATA_PATH)
+from common import *
 
 def extract_strings(filepath):
     strings = subprocess.Popen(['strings', filepath], stdout=subprocess.PIPE).communicate()[0].decode('utf-8').split('\n')
@@ -47,7 +23,7 @@ def get_string_features(all_strings):
             string_features[string] = 1
         hashed_features = hasher.transform([string_features])
         hashed_features = hashed_features.todense()
-        hashed_features = numpy.asarray(hashed_features)
+        hashed_features = np.asarray(hashed_features)
         hashed_features = hashed_features[0]
         data_features.extend([hashed_features])
     return data_features
@@ -97,12 +73,16 @@ def training(train_black_path, train_white_path):
     
     save_training_model(clf, score)
 
-def save2csv(data, csv_path):
+def save2csv(data, sample_path, csv_path):
     """数据保存到本地csv文件中
     """
-    
+
+    file_names = os.listdir(sample_path)
+    logger.info('{} file count: {}.'.format(sample_path, len(file_names)))
+
     df = pd.DataFrame(data)
-    df.to_csv(csv_path, sep=',', encoding='utf-8', index=False, header=False)
+    df['FileName'] = file_names
+    df.to_csv(csv_path, sep=',', encoding='utf-8', index=False)
 
 def string_features_processing(sample_path, save_path):
     """字符串特征处理（获取）
@@ -117,15 +97,15 @@ def string_features_processing(sample_path, save_path):
     string_features = get_string_features(all_strings)
     logger.info('string_features count: {}.'.format(len(string_features)))
     
-    save2csv(string_features, save_path)
+    save2csv(string_features, sample_path, save_path)
     return string_features
 
 def main():
-    train_white_features = string_features_processing(TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
-    train_black_features = string_features_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
-    test_features        = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
-
-    training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    #train_white_features = string_features_processing(TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    #train_black_features = string_features_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
+    #test_features        = string_features_processing(TEST_PATH, TEST_STRING_FEATURES_PATH)
+    test_dirty_features   = string_features_processing('./dirty_files/', DATASET_PATH+TEST_DIRTY_DATASET_FILENAME)
+    #training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
 
 if __name__ == '__main__':
     start_time = time.time()
@@ -133,8 +113,8 @@ if __name__ == '__main__':
     #main()
     
     # 测试自定义指定字符串特征数据集
-    training(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
-    #training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    #training(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
+    training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
 
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

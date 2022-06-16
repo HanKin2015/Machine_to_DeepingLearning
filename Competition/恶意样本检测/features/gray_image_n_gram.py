@@ -9,42 +9,7 @@
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import subprocess
-import os
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import tree
-from sklearn.feature_extraction import FeatureHasher
-from sklearn.model_selection import train_test_split
-import time
-from log import logger
-import pandas as pd
-from PIL import Image
-import binascii
-import pefile
-from capstone import *
-import re
-from collections import *
-from concurrent.futures import ThreadPoolExecutor
-
-SAMPLE_PATH      = './AIFirst_data/'
-TRAIN_WHITE_PATH = SAMPLE_PATH+'train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = SAMPLE_PATH+'train/black/' # 训练集黑样本路径
-TEST_PATH        = SAMPLE_PATH+'test/'        # 测试集样本路径
-DATA_PATH        = './data/'                  # 数据路径
-TRAIN_WHITE_STRING_FEATURES_PATH = DATA_PATH+'train_white_string_features.csv' # 训练集白样本字符串特征数据集路径
-TRAIN_BLACK_STRING_FEATURES_PATH = DATA_PATH+'train_black_string_features.csv' # 训练集黑样本字符串特征数据集路径
-TEST_STRING_FEATURES_PATH        = DATA_PATH+'test_string_features.csv'        # 测试集样本数字符串特征据集路径
-TRAIN_WHITE_CUSTOM_STRINGS_PATH  = DATA_PATH+'train_white_strings.csv'         # 训练集白样本自定义字符串数据集路径
-TRAIN_BLACK_CUSTOM_STRINGS_PATH  = DATA_PATH+'train_black_strings.csv'         # 训练集黑样本自定义字符串数据集路径
-TEST_CUSTOM_STRINGS_PATH         = DATA_PATH+'test_strings.csv'                # 测试集样本自定义字符串数据集路径
-
-TRAIN_WHITE_GRAY_IMAGES_PATH = './gray_images/train/white/'
-TRAIN_BLACK_GRAY_IMAGES_PATH = './gray_images/train/black/'
-TEST_GRAY_IMAGES_PATH        = './gray_images/test/'
-
-# 线程数量
-THREAD_NUM = 64
+from common import *
 
 def get_image_width(file_path):
     """获取图像宽度

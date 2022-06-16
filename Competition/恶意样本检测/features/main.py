@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+文 件 名: main.py
+文件描述: 主程序
+作    者: HeJian
+创建日期: 2022.06.16
+修改日期：2022.06.16
+Copyright (c) 2022 HeJian. All rights reserved.
+"""
+
 import time
 from log import logger
 import get_data

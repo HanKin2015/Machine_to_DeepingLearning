@@ -40,18 +40,12 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
 
-# 数据集路径
-DATASET_PATH = './dataset/'
-# 训练集样本数据集路径
-TRAIN_DATASET_PATH = DATASET_PATH+'train_dataset.csv'
-# 模型路径
-MODEL_PATH = './model/'
-# 恶意样本检测训练模型路径
-MALICIOUS_SAMPLE_DETECTION_MODEL_PATH = MODEL_PATH+'malicious_sample_detection.model'
-# 恶意样本检测特征选择器路径
-MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector'
-# 模型分数路径
-MODEL_SCORE_PATH = MODEL_PATH+'score'
+DATASET_PATH                             = './dataset/'                                     # 数据集路径
+TRAIN_DATASET_PATH                       = DATASET_PATH+'train_dataset.csv'                 # 训练集样本数据集路径
+MODEL_PATH                               = './model/'                                       # 模型路径
+MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.model'    # 恶意样本检测训练模型路径
+MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
+MODEL_SCORE_PATH                         = MODEL_PATH+'score'                               # 模型分数路径
 # RF模型路径
 # XGB模型路径
 # LGB模型路径
@@ -219,9 +213,24 @@ def XGB_model(X_train, X_test, y_train, y_test):
     score = model_score('XGBClassifier', y_test, y_pred)
     return XGB, score
 
-def lightgbm_model(X_train, X_test, y_train, y_test):
+def lightgbm_model(X, y):
     """lightgbm模型训练
     """
+
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    
+    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
+    y_pred = LGB.predict(X_test).astype(int)
+    
+    score = model_score('LGBMClassifier', y_test, y_pred)
+    return LGB, score
+
+
+def lightgbm_model_(X_train, X_test, y_train, y_test):
+    """lightgbm模型训练
+    """
+    
     params = {
           # 这些参数需要学习
           'boosting_type': 'gbdt',
@@ -308,9 +317,9 @@ def fusion_model(X, y):
     # 设置验证集数据划分方式
     cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=0)
     # 查看单一模型精度
-    logger.info('RFC: {}.'.format(cross_val_score(RandomForestClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
-    logger.info('XGB: {}.'.format(cross_val_score(xgb.XGBClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
-    logger.info('LGB: {}.'.format(cross_val_score(lgb.LGBMClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean())
+    logger.info('RFC: {}.'.format(cross_val_score(RandomForestClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean()))
+    logger.info('XGB: {}.'.format(cross_val_score(xgb.XGBClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean()))
+    logger.info('LGB: {}.'.format(cross_val_score(lgb.LGBMClassifier(), scoring='accuracy', cv=cv, n_jobs=-1).mean()))
     # 验证模型精度
     n_scores = cross_val_score(model, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
     # 打印模型的精度
@@ -321,8 +330,9 @@ def save_training_model(model, score):
     """
     
     before_score = 0
-    with open(MODEL_SCORE_PATH, 'r') as fd:
-        before_score = fd.read()
+    if os.path.exists(DIRTY_DATASET_MODEL_SCORE_PATH):
+        with open(DIRTY_DATASET_MODEL_SCORE_PATH, 'r') as fd:
+            before_score = fd.read()
     if score > float(before_score):
         buffer = pickle.dumps(model)
         with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
@@ -350,12 +360,12 @@ def main():
     # 模型训练
     #model, score = random_forest_model(X, y)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
-    #model, score = lightgbm_model(X_train, X_test, y_train, y_test)
+    model, score = lightgbm_model(X, y)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)
-    fusion_model(X, y)
-    #save_training_model(model, score)
+    #fusion_model(X, y)
+    save_training_model(model, score)
 
 if __name__ == '__main__':
     start_time = time.time()

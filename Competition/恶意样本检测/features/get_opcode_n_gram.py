@@ -44,6 +44,9 @@ TEST_GRAY_IMAGES_PATH            = './gray_images/test/'                       #
 TRAIN_WHITE_OPCODE_3_GRAM_PATH   = DATA_PATH+'train_white_opcode_3_gram.csv'   # 训练集白样本操作指令码3-gram特征存储路径
 TRAIN_BLACK_OPCODE_3_GRAM_PATH   = DATA_PATH+'train_black_opcode_3_gram.csv'   # 训练集黑样本操作指令码3-gram特征存储路径
 TEST_OPCODE_3_GRAM_PATH          = DATA_PATH+'test_opcode_3_gram.csv'          # 测试集样本操作指令码3-gram特征存储路径
+TEST_0_3000_OPCODE_3_GRAM_PATH   = DATA_PATH+'test_0_3000_opcode_3_gram.csv'          # 测试集样本操作指令码3-gram特征存储路径
+TEST_3000_6000_OPCODE_3_GRAM_PATH   = DATA_PATH+'test_3000_6000_opcode_3_gram.csv'
+TEST_6000_9857_OPCODE_3_GRAM_PATH= DATA_PATH+'test_6000_9857_opcode_3_gram.csv'          # 测试集样本操作指令码3-gram特征存储路径
 
 # 线程数量
 THREAD_NUM = 64
@@ -106,15 +109,15 @@ def save_to_csv(map3gram, save_path):
         cc += d
     selectedfeatures = {}
     tc = 0
-    for k,v in cc.items():
-        if v >= 500:
-            selectedfeatures[k] = v
-            logger.info('k = {}, v = {}.'.format(k, v))
+    for key,value in cc.items():
+        if value >= 50:
+            selectedfeatures[key] = value
+            logger.debug('key = {}, value = {}.'.format(key, value))
             tc += 1
     dataframelist = []
     for file_name,op3gram in map3gram.items():
         standard = {}
-        standard["file_name"] = file_name
+        standard['FileName'] = file_name
         for feature in selectedfeatures:
             if feature in op3gram:
                 standard[feature] = op3gram[feature]
@@ -122,35 +125,52 @@ def save_to_csv(map3gram, save_path):
                 standard[feature] = 0
         dataframelist.append(standard)
     df = pd.DataFrame(dataframelist)
+    logger.info('{} shape: ({}, {}).'.format(save_path, df.shape[0], df.shape[1]))
     df.to_csv(save_path, index=False)
 
-def opcode_n_gram_progressing(data_path, save_path):
+def opcode_n_gram_progressing(data_path, save_path, file_index_start=0, file_index_end=-1):
     """n-gram处理
     """
     
     map3gram = defaultdict(Counter)
 
     tasks = []
+    file_index = 0
+    is_progressing = False
     with ThreadPoolExecutor(max_workers=THREAD_NUM) as pool:
         for root, dirs, files in os.walk(data_path):
             for file in files:
-                task = pool.submit(get_opcode_3_gram, root, file)
-                tasks.append(task)
+                if file_index == file_index_start:
+                   is_progressing = True
+                   
+                if is_progressing:
+                    task = pool.submit(get_opcode_3_gram, root, file)
+                    tasks.append(task)
+                    
+                file_index += 1
+                if file_index == file_index_end:
+                    is_progressing = False
     
     failed_count = 0
     for task in tasks:
         file_name, op3gram = task.result()
         if op3gram is not None:
+            logger.debug('{} : {}.'.format(file_name, op3gram))
             map3gram[file_name] = op3gram
         else:
             failed_count += 1
-    logger.info('{} has {} samples which got opcode 3-gram failed.'.format(data_path, failed_count))
+    logger.info('{} has {}/{} samples which got opcode 3-gram failed.'.format(data_path, failed_count, file_index))
     save_to_csv(map3gram, save_path)
     
 def main():
     opcode_n_gram_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_OPCODE_3_GRAM_PATH)
     opcode_n_gram_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_OPCODE_3_GRAM_PATH)
     opcode_n_gram_progressing(TEST_PATH, TEST_OPCODE_3_GRAM_PATH)
+    
+    # 拆分数据解析处理
+    #opcode_n_gram_progressing(TEST_PATH, TEST_0_3000_OPCODE_3_GRAM_PATH, 0, 3000)
+    #opcode_n_gram_progressing(TEST_PATH, TEST_3000_6000_OPCODE_3_GRAM_PATH, 3000, 6000)
+    #opcode_n_gram_progressing(TEST_PATH, TEST_5000_9857_OPCODE_3_GRAM_PATH, 6000)
 
 def debug():
     """调试

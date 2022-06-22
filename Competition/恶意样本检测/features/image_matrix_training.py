@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-文 件 名: training.py
+文 件 名: image_matrix_training.py
 文件描述: 图像矩阵训练模型
 作    者: HeJian
 创建日期: 2022.06.15
@@ -10,24 +10,6 @@ Copyright (c) 2022 HeJian. All rights reserved.
 
 from common import *
 
-DATA_PATH                                = './data/'                                        # 数据路径
-DATASET_PATH                             = './dataset/'                                     # 数据集路径
-TRAIN_DATASET_PATH                       = DATASET_PATH+'train_dataset.csv'                 # 训练集样本数据集路径
-MODEL_PATH                               = './model/'                                       # 模型路径
-MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.model'    # 恶意样本检测训练模型路径
-MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
-TRAIN_WHITE_IMAGE_MATRIX_PATH            = DATA_PATH+'train_white_image_matrix.csv'         # 训练集白样本图像矩阵数据集存储路径
-TRAIN_BLACK_IMAGE_MATRIX_PATH            = DATA_PATH+'train_black_image_matrix.csv'         # 训练集黑样本图像矩阵数据集存储路径
-TEST_IMAGE_MATRIX_PATH                   = DATA_PATH+'test_image_matrix.csv'                # 测试集样本图像矩阵数据集存储路径
-MODEL_SCORE_PATH                         = MODEL_PATH+'score'                               # 模型分数路径
-IAMGE_MATRIX_RFC_MODEL_PATH              = MODEL_PATH+'image_matrix_rfc.model'              # RF模型路径
-IAMGE_MATRIX_XGB_MODEL_PATH              = MODEL_PATH+'image_matrix_xgb.model'              # XGB模型路径
-IAMGE_MATRIX_LGB_MODEL_PATH              = MODEL_PATH+'image_matrix_lgb.model'              # LGB模型路径
-
-# 创建模型文件夹
-if not os.path.exists(MODEL_PATH):
-    os.makedirs(MODEL_PATH)
-    
 def model_score(model_name, y_test, y_pred):
     """模型得分
     
@@ -96,8 +78,6 @@ def random_forest_model(X, y):
     y_pred = RFC.predict(X_test)
 
     score = model_score('RandomForestClassifier', y_test, y_pred)
-    
-    save_test_pred(X_test, y_test, y_pred, score)
     return RFC, score
 
 def save_training_model(model, score):

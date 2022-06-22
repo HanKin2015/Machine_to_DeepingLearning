@@ -86,9 +86,9 @@ TEST_STRING_FEATURES_PATH                = DATA_PATH+'test_string_features.csv' 
 TRAIN_WHITE_OPCODE_3_GRAM_PATH           = DATA_PATH+'train_white_opcode_3_gram.csv'        # 训练集白样本操作指令码3-gram特征存储路径
 TRAIN_BLACK_OPCODE_3_GRAM_PATH           = DATA_PATH+'train_black_opcode_3_gram.csv'        # 训练集黑样本操作指令码3-gram特征存储路径
 TEST_OPCODE_3_GRAM_PATH                  = DATA_PATH+'test_opcode_3_gram.csv'               # 测试集样本操作指令码3-gram特征存储路径
-TEST_0_3000_OPCODE_3_GRAM_PATH           = DATA_PATH+'test_0_3000_opcode_3_gram.csv'        # 测试集样本操作指令码3-gram特征存储路径
-TEST_3000_6000_OPCODE_3_GRAM_PATH        = DATA_PATH+'test_3000_6000_opcode_3_gram.csv'     # 测试集样本操作指令码3-gram特征存储路径
-TEST_6000_OPCODE_3_GRAM_PATH             = DATA_PATH+'test_6000_opcode_3_gram.csv'          # 测试集样本操作指令码3-gram特征存储路径
+TEST_0_3000_OPCODE_3_GRAM_PATH           = DATA_PATH+'test_0_3000_opcode_3_gram.csv'        # 测试集0-3000样本操作指令码3-gram特征存储路径
+TEST_3000_6000_OPCODE_3_GRAM_PATH        = DATA_PATH+'test_3000_6000_opcode_3_gram.csv'     # 测试集3000-6000样本操作指令码3-gram特征存储路径
+TEST_6000_OPCODE_3_GRAM_PATH             = DATA_PATH+'test_6000_opcode_3_gram.csv'          # 测试集6000-样本操作指令码3-gram特征存储路径
 
 MODEL_SCORE_PATH                         = MODEL_PATH+'score'                               # 模型分数路径
 IAMGE_MATRIX_RFC_MODEL_PATH              = MODEL_PATH+'image_matrix_rfc.model'              # RF模型路径
@@ -96,8 +96,10 @@ IAMGE_MATRIX_XGB_MODEL_PATH              = MODEL_PATH+'image_matrix_xgb.model'  
 IAMGE_MATRIX_LGB_MODEL_PATH              = MODEL_PATH+'image_matrix_lgb.model'              # LGB模型路径
 MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.model'    # 恶意样本检测训练模型路径
 MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
+OPCODE_N_GRAM_MODEL_PATH                 = MODEL_PATH+'opcode_n_gram.model'
+OPCODE_N_GRAM_MODEL_SCORE_PATH           = MODEL_PATH+'opcode_n_gram.score'
 DIRTY_DATASET_MODEL_PATH                 = MODEL_PATH+'dirty_dataset_rfc.model'             # 脏样本训练模型路径
-DIRTY_DATASET_MODEL_SCORE_PATH           = MODEL_PATH+'dirty_dataset_model_score'           # 脏样本模型分数路径
+DIRTY_DATASET_MODEL_SCORE_PATH           = MODEL_PATH+'dirty_dataset_rfc.score'             # 脏样本模型分数路径
 RESULT_PATH                              = './result.csv'                                   # 预测结果存储路径
 
 # 创建数据集路径文件夹

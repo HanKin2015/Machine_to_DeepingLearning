@@ -159,6 +159,18 @@ def extended_features(dataset, sample_path, extended_features_path):
     dataset = pd.merge(dataset, df, how='inner', on='FileName')
     return dataset
 
+def test_dirty_string_features():
+    """测试集脏数据字符串特征
+    """
+    
+    test_string_features_dataset = pd.read_csv(TEST_STRING_FEATURES_PATH, names=range(10000))
+    file_names = os.listdir(TEST_PATH)
+    test_string_features_dataset['FileName'] = file_names
+    dirty_file_names = os.listdir('./dirty_files/')
+    
+    test_dirty_string_features_dataset = test_string_features_dataset[test_string_features_dataset.FileName.isin(dirty_file_names)]
+    test_dirty_string_features_dataset.to_csv(DATASET_PATH+TEST_DIRTY_DATASET_FILENAME, sep=',', encoding='utf-8', index=False)
+
 def main():
     # 获取数据集
     train_black_dataset = read_csv(TRAIN_BLACK_DATASET_FILENAME)

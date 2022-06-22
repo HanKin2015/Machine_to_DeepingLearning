@@ -35,7 +35,7 @@ def main():
     # 模型预测结果
     file_name1 = test_dataset['FileName']
     X = test_dataset.drop(['FileName'], axis=1, inplace=False).values
-    #selector = load_model(SELECTOR_PATH)
+    #selector = load_model(MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH)
     #X = selector.transform(X)
     model = load_model(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH)
     result1 = model.predict(X)

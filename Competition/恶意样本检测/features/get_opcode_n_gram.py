@@ -122,6 +122,18 @@ def opcode_n_gram_progressing(data_path, save_path, file_index_start=0, file_ind
     logger.info('{} has {}/{} samples which got opcode 3-gram failed.'.format(data_path, failed_count, file_index))
     save_to_csv(map3gram, save_path)
     
+def dataset_concat():
+    test_0_3000 = pd.read_csv(TEST_0_3000_OPCODE_3_GRAM_PATH)
+    test_3000_6000 = pd.read_csv(TEST_3000_6000_OPCODE_3_GRAM_PATH)
+    test_6000 = pd.read_csv(TEST_6000_OPCODE_3_GRAM_PATH)
+    logger.info([test_0_3000.shape, test_3000_6000.shape, test_6000.shape])
+    
+    test_dataset = pd.concat([test_0_3000, test_3000_6000, test_6000], ignore_index=True)
+    logger.info(test_dataset.shape)
+    
+    test_dataset = test_dataset.fillna(0)
+    test_dataset.to_csv(TEST_OPCODE_3_GRAM_PATH, index=False)
+   
 def main():
     opcode_n_gram_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_OPCODE_3_GRAM_PATH)
     opcode_n_gram_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_OPCODE_3_GRAM_PATH)
@@ -130,7 +142,7 @@ def main():
     # 拆分数据解析处理
     #opcode_n_gram_progressing(TEST_PATH, TEST_0_3000_OPCODE_3_GRAM_PATH, 0, 3000)
     #opcode_n_gram_progressing(TEST_PATH, TEST_3000_6000_OPCODE_3_GRAM_PATH, 3000, 6000)
-    #opcode_n_gram_progressing(TEST_PATH, TEST_5000_9857_OPCODE_3_GRAM_PATH, 6000)
+    #opcode_n_gram_progressing(TEST_PATH, TEST_6000_OPCODE_3_GRAM_PATH, 6000)
 
 def debug():
     """调试
@@ -145,7 +157,8 @@ def debug():
 if __name__ == '__main__':
     start_time = time.time()
 
-    main()
+    #main()
+    dataset_concat()
 
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

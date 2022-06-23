@@ -12,20 +12,6 @@ from common import *
 
 def model_score(model_name, y_test, y_pred):
     """模型得分
-    
-    根据比赛规则计算
-    
-    Parameters
-    ------------
-    model_name : str
-        模型名字
-    y_test : pandas.Series
-        验证集结果
-    y_pred : pandas.Series
-        预测结果
-        
-    Returns
-    -------
     """
     
     logger.info('model {}:'.format(model_name))
@@ -50,30 +36,12 @@ def model_score(model_name, y_test, y_pred):
 
 def random_forest_model(X, y):
     """随机森林模型
-
-    根据比赛规则计算
-    
-    Parameters
-    ------------
-    black_is_black : str
-        表示黑样本被预测为黑样本的数目
-    black_is_white : str
-        表示黑样本被预测为白样本的数目（漏报）
-    white_is_black : str
-        表示白样本被预测为黑样本的数目（误报）
-    white_is_white : str
-        表示白样本被预测为白样本的数目
-        
-    Returns
-    -------
-    score : float
-        分数
     """
 
-    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.4, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
 
-    RFC = RandomForestClassifier(n_estimators=86, n_jobs=-1)
+    RFC = RandomForestClassifier(n_estimators=500, n_jobs=-1)
     RFC.fit(X_train, y_train)
     y_pred = RFC.predict(X_test)
 
@@ -85,10 +53,12 @@ def save_training_model(model, score):
     """
     
     before_score = 0
-    with open(OPCODE_N_GRAM_MODEL_SCORE_PATH, 'r') as fd:
-        before_score = fd.read()
+    if os.path.exists(OPCODE_N_GRAM_MODEL_SCORE_PATH):
+        with open(OPCODE_N_GRAM_MODEL_SCORE_PATH, 'r') as fd:
+            before_score = fd.read()
 
     if score > float(before_score):
+        logger.info('~~~~~[model changed]~~~~~')
         buffer = pickle.dumps(model)
         with open(OPCODE_N_GRAM_MODEL_PATH, "wb+") as fd:
             fd.write(buffer)
@@ -97,21 +67,8 @@ def save_training_model(model, score):
 
 def main():
     # 获取数据集
-    train_white_dataset = pd.read_csv(TRAIN_WHITE_OPCODE_3_GRAM_PATH)
-    train_black_dataset = pd.read_csv(TRAIN_BLACK_OPCODE_3_GRAM_PATH)
-    logger.info('train white dataset shape: ({}, {}).'.format(train_white_dataset.shape[0], train_white_dataset.shape[1]))
-    logger.info('train black dataset shape: ({}, {}).'.format(train_black_dataset.shape[0], train_black_dataset.shape[1]))
-    
-    # 添加标签
-    train_black_dataset['Label'] = 0
-    train_white_dataset['Label'] = 1
-    
-    # 黑白样本合并
-    train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True, sort=False)
+    train_dataset = pd.read_csv(TRAIN_OPCODE_3_GRAM_PATH)
     logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
-    
-    # 填充缺失值
-    train_dataset = train_dataset.fillna(0)
     
     # 划分训练集和测试集
     X = train_dataset.drop(['Label', 'FileName'], axis=1).values
@@ -122,6 +79,7 @@ def main():
     save_training_model(model, score)
 
 if __name__ == '__main__':
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()

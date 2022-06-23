@@ -24,6 +24,7 @@ def debug():
     #binary_file_to_grayscale_image(root, file)
     
 if __name__ == '__main__':
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()

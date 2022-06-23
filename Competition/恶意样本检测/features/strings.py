@@ -113,8 +113,8 @@ if __name__ == '__main__':
     #main()
     
     # 测试自定义指定字符串特征数据集
-    #training(TRAIN_BLACK_CUSTOM_STRINGS_PATH, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
-    training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    training(DATASET_PATH+TRAIN_BLACK_CUSTOM_STRINGS_PATH, DATASET_PATH+TRAIN_WHITE_CUSTOM_STRINGS_PATH)
+    #training(TRAIN_BLACK_STRING_FEATURES_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
 
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

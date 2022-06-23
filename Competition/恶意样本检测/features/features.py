@@ -66,8 +66,7 @@ def delete_uncorrelated_features(dataset):
     """
     
     uncorrelated_features = ['ExceptionError', 'TimeDateStamp', 'TS_obj', 'DayName',
-        'HourBin', 'Hour', 'Minute', 'Second', 'e_res', 'e_res2', 'StringFileInfoLength',
-        'StringFileInfoValueLength', 'StringFileInfoType', 'VarFileInfoLength', 'VarFileInfoValueLength', 'VarFileInfoType']
+        'HourBin', 'Hour', 'Minute', 'Second', 'e_res', 'e_res2']
     dataset.drop(uncorrelated_features, axis=1, inplace=True)
     return dataset
 
@@ -142,7 +141,8 @@ def extended_custom_features(dataset, extended_features_path):
     """扩展的特征(自定义的字符串特征)
     """
     
-    names = ['FileName', 'System32', 'Http', 'Https', 'Download', 'Heky', 'Wget', 'Curl', 'SystemRoot', 'Windir', 'Root']
+    names = ['FileName', 'System32', 'System64', 'Http', 'Https', 'Download', 'Heky', 'Wget', 'Curl', 'SystemRoot', 'Windir', 'Root',
+        'Load', 'Get', 'Temp', 'Mutex', 'Thread', 'Service']
     df = pd.read_csv(DATA_PATH+extended_features_path, names=names)
     dataset = pd.merge(dataset, df, how='inner', on='FileName')
     return dataset
@@ -179,12 +179,12 @@ def main():
     logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
     
     # 扩展的特征
-    train_black_dataset = extended_features(train_black_dataset, TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
-    train_white_dataset = extended_features(train_white_dataset, TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
-    test_dataset        = extended_features(test_dataset, TEST_PATH, TEST_STRING_FEATURES_PATH)
-    #train_black_dataset = extended_custom_features(train_black_dataset, TRAIN_BLACK_CUSTOM_STRINGS_PATH)
-    #train_white_dataset = extended_custom_features(train_white_dataset, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
-    #test_dataset        = extended_custom_features(test_dataset, TEST_CUSTOM_STRINGS_PATH)
+    #train_black_dataset = extended_features(train_black_dataset, TRAIN_BLACK_PATH, TRAIN_BLACK_STRING_FEATURES_PATH)
+    #train_white_dataset = extended_features(train_white_dataset, TRAIN_WHITE_PATH, TRAIN_WHITE_STRING_FEATURES_PATH)
+    #test_dataset        = extended_features(test_dataset, TEST_PATH, TEST_STRING_FEATURES_PATH)
+    train_black_dataset = extended_custom_features(train_black_dataset, TRAIN_BLACK_CUSTOM_STRINGS_PATH)
+    train_white_dataset = extended_custom_features(train_white_dataset, TRAIN_WHITE_CUSTOM_STRINGS_PATH)
+    test_dataset        = extended_custom_features(test_dataset, TEST_CUSTOM_STRINGS_PATH)
     logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
     
     # 添加标签

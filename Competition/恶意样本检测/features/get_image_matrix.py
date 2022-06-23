@@ -27,14 +27,17 @@ def get_image_width(file_path):
             return image_width_array[i]
     return 1024
 
-def get_image_matrix_from_binary_file(root, file, is_onerow=True):
+def get_image_matrix_from_binary_file(root, file, is_onerow=True, pixnum=5000):
     """从二进制文件获取图像矩阵
+    
+    一定要指定图像像素数量，否则数据集过大
+    
     """
     
     file_path = '{}{}'.format(root, file)
 
     with open(file_path, 'rb') as fd:
-        content = fd.read()
+        content = fd.read(pixnum)
     
     # 将二进制文件转换为十六进制字符串
     hexst = binascii.hexlify(content)
@@ -102,13 +105,13 @@ def image_matrix_progressing(data_path, save_path, file_index_start=0, file_inde
     save_to_csv(mapimg, save_path)
 
 def main():
-    #image_matrix_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_IMAGE_MATRIX_PATH)
-    #image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_IMAGE_MATRIX_PATH)
+    image_matrix_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_IMAGE_MATRIX_PATH)
+    image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_IMAGE_MATRIX_PATH)
     #image_matrix_progressing(TEST_PATH, TEST_IMAGE_MATRIX_PATH)
     
     # 数据分段解析处理
-    image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_0_3000_IMAGE_MATRIX_PATH, 0, 3000)
-    image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_3000_IMAGE_MATRIX_PATH, 3000)
+    #image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_0_3000_IMAGE_MATRIX_PATH, 0, 3000)
+    #image_matrix_progressing(TRAIN_BLACK_PATH, TRAIN_BLACK_3000_IMAGE_MATRIX_PATH, 3000)
     image_matrix_progressing(TEST_PATH, TEST_0_3000_IMAGE_MATRIX_PATH, 0, 3000)
     image_matrix_progressing(TEST_PATH, TEST_3000_6000_IMAGE_MATRIX_PATH, 3000, 6000)
     image_matrix_progressing(TEST_PATH, TEST_6000_IMAGE_MATRIX_PATH, 6000)

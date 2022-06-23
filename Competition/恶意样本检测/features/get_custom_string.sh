@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 # 文 件 名: get_custom_strings.sh
-# 文件描述: 操作摄像头工具合集
+# 文件描述: 使用strings命令获取指定字符串
 # 作    者: HeJian
 # 创建日期: 2022.06.10
-# 修改日期：2022.06.15
+# 修改日期：2022.06.23
 # 
 # Copyright (c) 2022 HeJian. All rights reserved.
 #
@@ -23,16 +23,22 @@ OUT='./result.csv'
 
 STRING_FEATURES=(
     "C:\\\Windows\\\System32"
+    "C:\\\Windows\\\SysWOW64"
     "http://"
     "https://"
     "download"
     "HKEY_"
-    "wget"
-    "curl"
     "%SystemRoot%\\\System32"
     "%windir%\\\system32"
+    "WinDir"
     "SystemRoot\\\System32"
-    "ftp"
+    "GetTempPath"
+    "EnumProcess"
+    "LoadLibrary"
+    "CreateService"
+    "CreateMutex"
+    "CreateThread"
+    "GetProcAddress"
 )
 
 function get_strings()
@@ -55,7 +61,7 @@ function get_strings()
     done
 }
 
-#get_strings ${TRAIN_WHITE_PATH} ${TRAIN_WHITE_STRINGS_PATH}
-#get_strings ${TRAIN_BLACK_PATH} ${TRAIN_BLACK_STRINGS_PATH}
-#get_strings ${TEST_PATH} ${TEST_STRINGS_PATH}
-get_strings ${IN} ${OUT}
+get_strings ${TRAIN_WHITE_PATH} ${TRAIN_WHITE_STRINGS_PATH}
+get_strings ${TRAIN_BLACK_PATH} ${TRAIN_BLACK_STRINGS_PATH}
+get_strings ${TEST_PATH} ${TEST_STRINGS_PATH}
+#get_strings ${IN} ${OUT}

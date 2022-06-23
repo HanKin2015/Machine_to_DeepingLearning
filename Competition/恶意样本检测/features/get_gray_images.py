@@ -72,7 +72,7 @@ def gray_image_progressing(data_path, save_path, file_index_start=0, file_index_
                 if file_index == file_index_end:
                     is_progressing = False
     
-    logger.info('directory[{}] transform {} binary files to gray images done[{}, {}].'.format(data_path, file_index, file_index_start, file_index_end))
+    logger.info('directory[{}] transform {} binary files to gray images done. file index[{}, {}].'.format(data_path, file_index, file_index_start, file_index_end))
 
 def main():
     #gray_image_progressing(TRAIN_WHITE_PATH, TRAIN_WHITE_GRAY_IMAGES_PATH)
@@ -90,12 +90,16 @@ def debug():
     
     root = 'D:\\Github\\Machine_to_DeepingLearning\\Competition\\恶意样本检测\\features\\backup\\'
     file = 'FTOOL.exe'
-    #binary_file_to_grayscale_image(root, file)
+    save_path = 'D:\\Github\\Machine_to_DeepingLearning\\Competition\\恶意样本检测\\features\\gray_images\\'
+    #binary_file_to_grayscale_image(root, file, save_path)
+    
+    gray_image_progressing('D:\\Github\\Machine_to_DeepingLearning\\Competition\\恶意样本检测\\features\\AIFirst_data\\train\\white\\', save_path)
     
 if __name__ == '__main__':
     start_time = time.time()
 
-    main()
+    #main()
+    debug()
 
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

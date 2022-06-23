@@ -65,6 +65,9 @@ def feature_selection_model(model):
     return select
 
 def get_RF_best_params(X, y):
+    """获取随机森林最佳参数
+    """
+
     random_seed=44
     random_forest_seed=np.random.randint(low=1,high=230)
 
@@ -137,9 +140,10 @@ def random_forest_model(X, y):
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
     
-    params = get_RF_best_params(X, y)
+    #params = get_RF_best_params(X, y)
 
-    RFC = RandomForestClassifier(params=params)
+    #RFC = RandomForestClassifier(params=params)
+    RFC = RandomForestClassifier(n_estimators=86, n_jobs=-1)
     RFC.fit(X_train, y_train)
     y_pred = RFC.predict(X_test)
 
@@ -281,19 +285,21 @@ def fusion_model(X, y):
     # 打印模型的精度
     logger.info('Mean Accuracy: %.3f (%.3f)' % (np.mean(n_scores), np.std(n_scores)))
 
-def save_training_model(model, score):
+def save_training_model(model, score, model_path=BASELINE_RFC_MODEL_PATH, score_path=BASELINE_RFC_MODEL_SCORE_PATH):
     """保存训练模型
     """
     
     before_score = 0
-    if os.path.exists(DIRTY_DATASET_MODEL_SCORE_PATH):
-        with open(DIRTY_DATASET_MODEL_SCORE_PATH, 'r') as fd:
+    if os.path.exists(score_path):
+        with open(score_path, 'r') as fd:
             before_score = fd.read()
+            
     if score > float(before_score):
+        logger.info('~~~~~[model changed]~~~~~')
         buffer = pickle.dumps(model)
-        with open(MALICIOUS_SAMPLE_DETECTION_MODEL_PATH, "wb+") as fd:
+        with open(model_path, "wb+") as fd:
             fd.write(buffer)
-        with open(MODEL_SCORE_PATH, 'w') as fd:
+        with open(score_path, 'w') as fd:
             fd.write(str(score))
 
 def save_feature_selector(selector):
@@ -314,16 +320,17 @@ def main():
     y = train_dataset['label'].values
         
     # 模型训练
-    #model, score = random_forest_model(X, y)
+    model, score = random_forest_model(X, y)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
-    model, score = lightgbm_model(X, y)
+    #model, score = lightgbm_model(X, y)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)
     #fusion_model(X, y)
-    save_training_model(model, score)
+    save_training_model(model, score, CUSTOM_STRING_RFC_MODEL_PATH, CUSTOM_STRING_RFC_MODEL_SCORE_PATH)
 
 if __name__ == '__main__':
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()

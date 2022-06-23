@@ -12,20 +12,6 @@ from common import *
 
 def model_score(model_name, y_test, y_pred):
     """模型得分
-    
-    根据比赛规则计算
-    
-    Parameters
-    ------------
-    model_name : str
-        模型名字
-    y_test : pandas.Series
-        验证集结果
-    y_pred : pandas.Series
-        预测结果
-        
-    Returns
-    -------
     """
     
     logger.info('model {}:'.format(model_name))
@@ -50,24 +36,6 @@ def model_score(model_name, y_test, y_pred):
 
 def random_forest_model(X, y):
     """随机森林模型
-
-    根据比赛规则计算
-    
-    Parameters
-    ------------
-    black_is_black : str
-        表示黑样本被预测为黑样本的数目
-    black_is_white : str
-        表示黑样本被预测为白样本的数目（漏报）
-    white_is_black : str
-        表示白样本被预测为黑样本的数目（误报）
-    white_is_white : str
-        表示白样本被预测为白样本的数目
-        
-    Returns
-    -------
-    score : float
-        分数
     """
 
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
@@ -85,14 +53,16 @@ def save_training_model(model, score):
     """
     
     before_score = 0
-    with open(MODEL_SCORE_PATH, 'r') as fd:
-        before_score = fd.read()
+    if os.path.exists(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH):
+        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'r') as fd:
+            before_score = fd.read()
 
     if score > float(before_score):
+        logger.info('~~~~~[model changed]~~~~~')
         buffer = pickle.dumps(model)
         with open(IAMGE_MATRIX_RFC_MODEL_PATH, "wb+") as fd:
             fd.write(buffer)
-        with open(MODEL_SCORE_PATH, 'w') as fd:
+        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'w') as fd:
             fd.write(str(score))
 
 def main():
@@ -122,6 +92,7 @@ def main():
     save_training_model(model, score)
 
 if __name__ == '__main__':
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()

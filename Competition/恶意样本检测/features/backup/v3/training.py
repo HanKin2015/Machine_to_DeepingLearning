@@ -225,7 +225,7 @@ def lightgbm_model(X_train, X_test, y_train, y_test):
                   early_stopping_rounds=early_stopping_rounds)
     y_pred = LGB.predict(X_test, num_iteration=LGB.best_iteration).astype(int)
     
-    logger.info('score : ', np.mean((y_pred[:,1]>0.5)==y_valid))
+    logger.info('score: {}'.format(np.mean((y_pred[:,1]>0.5)==y_valid)*100))
     #score = model_score('LGBMClassifier', y_test, y_pred)
     score = np.mean((y_pred[:,1]>0.5)==y_valid)
     return LGB, score

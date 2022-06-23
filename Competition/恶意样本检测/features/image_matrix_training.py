@@ -65,6 +65,22 @@ def save_training_model(model, score):
         with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'w') as fd:
             fd.write(str(score))
 
+def save_training_model_(model, score):
+    """保存训练模型
+    """
+    
+    before_score = 0
+    if os.path.exists(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH):
+        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'r') as fd:
+            before_score = fd.read()
+
+    if score > float(before_score):
+        logger.info('~~~~~[model changed]~~~~~')
+        with open(IAMGE_MATRIX_RFC_MODEL_PATH, "wb+") as fd:
+            pickle.dump(model, fd)
+        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'w') as fd:
+            fd.write(str(score))
+
 def main():
     # 获取数据集
     train_white_dataset = pd.read_csv(TRAIN_WHITE_IMAGE_MATRIX_PATH)

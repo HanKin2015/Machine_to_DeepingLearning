@@ -187,7 +187,7 @@ def lightgbm_model(X, y):
     return LGB, score
 
 
-def lightgbm_model_(X_train, X_test, y_train, y_test):
+def lightgbm_model_(X, y):
     """lightgbm模型训练
     """
     
@@ -210,12 +210,15 @@ def lightgbm_model_(X_train, X_test, y_train, y_test):
           'silent': True,
           }
     #LGB = lgb.LGBMClassifier(params).fit(X_train, y_train)
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    
     X_test, X_valid, y_test, y_valid = train_test_split(X_test, y_test, test_size=0.5, random_state=0)
 
     train_matrix = lgb.Dataset(X_train, label=y_train)
     test_matrix = lgb.Dataset(X_test, label=y_test)
 
-    num_round = 200  # 训练的轮数
+    num_round = 10  # 训练的轮数
     early_stopping_rounds = 10
     LGB = lgb.train(params, 
                   train_matrix,
@@ -224,7 +227,7 @@ def lightgbm_model_(X_train, X_test, y_train, y_test):
                   early_stopping_rounds=early_stopping_rounds)
     y_pred = LGB.predict(X_test, num_iteration=LGB.best_iteration).astype(int)
     
-    logger.info('score : ', np.mean((y_pred[:,1]>0.5)==y_valid))
+    logger.info('score: {}'.format(np.mean((y_pred[:,1]>0.5)==y_valid)*100))
     #score = model_score('LGBMClassifier', y_test, y_pred)
     score = np.mean((y_pred[:,1]>0.5)==y_valid)
     return LGB, score
@@ -310,6 +313,83 @@ def save_feature_selector(selector):
     with open(MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH, "wb+") as fd:
         fd.write(buffer)
 
+def random_forest_model_(X, y):
+    """随机森林模型
+    """
+    
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    
+    """
+    RFC = RandomForestClassifier().fit(X_train, y_train)
+    selector = SelectFromModel(RFC, prefit=True)
+    save_feature_selector(selector)
+    
+    logger.info('X_train before selector shape: ({}, {}).'.format(X_train.shape[0], X_train.shape[1]))
+    X_train = selector.transform(X_train)
+    X_test  = selector.transform(X_test)
+    logger.info('X_train after selector shape: ({}, {}).'.format(X_train.shape[0], X_train.shape[1]))
+    """
+    # K折交叉验证与学习曲线的联合使用来获取最优K值
+    scores_cross = []
+    Ks = []
+    for k in range(86, 87):
+        RFC = RandomForestClassifier(n_estimators=k, n_jobs=-1, oob_score=True, class_weight='balanced')  # 实例化模型对象
+        score_cross = cross_val_score(RFC, X_train, y_train, cv=10).mean()  # 根据训练数据进行交叉验证，并返回交叉验证的评分
+        scores_cross.append(score_cross)
+        Ks.append(k)
+        
+    # 转为数组类型
+    scores_arr = np.array(scores_cross)
+    Ks_arr = np.array(Ks)
+    # 绘制学习曲线
+    #plt.plot(Ks, scores_cross)
+    #plt.show()
+    
+    # 获取最高的评分，以及最高评分对应的数组下标，从而获得最优的K值
+    score_best = scores_arr.max()  # 在存储评分的array中找到最高评分
+    index_best = scores_arr.argmax()  # 找到array中最高评分所对应的下标
+    Ks_best = Ks_arr[index_best]  # 根据下标找到最高评分所对应的K值
+    logger.info('Ks_best: {}.'.format(Ks_best)) 
+
+    RFC = RandomForestClassifier(n_estimators=Ks_best)
+    RFC.fit(X_train, y_train)
+    y_pred = RFC.predict(X_test)
+
+    score = model_score('RandomForestClassifier', y_test, y_pred)
+    
+    save_test_pred(X_test, y_test, y_pred, score)
+    return RFC, score
+
+def lightgbm_model_best(X, y):
+    """lightgbm模型训练
+    """
+
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    
+    param = {
+        'n_estimators': range(50,400,50),
+        'learning_rate': [0.1, 0.05, 0.01, 0.001],
+        'max_depth': range(5,40,5),
+        'num_leaves': [20,30,40],
+        'feature_fraction': [0.6, 0.8, 1], 
+        'bagging_fraction': [0.8,0.9,1], 
+        'boosting_type': ['gbdt', 'dart'],
+        'bagging_freq': [2,3,4]}
+    
+    gc = GridSearchCV(lgb.LGBMClassifier(), param_grid=param,
+                   scoring = 'roc_auc',  cv=5)
+    gc.fit(X_train, y_train)
+    logger.info(gc.best_params_)
+    logger.info(gc.best_score_)
+    
+    #score = model_score('LGBMClassifier', y_test, y_pred)
+    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
+    score = 0
+    return LGB, score
+
+
 def main():
     # 获取数据集
     train_dataset = pd.read_csv(TRAIN_DATASET_PATH)
@@ -320,9 +400,11 @@ def main():
     y = train_dataset['label'].values
         
     # 模型训练
-    model, score = random_forest_model(X, y)
+    #model, score = random_forest_model(X, y)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
     #model, score = lightgbm_model(X, y)
+    #model, score = lightgbm_model_(X, y)
+    model, score =lightgbm_model_best(X, y)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)

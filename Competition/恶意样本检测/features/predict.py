@@ -19,6 +19,14 @@ def load_model(model_path):
     model = pickle.loads(buffer)
     return model
 
+def load_model_(model_path):
+    """加载模型
+    """
+
+    with open(model_path, 'rb') as fd:
+        model = pickle.loads(fd)
+    return model
+
 def special_treatment(dataset):
     """特殊样本处理全部置为0
     """
@@ -93,9 +101,9 @@ def predict(test_dataset_path, model_path):
 def main():
 
     #predict_()
-    #predict(TEST_IMAGE_MATRIX_PATH, IAMGE_MATRIX_RFC_MODEL_SCORE_PATH)
+    predict_(TEST_IMAGE_MATRIX_PATH, IAMGE_MATRIX_RFC_MODEL_SCORE_PATH)
     #predict_(TEST_OPCODE_3_GRAM_PATH, TEST_DIRTY_DATASET_PATH, OPCODE_N_GRAM_MODEL_PATH)
-    predict_(TEST_DATASET_PATH, TEST_DIRTY_DATASET_PATH, CUSTOM_STRING_RFC_MODEL_PATH)
+    #predict_(TEST_DATASET_PATH, TEST_DIRTY_DATASET_PATH, CUSTOM_STRING_RFC_MODEL_PATH)
     
 if __name__ == '__main__':
     logger.info('******** starting ********')

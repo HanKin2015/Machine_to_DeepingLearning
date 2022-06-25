@@ -4,7 +4,7 @@ import os
 # 存储程序需要的内容
 class Configure:
     # 数据集存放路径，根据实际情况更改
-    base_path = "../gray_images/"
+    base_path = "..\\gray_images\\"
     train_path = os.path.join(base_path, "train")
     test_path = os.path.join(base_path, "test")
  

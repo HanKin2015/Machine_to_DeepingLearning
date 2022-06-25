@@ -179,8 +179,24 @@ def lightgbm_model(X, y):
 
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    logger.info(np.unique(y_train))
+    logger.info(np.unique(y_test))
     
-    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
+    LGB = lgb.LGBMClassifier(
+            max_depth=3,
+            learning_rate=0.1,
+            n_estimators=200, # 使用多少个弱分类器
+            objective='multiclass',
+            num_class=3,
+            #booster='gbtree',
+            min_child_weight=2,
+            subsample=0.8,
+            colsample_bytree=0.8,
+            reg_alpha=0,
+            reg_lambda=1,
+            #boosting_type= 'rf',
+            seed=0 # 随机数种子
+        ).fit(X_train, y_train)
     y_pred = LGB.predict(X_test).astype(int)
     
     score = model_score('LGBMClassifier', y_test, y_pred)
@@ -361,6 +377,36 @@ def random_forest_model_(X, y):
     save_test_pred(X_test, y_test, y_pred, score)
     return RFC, score
 
+def lightgbm_model_custom(X, y):
+    """lightgbm模型训练
+    """
+
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    logger.info(np.unique(y_train))
+    logger.info(np.unique(y_test))
+    
+    # K折交叉验证与学习曲线的联合使用来获取最优K值
+    scores_cross = []
+    Ks = []
+    for k in range(75, 200):
+        LGB = lgb.LGBMClassifier(n_estimators=k, n_jobs=-1)
+        score_cross = cross_val_score(LGB, X_train, y_train, cv=5).mean()
+        scores_cross.append(score_cross)
+        Ks.append(k)
+    scores_arr = np.array(scores_cross)
+    Ks_arr = np.array(Ks)
+    score_best = scores_arr.max()  # 在存储评分的array中找到最高评分
+    index_best = scores_arr.argmax()  # 找到array中最高评分所对应的下标
+    Ks_best = Ks_arr[index_best]  # 根据下标找到最高评分所对应的K值
+    logger.info('Ks_best: {}.'.format(Ks_best)) 
+    
+    LGB = lgb.LGBMClassifier(n_estimators=Ks_best, n_jobs=-1).fit(X_train, y_train)
+    y_pred = LGB.predict(X_test).astype(int)
+    
+    score = model_score('LGBMClassifier', y_test, y_pred)
+    return LGB, score
+
 def lightgbm_model_best(X, y):
     """lightgbm模型训练
     """
@@ -403,8 +449,9 @@ def main():
     #model, score = random_forest_model(X, y)
     #model, score = XGB_model(X_train, X_test, y_train, y_test)
     #model, score = lightgbm_model(X, y)
+    model, score = lightgbm_model_custom(X, y)
     #model, score = lightgbm_model_(X, y)
-    model, score =lightgbm_model_best(X, y)
+    #model, score = lightgbm_model_best(X, y)
     #model, score = extra_trees_model(X_train, X_test, y_train, y_test)
     #model, score = MLP_model(X_train, X_test, y_train, y_test)
     #model, score = gradient_boosting_model(X_train, X_test, y_train, y_test)

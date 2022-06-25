@@ -1,6 +1,5 @@
 import torch.nn as nn
 from torch.hub import load_state_dict_from_url
-import torch
  
 __all__ = [
     'VGG', 'vgg16'
@@ -78,10 +77,7 @@ def _vgg(arch, cfg, batch_norm, pretrained, progress, **kwargs):
         kwargs['init_weights'] = False
     model = VGG(make_layers(cfgs[cfg], batch_norm=batch_norm), **kwargs)
     if pretrained:
-        #state_dict = load_state_dict_from_url(model_urls[arch], progress=progress)
-        state_dict = torch.load('./vgg16-397923af.pth')
-        state_dict.pop("classifier.6.bias")
-        state_dict.pop("classifier.6.weight")
+        state_dict = load_state_dict_from_url(model_urls[arch], progress=progress)
         model.load_state_dict(state_dict, strict=False)
     return model
  

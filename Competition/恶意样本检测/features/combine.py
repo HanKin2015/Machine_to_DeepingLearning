@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-文 件 名: image_matrix_training.py
-文件描述: 图像矩阵训练模型
+文 件 名: combine.py
+文件描述: 将操作指令n-gram(84.88)和图像矩阵特征(81.98)结合起来训练
+备    注: 只有81.84，运行4216秒左右 
 作    者: HeJian
-创建日期: 2022.06.15
-修改日期：2022.06.15
+创建日期: 2022.06.24
+修改日期：2022.06.24
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
@@ -41,7 +42,7 @@ def random_forest_model(X, y):
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
 
-    RFC = RandomForestClassifier(n_estimators=500, n_jobs=-1)
+    RFC = RandomForestClassifier(n_estimators=86, n_jobs=-1)
     RFC.fit(X_train, y_train)
     y_pred = RFC.predict(X_test)
 
@@ -53,39 +54,41 @@ def save_training_model(model, score):
     """
     
     before_score = 0
-    if os.path.exists(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH):
-        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'r') as fd:
+    if os.path.exists(COMBINE_RFC_MODEL_SCORE_PATH):
+        with open(COMBINE_RFC_MODEL_SCORE_PATH, 'r') as fd:
             before_score = fd.read()
 
     if score > float(before_score):
         logger.info('~~~~~[model changed]~~~~~')
         buffer = pickle.dumps(model)
-        with open(IAMGE_MATRIX_RFC_MODEL_PATH, "wb+") as fd:
+        with open(COMBINE_RFC_MODEL_PATH, "wb+") as fd:
             fd.write(buffer)
-        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'w') as fd:
-            fd.write(str(score))
-
-def save_training_model_(model, score):
-    """保存训练模型
-    """
-    
-    before_score = 0
-    if os.path.exists(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH):
-        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'r') as fd:
-            before_score = fd.read()
-
-    if score > float(before_score):
-        logger.info('~~~~~[model changed]~~~~~')
-        with open(IAMGE_MATRIX_RFC_MODEL_PATH, "wb+") as fd:
-            pickle.dump(model, fd)
-        with open(IAMGE_MATRIX_RFC_MODEL_SCORE_PATH, 'w') as fd:
+        with open(COMBINE_RFC_MODEL_SCORE_PATH, 'w') as fd:
             fd.write(str(score))
 
 def main():
     # 获取数据集
-    train_dataset = pd.read_csv(TRAIN_IMAGE_MATRIX_PATH)
-    logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
+    #train_dataset1 = pd.read_csv(TRAIN_IMAGE_MATRIX_PATH)
+    train_dataset1 = pd.read_csv(TRAIN_DATASET_PATH)
+    train_dataset2 = pd.read_csv(TRAIN_OPCODE_3_GRAM_PATH)
+    logger.info([train_dataset1.shape, train_dataset2.shape])
     
+    # 要先去掉Label，否则会变成Label_1, Label_2
+    label = train_dataset1[['FileName', 'Label']]
+    train_dataset1.drop(['Label'], axis=1, inplace=True)
+    train_dataset2.drop(['Label'], axis=1, inplace=True)
+    logger.info([train_dataset1.shape, train_dataset2.shape])
+    
+    train_dataset  = pd.merge(train_dataset1, train_dataset2, on='FileName')
+    logger.info(train_dataset.shape)
+    
+    train_dataset  = pd.merge(train_dataset, label, on='FileName')
+    logger.info(train_dataset.shape)
+    
+    # 先保存一下
+    #train_dataset.to_csv('./temp.csv', sep=',', encoding='utf-8', index=False)
+    logger.info(train_dataset.columns)
+
     # 划分训练集和测试集
     X = train_dataset.drop(['Label', 'FileName'], axis=1).values
     y = train_dataset['Label'].values

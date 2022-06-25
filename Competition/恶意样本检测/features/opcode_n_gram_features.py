@@ -42,7 +42,7 @@ def main():
     
     # 保存
     train_dataset.to_csv(TRAIN_OPCODE_3_GRAM_PATH, sep=',', encoding='utf-8', index=False)
-    test_dataset.to_csv(TEST_OPCODE_3_GRAM_PATH, sep=',', encoding='utf-8', index=False)
+    test_dataset.to_csv(TEST_OPCODE_3_GRAM_PATH_, sep=',', encoding='utf-8', index=False)
 
 def get_test_dirty_dataset():
     """获取测试集脏数据集

@@ -32,6 +32,9 @@ from sklearn.ensemble import RandomForestClassifier  # RFC随机森林分类
 from sklearn.ensemble import ExtraTreesClassifier    # ETC极端随机树分类
 import xgboost as xgb                                # XGB
 import lightgbm as lgb                               # LGB
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import LinearSVC
 from sklearn import tree
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.ensemble import GradientBoostingClassifier
@@ -45,6 +48,7 @@ from sklearn.ensemble import StackingClassifier
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
+from mlxtend.classifier import StackingCVClassifier
 
 DATA_PATH                                = './data/'                                        # 数据路径
 DATASET_PATH                             = './dataset/'                                     # 数据集路径
@@ -54,6 +58,7 @@ TRAIN_BLACK_PATH                         = SAMPLE_PATH+'train/black/'           
 TEST_PATH                                = SAMPLE_PATH+'test/'                              # 测试集样本路径
 TRAIN_WHITE_GRAY_IMAGES_PATH             = './gray_images/train/white/'                     # 训练集白样本灰度图像存储路径
 TRAIN_BLACK_GRAY_IMAGES_PATH             = './gray_images/train/black/'                     # 训练集黑样本灰度图像存储路径
+TRAIN_GRAY_IMAGES_PATH                   = './gray_images/train/'                           # 训练集样本灰度图像存储路径
 TEST_GRAY_IMAGES_PATH                    = './gray_images/test/'                            # 测试集样本灰度图像存储路径
 MODEL_PATH                               = './model/'                                       # 模型路径
 
@@ -63,6 +68,8 @@ TEST_DIRTY_DATASET_PATH                  = DATASET_PATH+'test_dirty_dataset.csv'
 
 TRAIN_WHITE_IMAGE_MATRIX_PATH            = DATA_PATH+'train_white_image_matrix.csv'         # 训练集白样本图像矩阵数据集存储路径
 TRAIN_BLACK_IMAGE_MATRIX_PATH            = DATA_PATH+'train_black_image_matrix.csv'         # 训练集黑样本图像矩阵数据集存储路径
+TRAIN_IMAGE_MATRIX_PATH                  = DATASET_PATH+'train_image_matrix.csv'
+TEST_IMAGE_MATRIX_PATH_                  = DATASET_PATH+'test_image_matrix.csv'
 TEST_IMAGE_MATRIX_PATH                   = DATA_PATH+'test_image_matrix.csv'                # 测试集样本图像矩阵数据集存储路径
 TRAIN_BLACK_0_3000_IMAGE_MATRIX_PATH     = DATA_PATH+'train_black_0_3000_image_matrix.csv'  # 训练集黑样本图像矩阵数据集存储路径
 TRAIN_BLACK_3000_IMAGE_MATRIX_PATH       = DATA_PATH+'train_black_3000_image_matrix.csv'    # 训练集黑样本图像矩阵数据集存储路径
@@ -87,28 +94,33 @@ TEST_STRING_FEATURES_PATH                = DATA_PATH+'test_string_features.csv' 
 
 TRAIN_WHITE_OPCODE_3_GRAM_PATH           = DATA_PATH+'train_white_opcode_3_gram.csv'        # 训练集白样本操作指令码3-gram特征存储路径
 TRAIN_BLACK_OPCODE_3_GRAM_PATH           = DATA_PATH+'train_black_opcode_3_gram.csv'        # 训练集黑样本操作指令码3-gram特征存储路径
-TRAIN_OPCODE_3_GRAM_PATH                 = DATA_PATH+'train_opcode_3_gram.csv'              # 训练集样本操作指令码3-gram特征存储路径
+TRAIN_OPCODE_3_GRAM_PATH                 = DATASET_PATH+'train_opcode_3_gram.csv'              # 训练集样本操作指令码3-gram特征存储路径
+TEST_OPCODE_3_GRAM_PATH_                 = DATASET_PATH+'test_opcode_3_gram.csv'
 TEST_OPCODE_3_GRAM_PATH                  = DATA_PATH+'test_opcode_3_gram.csv'               # 测试集样本操作指令码3-gram特征存储路径
 TEST_0_3000_OPCODE_3_GRAM_PATH           = DATA_PATH+'test_0_3000_opcode_3_gram.csv'        # 测试集0-3000样本操作指令码3-gram特征存储路径
 TEST_3000_6000_OPCODE_3_GRAM_PATH        = DATA_PATH+'test_3000_6000_opcode_3_gram.csv'     # 测试集3000-6000样本操作指令码3-gram特征存储路径
 TEST_6000_OPCODE_3_GRAM_PATH             = DATA_PATH+'test_6000_opcode_3_gram.csv'          # 测试集6000-样本操作指令码3-gram特征存储路径
 
 MODEL_SCORE_PATH                         = MODEL_PATH+'score'                               # 模型分数路径
-IAMGE_MATRIX_RFC_MODEL_PATH              = MODEL_PATH+'image_matrix_rfc.model'              # RFC模型路径
-IAMGE_MATRIX_XGB_MODEL_PATH              = MODEL_PATH+'image_matrix_xgb.model'              # XGB模型路径
-IAMGE_MATRIX_LGB_MODEL_PATH              = MODEL_PATH+'image_matrix_lgb.model'              # LGB模型路径
+IAMGE_MATRIX_RFC_MODEL_PATH              = MODEL_PATH+'image_matrix_rfc.pkl'                # RFC模型路径
+IAMGE_MATRIX_XGB_MODEL_PATH              = MODEL_PATH+'image_matrix_xgb.pkl'                # XGB模型路径
+IAMGE_MATRIX_LGB_MODEL_PATH              = MODEL_PATH+'image_matrix_lgb.pkl'                # LGB模型路径
 IAMGE_MATRIX_RFC_MODEL_SCORE_PATH        = MODEL_PATH+'image_matrix_rfc.score'              # RFC模型分数路径
 IAMGE_MATRIX_XGB_MODEL_SCORE_PATH        = MODEL_PATH+'image_matrix_xgb.score'              # XGB模型分数路径
 IAMGE_MATRIX_LGB_MODEL_SCORE_PATH        = MODEL_PATH+'image_matrix_lgb.score'              # LGB模型分数路径
-BASELINE_RFC_MODEL_PATH                  = MODEL_PATH+'baseline_rfc.model'
+BASELINE_RFC_MODEL_PATH                  = MODEL_PATH+'baseline_rfc.pkl'
 BASELINE_RFC_MODEL_SCORE_PATH            = MODEL_PATH+'baseline_rfc.score'
-CUSTOM_STRING_RFC_MODEL_PATH             = MODEL_PATH+'custom_string_rfc.model'
+CUSTOM_STRING_RFC_MODEL_PATH             = MODEL_PATH+'custom_string_rfc.pkl'
 CUSTOM_STRING_RFC_MODEL_SCORE_PATH       = MODEL_PATH+'custom_string_rfc.score'
-MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.model'    # 恶意样本检测训练模型路径
+COMBINE_RFC_MODEL_PATH                   = MODEL_PATH+'combine_rfc.pkl'
+COMBINE_RFC_MODEL_SCORE_PATH             = MODEL_PATH+'combine_rfc.score'
+STACKING_MODEL_PATH                      = MODEL_PATH+'stacking.pkl'
+STACKING_MODEL_SCORE_PATH                = MODEL_PATH+'stacking.score'
+MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.pkl'      # 恶意样本检测训练模型路径
 MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
-OPCODE_N_GRAM_MODEL_PATH                 = MODEL_PATH+'opcode_n_gram.model'                 # RFC模型路径
+OPCODE_N_GRAM_MODEL_PATH                 = MODEL_PATH+'opcode_n_gram.pkl'                   # RFC模型路径
 OPCODE_N_GRAM_MODEL_SCORE_PATH           = MODEL_PATH+'opcode_n_gram.score'                 # RFC模型分数路径
-DIRTY_DATASET_MODEL_PATH                 = MODEL_PATH+'dirty_dataset_rfc.model'             # 脏样本训练模型路径
+DIRTY_DATASET_MODEL_PATH                 = MODEL_PATH+'dirty_dataset_rfc.pkl'               # 脏样本训练模型路径
 DIRTY_DATASET_MODEL_SCORE_PATH           = MODEL_PATH+'dirty_dataset_rfc.score'             # 脏样本模型分数路径
 RESULT_PATH                              = './result.csv'                                   # 预测结果存储路径
 

@@ -43,7 +43,7 @@ def test():
  
 # 用来测试微软的公开数据集
 def test():
-    df = pd.DataFrame()
+    df = pd.read_csv(Configure.result_dir)
     with torch.no_grad():
         for inputs, file_name in test_loader:
             inputs = inputs.to(device)
@@ -52,8 +52,10 @@ def test():
             # _, predicted = torch.max(outputs.data, dim=1)
             data_len = len(inputs)
             for i in range(data_len):
-                dict_res = {"Id": file_name[i], "Prediction1": 0, "Prediction2": 0}
-                for j in range(2):
+                dict_res = {"Id": file_name[i], "Prediction1": 0, "Prediction2": 0,
+                            "Prediction3": 0, "Prediction4": 0, "Prediction5": 0,
+                            "Prediction6": 0, "Prediction7": 0, "Prediction8": 0, "Prediction9": 0}
+                for j in range(9):
                     dict_res["Prediction" + str(j + 1)] = predicted[i][j].item()
                 df = df.append(dict_res, ignore_index=True)
     df.to_csv(Configure.result_dir, index=0)
@@ -79,12 +81,21 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
  
     Configure = Configure()
-
+ 
+    # 定义Maling数据集的数据类
     train_dataset = MalwareDataset(Configure.train_path)
     train_loader = DataLoader(train_dataset, batch_size=Configure.batch_size,
                               shuffle=True, num_workers=2)
-
-
+ 
+    test_dataset = MalwareDataset(Configure.test_path)
+    test_loader = DataLoader(test_dataset, batch_size=Configure.batch_size,
+                             shuffle=False, num_workers=2)
+ 
+    # 微软公开数据集的数据类
+    train_dataset = MalwareTrainDataset(Configure.train_path)
+    train_loader = DataLoader(train_dataset, batch_size=Configure.batch_size,
+                              shuffle=True, num_workers=2)
+ 
     test_dataset = MalwareTestDataset(Configure.test_path)
     test_loader = DataLoader(test_dataset, batch_size=Configure.batch_size,
                              shuffle=False, num_workers=2)

@@ -2,6 +2,7 @@
 """
 文 件 名: stacking.py
 文件描述: 模型融合模型
+备    注: pip install安装需要指定安装到用户目录，否则容器重启的时候，非用户目录的修改内容会自动删除，恢复到默认状态。
 作    者: HeJian
 创建日期: 2022.06.25
 修改日期：2022.06.25
@@ -39,21 +40,21 @@ def stacking_model(X, y):
     """将RF、XGBoost、LightGBM融合（单层Stacking）
     """
     
-    RANDOM_SEED = 42
-    clf1 = lgb.LGBMClassifier(random_state=RANDOM_SEED)
-    clf2 = RandomForestClassifier(n_neighbors=86, random_state=RANDOM_SEED)
-    clf3 = ExtraTreesClassifier(random_state=RANDOM_SEED)
-    clf4 = xgb.XGBClassifier(random_state=RANDOM_SEED)
-    clf5 = GradientBoostingClassifier(random_state=RANDOM_SEED)
-    clf6 = DecisionTreeClassifier(random_state=RANDOM_SEED)
-    clf7 = LinearSVC(random_state=RANDOM_SEED)
-    lr   = LogisticRegression(random_state=RANDOM_SEED)
+    RANDOM_SEED = 2022
+    LGB  = lgb.LGBMClassifier(random_state=RANDOM_SEED)
+    RF   = RandomForestClassifier(n_neighbors=86, random_state=RANDOM_SEED)
+    XGB  = xgb.XGBClassifier(random_state=RANDOM_SEED)
+    GBDT = GradientBoostingClassifier(random_state=RANDOM_SEED)
+    DT   = DecisionTreeClassifier(random_state=RANDOM_SEED)
+    SVM  = LinearSVC(random_state=RANDOM_SEED)
+    ET   = ExtraTreesClassifier(random_state=RANDOM_SEED)
+    LR   = LogisticRegression(random_state=RANDOM_SEED)
     
-    sclf = StackingCVClassifier(classifiers=[clf1, clf2, clf3, clf4],meta_classifier=lr,random_state=RANDOM_SEED)
-    logger.info('3-fold cross validation:')
-    for clf, label in zip([clf1, clf2, clf3, clf4, sclf], ['LGB', 'RF', 'ET', 'XGB', 'StackingClassifier']):
-        scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
-        logger.info('Accuracy: {} (+/- {}) [{}]'.format(scores.mean(), scores.std(), label))
+    sclf = StackingCVClassifier(classifiers=[LGB,RF,XGB,GBDT,DT,SVM,LR], meta_classifier=LR, random_state=RANDOM_SEED)
+    #logger.info('3-fold cross validation:')
+    #for clf, label in zip([clf1, clf2, clf3, clf4, sclf], ['LGB', 'RF', 'ET', 'XGB', 'StackingClassifier']):
+    #    scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
+    #    logger.info('Accuracy: {} (+/- {}) [{}]'.format(scores.mean(), scores.std(), label))
     
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
@@ -61,7 +62,7 @@ def stacking_model(X, y):
     y_pred = sclf.predict(X_test).astype(int)
     
     score = model_score('StackingClassifier', y_test, y_pred)
-    return LGB, score
+    return sclf, score
 
 def save_training_model(model, score, model_path=BASELINE_RFC_MODEL_PATH, score_path=BASELINE_RFC_MODEL_SCORE_PATH):
     """保存训练模型

@@ -74,8 +74,8 @@ def main():
     logger.info([train_dataset1.shape, train_dataset2.shape])
     
     # 要先去掉Label，否则会变成Label_1, Label_2
-    label = train_dataset1[['FileName', 'Label']]
-    train_dataset1.drop(['Label'], axis=1, inplace=True)
+    label = train_dataset2[['FileName', 'Label']]
+    train_dataset1.drop(['label'], axis=1, inplace=True)
     train_dataset2.drop(['Label'], axis=1, inplace=True)
     logger.info([train_dataset1.shape, train_dataset2.shape])
     

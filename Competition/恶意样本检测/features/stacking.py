@@ -35,14 +35,22 @@ def model_score(model_name, y_test, y_pred):
         round(recall, 4), round(error_ratio, 4), round(score*100, 2)))
     return round(score*100, 2)
 
+def load_model(model_path):
+    """加载模型
+    """
 
+    with open(model_path, 'rb') as fd:
+        buffer = fd.read()
+    model = pickle.loads(buffer)
+    return model
+    
 def stacking_model(X, y):
     """将RF、XGBoost、LightGBM融合（单层Stacking）
     """
     
     RANDOM_SEED = 2022
     LGB  = lgb.LGBMClassifier(random_state=RANDOM_SEED)
-    RF   = RandomForestClassifier(n_neighbors=86, random_state=RANDOM_SEED)
+    RF   = RandomForestClassifier(n_estimators=86, random_state=RANDOM_SEED)
     XGB  = xgb.XGBClassifier(random_state=RANDOM_SEED)
     GBDT = GradientBoostingClassifier(random_state=RANDOM_SEED)
     DT   = DecisionTreeClassifier(random_state=RANDOM_SEED)
@@ -88,8 +96,10 @@ def main():
     logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
     
     # 划分训练集和测试集 80% 20%
-    X = train_dataset.drop(['label', 'FileName'], axis=1).values
-    y = train_dataset['label'].values
+    X = train_dataset.drop(['Label', 'FileName'], axis=1).values
+    selector = load_model(COMBINE_RFC_SELECTOR_PATH)
+    X = selector.transform(X)
+    y = train_dataset['Label'].values
         
     # 模型训练
     model, score = stacking_model(X, y)

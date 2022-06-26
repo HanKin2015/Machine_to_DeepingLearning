@@ -118,6 +118,7 @@ STACKING_MODEL_PATH                      = MODEL_PATH+'stacking.pkl'
 STACKING_MODEL_SCORE_PATH                = MODEL_PATH+'stacking.score'
 MALICIOUS_SAMPLE_DETECTION_MODEL_PATH    = MODEL_PATH+'malicious_sample_detection.pkl'      # 恶意样本检测训练模型路径
 MALICIOUS_SAMPLE_DETECTION_SELECTOR_PATH = MODEL_PATH+'malicious_sample_detection.selector' # 恶意样本检测特征选择器路径
+COMBINE_RFC_SELECTOR_PATH                = MODEL_PATH+'combine_rfc_selector.pkl'
 OPCODE_N_GRAM_MODEL_PATH                 = MODEL_PATH+'opcode_n_gram.pkl'                   # RFC模型路径
 OPCODE_N_GRAM_MODEL_SCORE_PATH           = MODEL_PATH+'opcode_n_gram.score'                 # RFC模型分数路径
 DIRTY_DATASET_MODEL_PATH                 = MODEL_PATH+'dirty_dataset_rfc.pkl'               # 脏样本训练模型路径

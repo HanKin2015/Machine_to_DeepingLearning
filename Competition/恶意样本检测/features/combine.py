@@ -35,9 +35,48 @@ def model_score(model_name, y_test, y_pred):
         round(recall, 4), round(error_ratio, 4), round(score*100, 2)))
     return round(score*100, 2)
 
+def save_feature_selector(selector):
+    """保存特征选择模型
+    """
+    
+    buffer = pickle.dumps(selector)
+    with open(COMBINE_RFC_SELECTOR_PATH, "wb+") as fd:
+        fd.write(buffer)
+
+def lightgbm_model(X, y):
+    """lightgbm模型训练
+    """
+
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    logger.info(np.unique(y_train))
+    logger.info(np.unique(y_test))
+    
+    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
+    y_pred = LGB.predict(X_test).astype(int)
+    
+    score = model_score('LGBMClassifier', y_test, y_pred)
+    return LGB, score
+
+def load_model(model_path):
+    """加载模型
+    """
+
+    with open(model_path, 'rb') as fd:
+        buffer = fd.read()
+    model = pickle.loads(buffer)
+    return model
+
 def random_forest_model(X, y):
     """随机森林模型
     """
+    
+    RFC = RandomForestClassifier().fit(X, y)
+    selector = SelectFromModel(RFC, prefit=True)
+    save_feature_selector(selector)
+    logger.info('X before selector shape: ({}, {}).'.format(X.shape[0], X.shape[1]))
+    X = selector.transform(X)
+    logger.info('X_train after selector shape: ({}, {}).'.format(X.shape[0], X.shape[1]))
 
     X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
     logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
@@ -69,32 +108,36 @@ def save_training_model(model, score):
 def main():
     # 获取数据集
     #train_dataset1 = pd.read_csv(TRAIN_IMAGE_MATRIX_PATH)
-    train_dataset1 = pd.read_csv(TRAIN_DATASET_PATH)
-    train_dataset2 = pd.read_csv(TRAIN_OPCODE_3_GRAM_PATH)
-    logger.info([train_dataset1.shape, train_dataset2.shape])
+    #train_dataset1 = pd.read_csv(TRAIN_DATASET_PATH)
+    #train_dataset2 = pd.read_csv(TRAIN_OPCODE_3_GRAM_PATH)
+    #logger.info([train_dataset1.shape, train_dataset2.shape])
     
     # 要先去掉Label，否则会变成Label_1, Label_2
-    label = train_dataset2[['FileName', 'Label']]
-    train_dataset1.drop(['label'], axis=1, inplace=True)
-    train_dataset2.drop(['Label'], axis=1, inplace=True)
-    logger.info([train_dataset1.shape, train_dataset2.shape])
+    #label = train_dataset2[['FileName', 'Label']]
+    #train_dataset1.drop(['label'], axis=1, inplace=True)
+    #train_dataset2.drop(['Label'], axis=1, inplace=True)
+    #logger.info([train_dataset1.shape, train_dataset2.shape])
     
-    train_dataset  = pd.merge(train_dataset1, train_dataset2, on='FileName')
-    logger.info(train_dataset.shape)
+    #train_dataset  = pd.merge(train_dataset1, train_dataset2, on='FileName')
+    #logger.info(train_dataset.shape)
     
-    train_dataset  = pd.merge(train_dataset, label, on='FileName')
-    logger.info(train_dataset.shape)
+    #train_dataset  = pd.merge(train_dataset, label, on='FileName')
+    #logger.info(train_dataset.shape)
     
     # 先保存一下
-    #train_dataset.to_csv('./temp.csv', sep=',', encoding='utf-8', index=False)
+    #train_dataset.to_csv('./train_combine_opcode.csv', sep=',', encoding='utf-8', index=False)
+    train_dataset = pd.read_csv('./train_combine_opcode.csv')
     logger.info(train_dataset.columns)
 
     # 划分训练集和测试集
     X = train_dataset.drop(['Label', 'FileName'], axis=1).values
+    selector = load_model(COMBINE_RFC_SELECTOR_PATH)
+    X = selector.transform(X)
     y = train_dataset['Label'].values
         
     # 模型训练
-    model, score = random_forest_model(X, y)
+    #model, score = random_forest_model(X, y)
+    model, score = lightgbm_model(X, y)
     save_training_model(model, score)
 
 if __name__ == '__main__':

@@ -188,8 +188,8 @@ def main():
     logger.info([train_black_dataset.shape, train_white_dataset.shape, test_dataset.shape])
     
     # 添加标签
-    train_black_dataset['label'] = 0
-    train_white_dataset['label'] = 1
+    train_black_dataset['Label'] = 0
+    train_white_dataset['Label'] = 1
     
     # 黑白样本合并
     train_dataset = pd.concat([train_black_dataset, train_white_dataset], ignore_index=True)
@@ -213,8 +213,8 @@ def main():
         test_dataset.shape[0], test_dataset.shape[1],))
     
     # 将标签移动到最后一列
-    label = train_dataset['label']
-    train_dataset.drop(['label'], axis=1, inplace=True)
+    label = train_dataset['Label']
+    train_dataset.drop(['Label'], axis=1, inplace=True)
     train_dataset = pd.concat([train_dataset, label], axis=1)
     
     # 保存数据集

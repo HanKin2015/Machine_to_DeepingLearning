@@ -100,16 +100,16 @@ def predict(test_dataset_path, model_path):
 
 def combine_predict(test_dataset_path1, test_dataset_path2, test_dirty_dataset_path, model_path, dirty_model_path=None):
     # 获取数据集
-    #test_dataset1 = pd.read_csv(test_dataset_path1)
-    #test_dataset2 = pd.read_csv(test_dataset_path2)
-    #logger.info('test dataset1 shape: ({}, {}).'.format(test_dataset1.shape[0], test_dataset1.shape[1]))
-    #logger.info('test dataset2 shape: ({}, {}).'.format(test_dataset2.shape[0], test_dataset2.shape[1]))
+    test_dataset1 = pd.read_csv(test_dataset_path1)
+    test_dataset2 = pd.read_csv(test_dataset_path2)
+    logger.info('test dataset1 shape: ({}, {}).'.format(test_dataset1.shape[0], test_dataset1.shape[1]))
+    logger.info('test dataset2 shape: ({}, {}).'.format(test_dataset2.shape[0], test_dataset2.shape[1]))
     
-    #test_dataset  = pd.merge(test_dataset1, test_dataset2, on='FileName')
-    #logger.info(test_dataset.shape)
-    #test_dataset.to_csv('test_combine_opcode.csv', sep=',', encoding='utf-8', index=False)
+    test_dataset  = pd.merge(test_dataset1, test_dataset2, on='FileName')
+    logger.info(test_dataset.shape)
+    test_dataset.to_csv('test_combine_opcode.csv', sep=',', encoding='utf-8', index=False)
     
-    test_dataset = pd.read_csv('test_combine_opcode.csv')
+    #test_dataset = pd.read_csv('test_combine_opcode.csv')
     logger.info(test_dataset.shape)
     
     test_dirty_dataset = pd.read_csv(test_dirty_dataset_path)

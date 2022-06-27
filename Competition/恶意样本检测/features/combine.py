@@ -52,7 +52,7 @@ def lightgbm_model(X, y):
     logger.info(np.unique(y_train))
     logger.info(np.unique(y_test))
     
-    LGB = lgb.LGBMClassifier().fit(X_train, y_train)
+    LGB = lgb.LGBMClassifier(num_leaves=2**5-1, reg_alpha=0.25, reg_lambda=0.25, objective='binary', max_depth=-1, learning_rate=0.005, min_child_samples=3, random_state=2022, n_estimators=200, subsample=1, colsample_bytree=1).fit(X_train, y_train)
     y_pred = LGB.predict(X_test).astype(int)
     
     score = model_score('LGBMClassifier', y_test, y_pred)
@@ -107,7 +107,6 @@ def save_training_model(model, score):
 
 def main():
     # 获取数据集
-    #train_dataset1 = pd.read_csv(TRAIN_IMAGE_MATRIX_PATH)
     #train_dataset1 = pd.read_csv(TRAIN_DATASET_PATH)
     #train_dataset2 = pd.read_csv(TRAIN_OPCODE_3_GRAM_PATH)
     #logger.info([train_dataset1.shape, train_dataset2.shape])

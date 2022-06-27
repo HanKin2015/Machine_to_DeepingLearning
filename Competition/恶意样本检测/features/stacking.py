@@ -58,7 +58,7 @@ def stacking_model(X, y):
     ET   = ExtraTreesClassifier(random_state=RANDOM_SEED)
     LR   = LogisticRegression(random_state=RANDOM_SEED)
     
-    sclf = StackingCVClassifier(classifiers=[LGB,RF,XGB,GBDT,DT,SVM,LR], meta_classifier=LR, random_state=RANDOM_SEED)
+    sclf = StackingCVClassifier(classifiers=[LGB,RF,LR], meta_classifier=LR, random_state=RANDOM_SEED)
     #logger.info('3-fold cross validation:')
     #for clf, label in zip([clf1, clf2, clf3, clf4, sclf], ['LGB', 'RF', 'ET', 'XGB', 'StackingClassifier']):
     #    scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')

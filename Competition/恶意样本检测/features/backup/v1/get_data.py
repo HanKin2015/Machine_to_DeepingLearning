@@ -34,6 +34,17 @@ THREAD_NUM = 64
 if not os.path.exists(DATA_PATH):
     os.makedirs(DATA_PATH)
 
+exception_error = {
+    'Invalid NT Headers signature.': 1,
+    'Invalid NT Headers signature. Probably a NE file': 2,
+    'Invalid e_lfanew value, probably not a PE file': 3,
+    'Invalid NT Headers signature. Probably a LE file': 4,
+    'Unable to read the DOS Header, possibly a truncated file.': 5,
+    'DOS Header magic not found.': 6,
+    'list index out of range': 7,
+}
+
+# 数据目录表
 directory_names = (
     'IMAGE_DIRECTORY_ENTRY_EXPORT',
     'IMAGE_DIRECTORY_ENTRY_IMPORT',
@@ -53,17 +64,10 @@ directory_names = (
     'IMAGE_DIRECTORY_ENTRY_RESERVED',
 )
 
-exception_error = {
-    'Invalid NT Headers signature.': 1,
-    'Invalid NT Headers signature. Probably a NE file': 2,
-    'Invalid e_lfanew value, probably not a PE file': 3,
-    'Invalid NT Headers signature. Probably a LE file': 4,
-    'Unable to read the DOS Header, possibly a truncated file.': 5,
-    'DOS Header magic not found.': 6,
-    'list index out of range': 7,
-}
-
 def get_index(directory_name):
+    """获取数据目录表索引
+    """
+    
     complete_name = 'IMAGE_DIRECTORY_ENTRY_' + directory_name
     return pefile.DIRECTORY_ENTRY[complete_name]
 
@@ -171,8 +175,6 @@ class PEFile:
         for key, value in self.__dict__.items():
             sample[key] = value
         return sample
-
-
 
 def get_pefile_info(root, file):
     """获取PE文件信息

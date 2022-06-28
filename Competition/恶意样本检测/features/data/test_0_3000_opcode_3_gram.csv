@@ -1,6 +1,0 @@
-FileName,"('jmp', 'jmp', 'jmp')","('jmp', 'lea', 'jmp')","('lea', 'jmp', 'mov')","('mov', 'jmp', 'mov')","('jmp', 'mov', 'jmp')","('jmp', 'mov', 'add')","('mov', 'add', 'jmp')","('add', 'jmp', 'mov')","('mov', 'jmp', 'lea')","('lea', 'jmp', 'lea')","('add', 'add', 'add')"
-Backdoor.Win32.Agent.bjkd_4713.exe,0,0,0,0,0,0,0,0,0,0,0
-Backdoor.Win32.Bifrose.dxtc_3871.exe,0,0,0,0,0,0,0,0,0,0,0
-Backdoor.Win32.Bifrose.dxyg_cca1.exe,0,0,0,0,0,0,0,0,0,0,0
-Backdoor.Win32.Bifrose.frf_a672.exe,0,0,0,0,0,0,0,0,0,0,0
-FTOOL.exe,215,202,55,79,130,101,101,100,52,148,244

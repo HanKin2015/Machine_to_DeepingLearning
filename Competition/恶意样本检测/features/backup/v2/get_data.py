@@ -2,36 +2,27 @@
 """
 文 件 名: get_data.py
 文件描述: 通过pefile库获取pe文件信息
+备    注：测试数据集19个脏数据
 作    者: HeJian
 创建日期: 2022.05.27
 修改日期：2022.06.06
 Copyright (c) 2022 HeJian. All rights reserved.
 """
 
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '64'
-import pefile
-import pandas as pd
-import time
-from log import logger
-from concurrent.futures import ThreadPoolExecutor
-import numpy as np
+from common import *
 
-TRAIN_WHITE_PATH = './AIFirst_data/train/white/' # 训练集白样本路径
-TRAIN_BLACK_PATH = './AIFirst_data/train/black/' # 训练集黑样本路径
-TEST_PATH        = './AIFirst_data/test/'        # 测试集样本路径
-DATA_PATH        = './data/'                     # 数据路径
-TRAIN_WHITE_DATASET_PATH = DATA_PATH+'train_white_dataset.csv' # 训练集白样本数据集路径
-TRAIN_BLACK_DATASET_PATH = DATA_PATH+'train_black_dataset.csv' # 训练集黑样本数据集路径
-TEST_DATASET_PATH        = DATA_PATH+'test_dataset.csv'        # 测试集样本数据集路径
+# pefile解析失败错误信息，7是部分索引不存在
+exception_error = {
+    'Invalid NT Headers signature.': 1,
+    'Invalid NT Headers signature. Probably a NE file': 2,
+    'Invalid e_lfanew value, probably not a PE file': 3,
+    'Invalid NT Headers signature. Probably a LE file': 4,
+    'Unable to read the DOS Header, possibly a truncated file.': 5,
+    'DOS Header magic not found.': 6,
+    'list index out of range': 7,
+}
 
-# 线程数量
-THREAD_NUM = 64
-
-# 创建数据文件夹
-if not os.path.exists(DATA_PATH):
-    os.makedirs(DATA_PATH)
-
+# 数据目录表
 directory_names = (
     'IMAGE_DIRECTORY_ENTRY_EXPORT',
     'IMAGE_DIRECTORY_ENTRY_IMPORT',
@@ -51,17 +42,10 @@ directory_names = (
     'IMAGE_DIRECTORY_ENTRY_RESERVED',
 )
 
-exception_error = {
-    'Invalid NT Headers signature.': 1,
-    'Invalid NT Headers signature. Probably a NE file': 2,
-    'Invalid e_lfanew value, probably not a PE file': 3,
-    'Invalid NT Headers signature. Probably a LE file': 4,
-    'Unable to read the DOS Header, possibly a truncated file.': 5,
-    'DOS Header magic not found.': 6,
-    'list index out of range': 7,
-}
-
 def get_index(directory_name):
+    """获取数据目录表索引
+    """
+    
     complete_name = 'IMAGE_DIRECTORY_ENTRY_' + directory_name
     return pefile.DIRECTORY_ENTRY[complete_name]
 
@@ -288,6 +272,13 @@ def data_processing(data_path, csv_path):
     dataset = get_dataset(data_path)
     dataset_to_csv(dataset, csv_path)
 
+def debug():
+    root = 'C:\\Users\\Administrator\\AppData\\Local\\口袋助理\\files\\'
+    file = 'procexp（中文）64.exe'
+    #pe = PEFile(root, file)
+    pe = PEFile(TRAIN_BLACK_PATH, '000057b32c463c4bcda99933faf15dd4')
+    print(pe.construct())
+    
 def main():
     data_processing(TRAIN_BLACK_PATH, TRAIN_BLACK_DATASET_PATH)
     data_processing(TRAIN_WHITE_PATH, TRAIN_WHITE_DATASET_PATH)
@@ -296,10 +287,8 @@ def main():
 if __name__ == '__main__':
     start_time = time.time()
 
+    #debug()
     main()
-    #root = './AIFirst_data/train/black/'
-    #file = 'dsdsd'
-    #pe = PEFile(root, file)
     
     end_time = time.time()
     logger.info('process spend {} s.'.format(round(end_time - start_time, 3)))

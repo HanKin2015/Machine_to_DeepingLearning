@@ -188,7 +188,17 @@ Kaggle比赛中最重要的环节就是特征工程，特征的好坏直接决�
 https://blog.csdn.net/weixin_47038938
 
 
+[DataCon大数据安全分析比赛冠军思路分享](https://zhuanlan.zhihu.com/p/64252076)
+[DataCon大数据安全分析比赛季军思路分享](https://zhuanlan.zhihu.com/p/185715807)
+比赛数据：https://github.com/kericwy1337/Datacon2019-Malicious-Code-DataSet-Stage1
+[出题人的github比赛代码参考](https://github.com/yhangf/DataCon/tree/master/DataCon2019/code/stage1)
+[kaggle相关比赛](https://www.kaggle.com/competitions/malware-classification/data)
+[使用torch训练图片预测恶意样本](https://bbs.pediy.com/thread-271558-1.htm)
+[n-gram特征预测恶意样本](https://zhuanlan.kanxue.com/article-13391.htm)
+[微软恶意代码分类github代码基本上能用](https://github.com/bindog/ToyMalwareClassification)
 
+对啊，可以去看鱼佬的github。
 
+bagging和stacking模型融合：https://zhuanlan.zhihu.com/p/347178578
 
 

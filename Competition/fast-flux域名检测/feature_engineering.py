@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-文 件 名: features.py
+文 件 名: feature_engineering.py
 文件描述: 特征工程
 作    者: HanKin
 创建日期: 2022.10.18
@@ -66,8 +66,7 @@ def delete_uncorrelated_features(dataset):
     """删除相关性低的特征
     """
     
-    uncorrelated_features = ['time_first', 'time_last', 'rrtype', 'rdata',
-        'rrname', 'bailiwick']
+    uncorrelated_features = ['time_first', 'time_last', 'rrtype', 'rdata', 'bailiwick']
     dataset.drop(uncorrelated_features, axis=1, inplace=True)
     return dataset
 
@@ -113,12 +112,26 @@ def discrete_value_processing(dataset):
     """
     
     gle = LabelEncoder()
+    
     rrname_label = gle.fit_transform(dataset['rrname'])
     rrname_mapping = {index: label for index, label in enumerate(gle.classes_)}
     #logger.info(rrname_mapping)
     dataset['rrname_label'] = rrname_label
     
+    bailiwick_label = gle.fit_transform(dataset['bailiwick'])
+    bailiwick_mapping = {index: label for index, label in enumerate(gle.classes_)}
+    #logger.info(bailiwick_mapping)
+    dataset['bailiwick_label'] = bailiwick_label
     
+    dataset['rdata_count'] = dataset['rdata'].apply(lambda x: len(x.split(',')))
+    return dataset
+
+def time_processing(dataset):
+    """观察时间处理
+    """
+    
+    dataset['time_interval'] = dataset['time_last'] - dataset['time_first']
+    dataset['time_interval'] = dataset['time_interval'].apply(lambda x: int(x / 86400))
     return dataset
 
 def features_processing(dataset):
@@ -128,9 +141,9 @@ def features_processing(dataset):
     #dataset = exception_value_processing(dataset)
     # 日期时间处理
     #datetime_processing(dataset)
+    time_processing(dataset)
     # 离散值处理
     dataset = discrete_value_processing(dataset)
-    
     # 删除不相关的特征（相关性低）
     dataset = delete_uncorrelated_features(dataset)
     
@@ -155,7 +168,7 @@ def extended_features(dataset, sample_path, extended_features_path):
 def main():
     # 获取数据集
     train_dataset = pd.read_csv(TRAIN_RAW_DATASET_PATH)
-    train_label   = pd.read_csv(TRAIN_LABELS_PATH)
+    train_label   = pd.read_csv(TRAIN_LABEL_PATH)
     test_dataset  = pd.read_csv(TEST_RAW_DATASET_PATH)
     logger.info([train_dataset.shape, train_label.shape, test_dataset.shape])
 
@@ -172,7 +185,6 @@ def main():
     logger.info('train_dataset: ({}, {}), test_dataset: ({}, {}).'.format(
         train_dataset.shape[0], train_dataset.shape[1],
         test_dataset.shape[0], test_dataset.shape[1],))
-    logger.info(train_dataset.columns)
     
     # 将标签移动到最后一列
     label = train_dataset['label']
@@ -180,18 +192,18 @@ def main():
     train_dataset = pd.concat([train_dataset, label], axis=1)
     
     # 保存数据集
+    logger.info([train_dataset.shape, test_dataset.shape])
+    logger.info(train_dataset.columns)
     train_dataset.to_csv(TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
     test_dataset.to_csv(TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
 
 if __name__ == '__main__':
     #os.system('chcp 936 & cls')
+    logger.info('******** starting ********')
     start_time = time.time()
 
     main()
 
     end_time = time.time()
-    print('process spend {} s.'.format(round(end_time - start_time, 3)))
-
-
-
+    logger.info('process spend {} s.\n'.format(round(end_time - start_time, 3)))
 

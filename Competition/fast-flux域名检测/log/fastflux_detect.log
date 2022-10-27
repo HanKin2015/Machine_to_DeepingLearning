@@ -1,0 +1,151 @@
+2022-10-27 10:00:25 main.py[<module>:24] INFO: ******** starting ********
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:173] INFO: [(231, 7), (67, 2), (231, 7)]
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:178] INFO: [(231, 8)]
+2022-10-27 10:00:25 C:\Users\Administrator\Anaconda3\lib\site-packages\numexpr\utils.py[_init_num_threads:141] INFO: NumExpr defaulting to 4 threads.
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:187] INFO: train_dataset: (231, 7), test_dataset: (231, 6).
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:195] INFO: [(231, 7), (231, 6)]
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:196] INFO: Index(['count', 'rrname', 'time_interval', 'rrname_label', 'bailiwick_label',
+       'rdata_count', 'label'],
+      dtype='object')
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[main:119] INFO: train dataset shape: (231, 7).
+2022-10-27 10:00:25 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[random_forest_model:89] INFO: [(161, 5), (70, 5), (161,), (70,)]
+2022-10-27 10:00:26 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[random_forest_model:94] INFO:               precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        70
+
+    accuracy                           1.00        70
+   macro avg       1.00      1.00      1.00        70
+weighted avg       1.00      1.00      1.00        70
+
+2022-10-27 10:00:26 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:62] INFO: model RandomForestClassifier:
+2022-10-27 10:01:16 main.py[<module>:24] INFO: ******** starting ********
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:173] INFO: [(231, 7), (67, 2), (231, 7)]
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:178] INFO: [(231, 8)]
+2022-10-27 10:01:16 C:\Users\Administrator\Anaconda3\lib\site-packages\numexpr\utils.py[_init_num_threads:141] INFO: NumExpr defaulting to 4 threads.
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:187] INFO: train_dataset: (231, 7), test_dataset: (231, 6).
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:195] INFO: [(231, 7), (231, 6)]
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\feature_engineering.py[main:196] INFO: Index(['count', 'rrname', 'time_interval', 'rrname_label', 'bailiwick_label',
+       'rdata_count', 'label'],
+      dtype='object')
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[main:119] INFO: train dataset shape: (231, 7).
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[random_forest_model:89] INFO: [(161, 5), (70, 5), (161,), (70,)]
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[random_forest_model:94] INFO:               precision    recall  f1-score   support
+
+           0       0.93      0.98      0.95        64
+           1       0.50      0.17      0.25         6
+
+    accuracy                           0.91        70
+   macro avg       0.71      0.58      0.60        70
+weighted avg       0.89      0.91      0.89        70
+
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:62] INFO: model RandomForestClassifier:
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:64] INFO: black_is_black = 63
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:65] INFO: black_is_white = 1
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:66] INFO: white_is_black = 5
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:67] INFO: white_is_white = 1
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[model_score:81] INFO: recall: 0.9844, precision: 0.9265, score: 95.45
+2022-10-27 10:01:16 D:\Github\Machine_to_DeepingLearning\Competition\fast-flux域名检测\training_model.py[save_training_model:109] INFO: model need to be changed, old score 0, new score 95.45
+2022-10-27 10:01:16 main.py[<module>:30] INFO: process spend 0.374 s.
+
+2022-10-27 10:01:27 predict_result.py[<module>:80] INFO: ******** starting ********
+2022-10-27 10:01:27 predict_result.py[predict:57] INFO: test dataset shape: (231, 6).
+2022-10-27 10:01:27 predict_result.py[predict:72] INFO: predict result shape: (231, 2)
+2022-10-27 10:02:03 predict_result.py[<module>:80] INFO: ******** starting ********
+2022-10-27 10:02:03 predict_result.py[predict:57] INFO: test dataset shape: (231, 6).
+2022-10-27 10:02:03 predict_result.py[predict:72] INFO: predict result shape: (231, 2)
+2022-10-27 10:02:03 predict_result.py[result_processing:48] INFO: predict result shape: (0, 2)
+2022-10-27 10:02:03 predict_result.py[<module>:86] INFO: process spend 0.413 s.
+
+2022-10-27 10:04:07 predict_result.py[<module>:101] INFO: ******** starting ********
+2022-10-27 10:04:07 predict_result.py[predict:78] INFO: test dataset shape: (231, 6).
+2022-10-27 10:04:07 predict_result.py[predict:93] INFO: predict result shape: (231, 2)
+2022-10-27 10:04:07 predict_result.py[result_processing_:69] INFO: predict result shape: (67, 2)
+2022-10-27 10:04:07 predict_result.py[<module>:107] INFO: process spend 0.258 s.
+
+2022-10-27 10:05:48 predict_result.py[<module>:102] INFO: ******** starting ********
+2022-10-27 10:05:48 predict_result.py[predict:79] INFO: test dataset shape: (231, 6).
+2022-10-27 10:05:48 predict_result.py[predict:94] INFO: predict result shape: (231, 2)
+2022-10-27 10:05:48 predict_result.py[result_processing:46] INFO: tasks count: 67
+2022-10-27 10:05:49 predict_result.py[result_processing:49] INFO: predict result shape: (0, 2)
+2022-10-27 10:05:49 predict_result.py[<module>:108] INFO: process spend 0.408 s.
+
+2022-10-27 10:06:11 predict_result.py[<module>:103] INFO: ******** starting ********
+2022-10-27 10:06:11 predict_result.py[predict:80] INFO: test dataset shape: (231, 6).
+2022-10-27 10:06:11 predict_result.py[predict:95] INFO: predict result shape: (231, 2)
+2022-10-27 10:06:11 predict_result.py[result_processing:46] INFO: tasks count: 67
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010rszhentan.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010sdent.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01wulian.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '001shentu.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01zhizuan.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010-erbohui.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020kouqiangke.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020-jiabohui.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020jiachang.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '00tuan.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01snail.com.', 'label': 1}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020-studio.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01times.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020chaoyu.com.', 'label': 1}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01more.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020kouqiang.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01software.net.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020taijik.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01fan.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '007amzhentan.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020kouqiang.net.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010-running.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01gua.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010wuguan.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01hua.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020-hunbohui.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020buyer.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020zhenying.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020jiehun.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020gyedu.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01chain.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020-erbohui.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01miao.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01pin.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010dental.com.', 'label': 1}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01demo.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010ditan.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '001piao.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020anjing.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '007wangluo.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '0-kgame.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '0101jiaoyu.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020manyi.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020wenyi.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020ziqiang.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020chun.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01jiaju.com.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '012weizan.com.', 'label': 1}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '001chuantai.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01-cloud.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '007jiafen.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020youqi.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '00pin.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '007jieshaohuo.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01yue.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01game.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020geyin.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020qingyun.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020shiming.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '001-design.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01qingtan.com.', 'label': 1}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010qutuanjian.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '020orange.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010-hunbohui.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '010mail.net.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '01-design.com.cn.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:48] INFO: {'domain': '0039italia.com.', 'label': 0}
+2022-10-27 10:06:11 predict_result.py[result_processing:50] INFO: predict result shape: (0, 2)
+2022-10-27 10:06:11 predict_result.py[<module>:109] INFO: process spend 0.51 s.
+
+2022-10-27 10:06:49 predict_result.py[<module>:103] INFO: ******** starting ********
+2022-10-27 10:06:49 predict_result.py[predict:80] INFO: test dataset shape: (231, 6).
+2022-10-27 10:06:49 predict_result.py[predict:95] INFO: predict result shape: (231, 2)
+2022-10-27 10:06:50 predict_result.py[result_processing:50] INFO: predict result shape: (67, 2)
+2022-10-27 10:06:50 predict_result.py[<module>:109] INFO: process spend 0.411 s.
+

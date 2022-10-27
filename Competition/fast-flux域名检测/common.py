@@ -22,7 +22,7 @@ from sklearn.model_selection import cross_val_score  # 模型评价：训练误�
 from sklearn.ensemble import RandomForestClassifier  # RFC随机森林分类
 from sklearn.preprocessing import LabelEncoder
 
-RAW_DATASET_PATH       = './'
+RAW_DATASET_PATH       = './mini_'
 DATASET_PATH           = './dataset/'                                               # 数据集路径
 MODEL_PATH             = './model/'                                                 # 模型路径
                                                                                     

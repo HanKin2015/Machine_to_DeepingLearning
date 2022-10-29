@@ -23,7 +23,7 @@ def lightgbm_model(X, y):
     # K折交叉验证与学习曲线的联合使用来获取最优K值
     scores_cross = []
     Ks = []
-    for k in range(75, 100):
+    for k in range(85, 90):
         LGB = lgb.LGBMClassifier(n_estimators=k, n_jobs=-1)
         score_cross = cross_val_score(LGB, X_train, y_train, cv=5).mean()
         scores_cross.append(score_cross)
@@ -96,7 +96,21 @@ def random_forest_model(X, y):
     score = model_score('RandomForestClassifier', y_test, y_pred)
     return RFC, score
 
-def save_training_model(model, score, model_path=MODEL_PATH, score_path=MODEL_SCORE_PATH):
+def svm_model(X, y):
+    """SVM模型
+    """
+    
+    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    
+    logger.info('training model......')
+    SVM = svm.SVC(kernel='linear').fit(X_train, y_train)
+    y_pred = SVM.predict(X_test)
+    logger.info(classification_report(y_test, y_pred))
+    score = model_score('SVM', y_test, y_pred)
+    return SVM, score
+
+def save_training_model(model, score, model_path=BASELINE_MODEL_PATH, score_path=BASELINE_MODEL_SCORE_PATH):
     """保存训练模型
     """
     
@@ -104,9 +118,11 @@ def save_training_model(model, score, model_path=MODEL_PATH, score_path=MODEL_SC
     if os.path.exists(score_path):
         with open(score_path, 'r') as fd:
             before_score = fd.read()
-            
+    
+    before_score = 0
     if score > float(before_score):
         logger.info('model need to be changed, old score {}, new score {}'.format(before_score, score))
+        logger.info('save model[{}]'format(model_path))
         buffer = pickle.dumps(model)
         with open(model_path, "wb+") as fd:
             fd.write(buffer)
@@ -115,15 +131,16 @@ def save_training_model(model, score, model_path=MODEL_PATH, score_path=MODEL_SC
 
 def main():
     # 获取数据集
-    train_dataset = pd.read_csv(TRAIN_DATASET_PATH)
+    train_dataset = pd.read_csv(FEATURE_TRAIN_DATASET_PATH)
     logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
     
-    X = train_dataset.drop(['rrname', 'label'], axis=1).values
+    X = train_dataset.drop(['domain', 'label'], axis=1).values
     y = train_dataset['label'].values
         
     # 模型训练
-    #model = lightgbm_model(X, y)
-    model, score = random_forest_model(X, y)
+    #model, score = lightgbm_model(X, y)
+    #save_training_model(model, score)
+    model, score = svm_model(X, y)
     save_training_model(model, score, RFC_MODEL_PATH, RFC_MODEL_SCORE_PATH)
 
 if __name__ == '__main__':

@@ -1,104 +1,82 @@
 # -*- coding: utf-8 -*-
 """
 文 件 名: get_data.py
-文件描述: 获取数据
+文件描述: 获取数据，原始数据一条记录存在多行，需要将多行合并成一行
 作    者: HanKin
-创建日期: 2022.07.20
-修改日期：2022.07.20
+创建日期: 2022.10.28
+修改日期：2022.10.28
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
 
 from common import *
 
-class MachineState:
-    def __init__(self, root, file):
-        file_path = os.path.join(root, file)
-        self.ids = file[:-4]
-        df = pd.read_csv(file_path)
-        #print(df.shape)
+def rdata_processing(dataset):
+    """
+    """
+    
+    result = pd.DataFrame(columns=['domain', 'ip_list', 'ip_count_list'])
+    
+    for rrname in tqdm(set(dataset['rrname']), ncols=100):
+        df = dataset[dataset['rrname'] == rrname]
         
-        column_names = df.columns
-        #print(column_names)
+        ip_count_list = []
+        ip_list = []
+        for index, row in df.iterrows():
+            tmp = eval(row['rdata'])
+            ip_count_list.append(len(tmp))
+            ip_list = list(set(ip_list).union(set(tmp)))
         
-        for column_name in column_names:
-            exec('self.{}_mean   = round(df.{}.mean())'.format(column_name, column_name))
-            exec('self.{}_median = round(df.{}.median())'.format(column_name, column_name))
-            exec('self.{}_max    = round(df.{}.max())'.format(column_name, column_name))
-            exec('self.{}_min    = round(df.{}.min())'.format(column_name, column_name))
+        row = {'domain': rrname, 'ip_list': ip_list, 'ip_count_list': ip_count_list}
+        result = pd.concat([result, pd.DataFrame([row])], ignore_index=True)
 
-    def construct(self):
-        state = {}
-        for key, value in self.__dict__.items():
-            state[key] = value
-        return state
+    logger.info('predict result shape: {}'.format(result.shape))
+    return result
 
-def get_machine_state(root, file):
-    """
+def delete_uncorrelated_features(dataset):
+    """删除相关性低的特征
     """
     
-    try:
-        state = MachineState(root, file)
-        return state.construct()
-    except Exception as e:
-        print('file[{}] get machine state failed, error[{}].'.format(file, e))
+    uncorrelated_features = ['judgement', 'networkTags', 'threatTags', 'firstFoundTime', 'updateTime',
+        'expired', 'openSource', 'location', 'asn', 'samples', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    dataset.drop(uncorrelated_features, axis=1, inplace=True)
+    return dataset
 
-def get_data(raw_data_path):
-    """获取数据集
-    """
-
-    data  = []
-    tasks = []
+def features_processing(dataset):
+    # location处理
+    dataset = rdata_processing(dataset)
+    # 删除不相关的特征（相关性低）
+    #dataset = delete_uncorrelated_features(dataset)
     
-    with ThreadPoolExecutor(max_workers=THREAD_NUM) as pool:
-        for root, dirs, files in os.walk(raw_data_path):
-            for file in files:
-                task = pool.submit(get_machine_state, root, file)
-                tasks.append(task)
+    # 特殊处理
     
-    failed_count = 0
-    for task in tasks:
-        sample = task.result()
-        if sample is not None:
-            data.append(sample)
-        else:
-            failed_count += 1
-    print('{} has {} samples which got data failed .'.format(raw_data_path, failed_count))
-    return data
-
-def data_to_csv(data, csv_path):
-    """
-    数据保存到本地csv文件中
-    """
-    
-    df = pd.DataFrame(data)
-    df.to_csv(csv_path, sep=',', encoding='utf-8', index=False)
-
-def raw_data_processing(raw_data_path, csv_path):
-    """
-    数据处理
-    """
-    
-    data = get_data(raw_data_path)
-    data_to_csv(data, csv_path)
+    return dataset
 
 def main():
-    raw_data_processing(TRAIN_RAW_DATA_PATH, TRAIN_DATA_PATH)
-    raw_data_processing(TEST_RAW_DATA_PATH, TEST_DATA_PATH)
-
-def debug():
-    root = r'D:\Users\User\Desktop\AI\idle_machine_detect\idle_machine_detect\train\data\\'
-    file = '7.csv'
-    machine_state = get_machine_state(root, file)
-    print(machine_state)
-    print(int(2.7920231712))
-    print(round(2.7920231712))
+    # 获取数据集
+    train_dataset = pd.read_csv(RAW_TRAIN_DATASET_PATH)
+    test_dataset  = pd.read_csv(RAW_TEST_DATASET_PATH)
+    logger.info([train_dataset.shape, test_dataset.shape])
+    
+    # 特征工程
+    train_dataset = features_processing(train_dataset)
+    test_dataset  = features_processing(test_dataset)
+    logger.info('train_dataset: ({}, {}), test_dataset: ({}, {}).'.format(
+        train_dataset.shape[0], train_dataset.shape[1],
+        test_dataset.shape[0], test_dataset.shape[1],))
+    
+    # 保存数据集
+    logger.info([train_dataset.shape, test_dataset.shape])
+    logger.info(train_dataset.columns)
+    train_dataset.to_csv(TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    test_dataset.to_csv(TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
 
 if __name__ == '__main__':
+    #os.system('chcp 936 & cls')
+    logger.info('******** starting ********')
     start_time = time.time()
 
-    #debug()
     main()
 
     end_time = time.time()
-    print('process spend {} s.'.format(round(end_time - start_time, 3)))
+    logger.info('process spend {} s.\n'.format(round(end_time - start_time, 3)))

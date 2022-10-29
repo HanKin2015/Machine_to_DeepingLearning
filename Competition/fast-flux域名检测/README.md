@@ -6,6 +6,9 @@
 训练模型
 预测结果
 
+pip install xgboost
+pip install lightgbm
+
 ## 2、Bailiwick
 居然百度和必应几乎搜索不出来相关资料，这。。。。。。
 https://zhuanlan.zhihu.com/p/92899876/
@@ -101,10 +104,33 @@ https://github.com/dnsdb/dnsdb-query
 
 
 
+https://github.com/asgoel/Fast-Flux-Detect
+https://github.com/staaldraad/fastfluxanalysis
+https://mp.weixin.qq.com/s/_VrzoPMhc8PIyFnbN3YaNw
+
+
+Fast-Flux技术
+
+在正常的DNS服务器中，用户对同一个域名做DNS查询，在较长的一段时间内，无论查询多少次返回的结果基本上是不会改变的，而Fast-Flux技术为一个域名配置了多个IP地址，通过动态变化IP地址完成和域名的映射，这种情况下用户在每次访问某个域名时实际上访问不是同一个主机。攻击者将这些感染的主机仅仅作为代理将需求转发给实际的控制者，完成控制者和被控机器的通信。
+
+Fast-Flux域名检测
 
 
 
+■ Fast-Flux特征分析
+
+基于Fast-Flux技术的僵尸网络，有以下几个特征：
+
+1）返回的IP数量
+
+Fast-Flux网络返回的IP地址是不断变化的，在一段时间内查询得到的IP地址数量会持续增加，而合法网站的域名查询返回的IP数一般比较稳定。
+
+2）IP所属国家特征
+
+由于受感染主机的不同区域分布，基于Fast-Flux技术的僵尸网络的IP地址分布在不同的国家（对应不同的时区，混乱度较大），而正常的域名IP一般都在一个国家或少数几个国家中。
 
 
 
+■ Fast-Flux检测方法
 
+针对上述特征，首先考虑从输入的数据中统计每个域名响应的IP地址序列和对应的时区数据，并将每一个域名的统计结果和上一个周期进行累加更新，最后使用AI算法对数据进行异常的检测，并上报异常结果。

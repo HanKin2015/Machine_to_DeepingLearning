@@ -66,7 +66,7 @@ def delete_uncorrelated_features(dataset):
     """删除相关性低的特征
     """
     
-    uncorrelated_features = ['time_first', 'time_last', 'rrtype', 'rdata', 'bailiwick', 'rrname_label', 'bailiwick_label']
+    uncorrelated_features = ['time_first', 'time_last', 'rrtype', 'rdata', 'bailiwick']
     dataset.drop(uncorrelated_features, axis=1, inplace=True)
     return dataset
 
@@ -124,8 +124,6 @@ def discrete_value_processing(dataset):
     dataset['bailiwick_label'] = bailiwick_label
     
     dataset['rdata_count'] = dataset['rdata'].apply(lambda x: len(x.split(',')))
-    dataset['rrname_bailiwick'] = (dataset['rrname'] == dataset['bailiwick'])
-    dataset['rrname_bailiwick'] = dataset['rrname_bailiwick'].astype(int)
     return dataset
 
 def time_processing(dataset):
@@ -136,104 +134,57 @@ def time_processing(dataset):
     dataset['time_interval'] = dataset['time_interval'].apply(lambda x: int(x / 86400))
     return dataset
 
-def rdata__processing(dataset):
-    """
-    """
-
-def features_processing(dataset, ip_info):
+def features_processing(dataset):
     # 缺失值处理
     #dataset = missing_value_processing(dataset)
     # 异常值处理
     #dataset = exception_value_processing(dataset)
     # 日期时间处理
     #datetime_processing(dataset)
-    #time_processing(dataset)
+    time_processing(dataset)
     # 离散值处理
-    #dataset = discrete_value_processing(dataset)
-    # 通过ip地址获取洲和国家的数量
-    dataset = get_ip_info(dataset, ip_info)
+    dataset = discrete_value_processing(dataset)
     # 删除不相关的特征（相关性低）
-    #dataset = delete_uncorrelated_features(dataset)
+    dataset = delete_uncorrelated_features(dataset)
     
     # 特殊处理
     
     return dataset
 
-def get_ip_info(dataset, ip_info):
-    """获取ip地址的洲和国家的数量
-    优化尝试：eval单次转换慢吗，并不是，也不是for循环，而是dataframe查找慢
-    试一下字典
+def extended_custom_features(dataset, extended_features_path):
+    """扩展的特征(自定义的字符串特征)
     """
     
-    continent_label_dict = dict(zip(ip_info['ip'], ip_info['continent_label']))
-    country_label_dict   = dict(zip(ip_info['ip'], ip_info['country_label']))
     
-    result = pd.DataFrame(columns=['domain', 'continent_count', 'country_count', 'time_slot_count', 'd_value'])
-    logger.info(dataset.columns)
-    #for index, row in tqdm(dataset.iterrows(), ncols=100): # 这种方式的进度条效果不佳
-    for row_id in tqdm(range(dataset.shape[0]), ncols=100):
-        continent_list = []
-        country_list = []
-        for ip in eval(dataset.iloc[row_id]['ip_list']):
-            continent_list.append(continent_label_dict.get(ip))
-            country_list.append(country_label_dict.get(ip))
-            #continent_list.append(ip_info.query('ip == @ip')['continent_label'].values[0])
-            #country_list.append(ip_info.query('ip == @ip')['country_label'].values[0])
-        continent_list = list(set(continent_list))
-        country_list = list(set(country_list))
-        
-        ip_count_list = eval(dataset.iloc[row_id]['ip_count_list'])
-        
-        row = {'domain': dataset.iloc[row_id]['domain'], 'continent_count': len(continent_list),
-            'country_count': len(country_list), 'time_slot_count': len(ip_count_list),
-            'd_value': max(ip_count_list)-min(ip_count_list)}
-        result = pd.concat([result, pd.DataFrame([row])], ignore_index=True)
-    return result
+    return dataset
 
-def ip_info_processing():
-    """将ip地址的洲和国家LabelEncoder
+def extended_features(dataset, sample_path, extended_features_path):
+    """扩展的特征
     """
     
-    ip_info = pd.read_csv(IP_INFO_PATH)
-    logger.info('ip_info shape <{}, {}>'.format(ip_info.shape[0], ip_info.shape[1]))
-    logger.info(ip_info.columns)
     
-    # TypeError: argument must be a string or number
-    ip_info = ip_info.fillna('None')
-    
-    gle = LabelEncoder()
-    
-    continent_label = gle.fit_transform(ip_info['continent'])
-    continent_mapping = {index: label for index, label in enumerate(gle.classes_)}
-    ip_info['continent_label'] = continent_label
-    
-    country_label = gle.fit_transform(ip_info['country'])
-    country_mapping = {index: label for index, label in enumerate(gle.classes_)}
-    ip_info['country_label'] = country_label
-
-    return ip_info
+    return dataset
 
 def main():
     # 获取数据集
-    train_dataset = pd.read_csv(TRAIN_DATASET_PATH)
+    train_dataset = pd.read_csv(TRAIN_RAW_DATASET_PATH)
     train_label   = pd.read_csv(TRAIN_LABEL_PATH)
-    test_dataset  = pd.read_csv(TEST_DATASET_PATH)
+    test_dataset  = pd.read_csv(TEST_RAW_DATASET_PATH)
     logger.info([train_dataset.shape, train_label.shape, test_dataset.shape])
+
+    # 添加标签
+    train_label.rename(columns = {"domain": "rrname"},  inplace=True)
+    train_dataset = train_dataset.merge(train_label, on='rrname', how='left')
+    logger.info([train_dataset.shape])
     
-    # 处理ip_info数据集
-    ip_info = ip_info_processing()
-    logger.info('ip_info shape <{}, {}>'.format(ip_info.shape[0], ip_info.shape[1]))
+    # 去除脏数据
     
     # 特征工程
-    train_dataset = features_processing(train_dataset, ip_info)
-    test_dataset  = features_processing(test_dataset, ip_info)
+    train_dataset = features_processing(train_dataset)
+    test_dataset  = features_processing(test_dataset)
     logger.info('train_dataset: ({}, {}), test_dataset: ({}, {}).'.format(
         train_dataset.shape[0], train_dataset.shape[1],
         test_dataset.shape[0], test_dataset.shape[1],))
-    
-    # 添加标签
-    train_dataset = train_dataset.merge(train_label, on='domain', how='left')
-    logger.info([train_dataset.shape])
     
     # 将标签移动到最后一列
     label = train_dataset['label']
@@ -243,8 +194,8 @@ def main():
     # 保存数据集
     logger.info([train_dataset.shape, test_dataset.shape])
     logger.info(train_dataset.columns)
-    train_dataset.to_csv(FEATURE_TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
-    test_dataset.to_csv(FEATURE_TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    train_dataset.to_csv(TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    test_dataset.to_csv(TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
 
 if __name__ == '__main__':
     #os.system('chcp 936 & cls')

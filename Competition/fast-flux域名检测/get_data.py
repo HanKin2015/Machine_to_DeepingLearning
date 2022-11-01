@@ -11,24 +11,62 @@ Copyright (c) 2022 HanKin. All rights reserved.
 
 from common import *
 
-def rdata_processing(dataset):
+def rdata_processing_(dataset):
     """
+    太费时，需要4个小时处理需要优化
+    通过排序后就不需要再使用query函数查询
     """
     
     result = pd.DataFrame(columns=['domain', 'ip_list', 'ip_count_list'])
     
     for rrname in tqdm(set(dataset['rrname']), ncols=100):
-        df = dataset[dataset['rrname'] == rrname]
+        #df = dataset[dataset['rrname'] == rrname]
+        df = dataset.query('rrname == @rrname')
         
         ip_count_list = []
         ip_list = []
-        for index, row in df.iterrows():
-            tmp = eval(row['rdata'])
-            ip_count_list.append(len(tmp))
-            ip_list = list(set(ip_list).union(set(tmp)))
+        #for index, row in df.iterrows():
+            #tmp = eval(row['rdata'])
+            #ip_count_list.append(len(tmp))
+            #ip_list = list(set(ip_list).union(set(tmp)))
+            #pass
         
         row = {'domain': rrname, 'ip_list': ip_list, 'ip_count_list': ip_count_list}
         result = pd.concat([result, pd.DataFrame([row])], ignore_index=True)
+
+    logger.info('predict result shape: {}'.format(result.shape))
+    return result
+
+def rdata_processing(dataset):
+    """
+    太费时，需要4个小时处理需要优化
+    通过排序后就不需要再使用query函数查询
+    优化后大约再20分钟左右
+    """
+    
+    result = pd.DataFrame(columns=['domain', 'ip_list', 'ip_count_list'])
+    
+    ip_count_list = []
+    ip_list = []
+    previous_rrname = dataset.iloc[0]['rrname']
+    for row_id in tqdm(range(dataset.shape[0]), ncols=100):
+        current_rrname = dataset.iloc[row_id]['rrname']
+        logger.debug(type(current_rrname))
+        
+        if current_rrname != previous_rrname:
+            logger.debug(result)
+            row = {'domain': previous_rrname, 'ip_list': ip_list, 'ip_count_list': ip_count_list}
+            result = pd.concat([result, pd.DataFrame([row])], ignore_index=True)
+            ip_count_list = []
+            ip_list = []
+            previous_rrname = current_rrname
+            
+        rdata_list = eval(dataset.iloc[row_id]['rdata'])
+        ip_count_list.append(len(rdata_list))
+        ip_list = list(set(ip_list).union(set(rdata_list)))
+        if row_id == dataset.shape[0] - 1:
+            row = {'domain': previous_rrname, 'ip_list': ip_list, 'ip_count_list': ip_count_list}
+            result = pd.concat([result, pd.DataFrame([row])], ignore_index=True)
 
     logger.info('predict result shape: {}'.format(result.shape))
     return result
@@ -64,7 +102,7 @@ def main():
     logger.info('train_dataset: ({}, {}), test_dataset: ({}, {}).'.format(
         train_dataset.shape[0], train_dataset.shape[1],
         test_dataset.shape[0], test_dataset.shape[1],))
-    
+
     # 保存数据集
     logger.info([train_dataset.shape, test_dataset.shape])
     logger.info(train_dataset.columns)

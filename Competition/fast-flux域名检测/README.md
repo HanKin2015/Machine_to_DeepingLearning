@@ -8,6 +8,15 @@
 
 pip install xgboost
 pip install lightgbm
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip install catboost
+pip install graphviz
+https://pypi.tuna.tsinghua.edu.cn/simple/graphviz/
+https://pypi.tuna.tsinghua.edu.cn/simple/catboost/
+https://pypi.tuna.tsinghua.edu.cn/simple/lightgbm/
+https://pypi.tuna.tsinghua.edu.cn/simple/xgboost/
+
+nlpia这个库需要安装很多依赖，建议在线安装，只是例子中使用到。
 
 ## 2、Bailiwick
 居然百度和必应几乎搜索不出来相关资料，这。。。。。。

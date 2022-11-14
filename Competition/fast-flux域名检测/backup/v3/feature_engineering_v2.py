@@ -11,6 +11,43 @@ Copyright (c) 2022 HanKin. All rights reserved.
 
 from common import *
 
+def delete_uncorrelated_features(dataset):
+    """删除相关性低的特征
+    """
+    
+    uncorrelated_features = ['time_first', 'time_last', 'rrtype', 'rdata', 'bailiwick', 'rrname_label', 'bailiwick_label']
+    dataset.drop(uncorrelated_features, axis=1, inplace=True)
+    return dataset
+
+def discrete_value_processing(dataset):
+    """离散值处理
+    """
+    
+    gle = LabelEncoder()
+    
+    rrname_label = gle.fit_transform(dataset['rrname'])
+    rrname_mapping = {index: label for index, label in enumerate(gle.classes_)}
+    #logger.info(rrname_mapping)
+    dataset['rrname_label'] = rrname_label
+    
+    bailiwick_label = gle.fit_transform(dataset['bailiwick'])
+    bailiwick_mapping = {index: label for index, label in enumerate(gle.classes_)}
+    #logger.info(bailiwick_mapping)
+    dataset['bailiwick_label'] = bailiwick_label
+    
+    dataset['rdata_count'] = dataset['rdata'].apply(lambda x: len(x.split(',')))
+    dataset['rrname_bailiwick'] = (dataset['rrname'] == dataset['bailiwick'])
+    dataset['rrname_bailiwick'] = dataset['rrname_bailiwick'].astype(int)
+    return dataset
+
+def time_processing(dataset):
+    """观察时间处理
+    """
+    
+    dataset['time_interval'] = dataset['time_last'] - dataset['time_first']
+    dataset['time_interval'] = dataset['time_interval'].apply(lambda x: int(x / 3600 / 24))
+    return dataset
+
 def label_encode(series):
     """自然数编码
     """
@@ -60,8 +97,8 @@ def dataset_pre_processing(dataset):
     dataset['rdata'] = dataset['rdata'].apply(lambda x:x.replace(' ', ''))
 
     # 时间转换成天数
-    dataset['time_first'] = dataset['time_first'].apply(lambda x: int(x / 3600 / 24))
-    dataset['time_last'] = dataset['time_last'].apply(lambda x: int(x / 3600 / 24))
+    #dataset['time_first'] = dataset['time_first'].apply(lambda x: int(x / 3600 / 24))
+    #dataset['time_last'] = dataset['time_last'].apply(lambda x: int(x / 3600 / 24))
 
     # 时间差
     dataset['time_diff'] = dataset['time_last'] - dataset['time_first']
@@ -77,12 +114,65 @@ def feature_processing(dataset, ip_info):
     # 特征提取
     agg_df = feature_extraction(dataset)
     # pdns数据集和ip_info数据集结合
-    agg_df = pdns_concat_ip_info(agg_df, ip_info)
+    agg_df = pdns_concat_ip_info_v2(agg_df, ip_info)
+    # 通过ip地址获取洲和国家的数量
+    #dataset = get_ip_info(dataset, ip_info)
+    # 删除不相关的特征（相关性低）
+    #dataset = delete_uncorrelated_features(dataset)
+    
     # 特殊处理
     agg_df = other(agg_df)
     return agg_df
 
 def pdns_concat_ip_info(agg_df, ip_info):
+    """pdns数据集和ip_info数据集结合
+    """
+    
+    logger.info([ip_info.shape])
+    
+    # 创建ip_info字典
+    col_dicts = ['judgement', 'networkTags', 'threatTags', 'expired', 'continent',
+             'country', 'province', 'city', 'district', 'timeZone', 'organization', 'operator']
+    for col_dict in col_dicts:
+        exec('{}_dict = dict()'.format(col_dict), globals())
+        exec("{}_dict = dict(zip(ip_info['ip'], ip_info['{}']))".format(col_dict, col_dict))
+
+    # 初始化列表
+    for col_dict in col_dicts:
+        exec('{}_li = []'.format(col_dict), globals())
+
+    np.array(judgement_dict)
+
+    not_found_ip_count = 0
+    for items in tqdm(agg_df['rdatalist'].values):
+        # 置空临时列表
+        for col_dict in col_dicts:
+            exec('{}_tmp = []'.format(col_dict), globals())
+        
+        for ip in items:
+            try:
+                for col_dict in col_dicts:
+                    exec('{}_tmp.append({}_dict[ip])'.format(col_dict, col_dict))
+            except:
+                logger.debug('failed, ip {}'.format(ip))
+                not_found_ip_count += 1
+                pass
+        
+        # 将临时列表添加到主列表
+        for col_dict in col_dicts:
+            exec('{}_li.append({}_tmp)'.format(col_dict, col_dict))
+    
+    logger.info('here is {} ips which are not found'.format(not_found_ip_count))
+    
+    # 将ip_info提取的特征添加到数据集中
+    info_df = pd.DataFrame({'judgement':np.array(judgement_li),'networkTags':np.array(networkTags_li),'threatTags':np.array(threatTags_li),
+                        'expired':np.array(expired_li),'continent':np.array(continent_li),'country':np.array(country_li),
+                        'province':np.array(province_li),'city':np.array(city_li),'district':np.array(district_li),
+                        'timeZone':np.array(timeZone_li),'organization':np.array(organization_li),'operator':np.array(operator_li)})
+    agg_df = pd.concat([agg_df, info_df], axis=1)
+    return agg_df
+
+def pdns_concat_ip_info_v2(agg_df, ip_info):
     """pdns数据集和ip_info数据集结合
     """
     
@@ -379,23 +469,33 @@ def main():
     logger.info([dataset.shape])
     logger.info(dataset.info())
 
-    # 分离训练集和测试集
-    train_dataset = dataset[~dataset.label.isnull()].reset_index(drop=True)
-    test_dataset  = dataset[dataset.label.isnull()].reset_index(drop=True)
-    logger.info([train_dataset.shape, test_dataset.shape])
-    
     # 挑选特征
     info_cols = ['judgement','networkTags','threatTags','expired','continent','country','province','city',
             'district','timeZone','organization','operator']
     features = [f for f in dataset.columns if f not in ['rrname', 'label', 'rdatalist','bailiwicklist']+info_cols]
     logger.info('features count {}'.format(len(features)))
-    train_dataset = train_dataset[features+['rrname', 'label']]
-    test_dataset = test_dataset[features+['rrname']]
+    
+    # 分离训练集和测试集
+    train_dataset = dataset[~dataset.label.isnull()].reset_index(drop=True)
+    test_dataset  = dataset[dataset.label.isnull()].reset_index(drop=True)
     logger.info([train_dataset.shape, test_dataset.shape])
-
+    
     # 保存数据集
-    train_dataset.to_csv(FEATURE_TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
-    test_dataset.to_csv(FEATURE_TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    #train_dataset.to_csv(FEATURE_TRAIN_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    #test_dataset.to_csv(FEATURE_TEST_DATASET_PATH, sep=',', encoding='utf-8', index=False)
+    x_train = train_dataset[features]
+    y_train = train_dataset['label']
+    x_test  = test_dataset[features]
+    del dataset
+    gc.collect()
+    logger.info([x_train.shape, x_test.shape])
+    
+    cat_train, cat_test = cat_model(x_train, y_train, x_test)
+    logger.info(cat_test.shape)
+    
+    test_dataset['label'] = cat_test
+    test_dataset['label'] = test_dataset['label'].apply(lambda x: 1 if x > 0.35 else 0)
+    test_dataset[['rrname','label']].to_csv("result.csv", index=False, header=False)
 
 def debug():
     """debug测试

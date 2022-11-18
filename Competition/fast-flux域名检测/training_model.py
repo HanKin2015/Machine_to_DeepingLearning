@@ -4,7 +4,7 @@
 文件描述: 训练模型
 作    者: HanKin
 创建日期: 2022.10.26
-修改日期：2022.10.26
+修改日期：2022.11.17
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
@@ -214,9 +214,9 @@ def cv_model(clf, train_x, train_y, test_x, clf_name):
         
         print(cv_scores)
         
-    print("%s_train_score_list:" % clf_name, cv_scores)
-    print("%s_score_mean:" % clf_name, np.mean(cv_scores))
-    print("%s_score_std:" % clf_name, np.std(cv_scores))
+    logger.info("%s_train_score_list:" % clf_name, cv_scores)
+    logger.info("%s_score_mean:" % clf_name, np.mean(cv_scores))
+    logger.info("%s_score_std:" % clf_name, np.std(cv_scores))
     return oof, pred
 
 def lgb_model(x_train, y_train, x_test):
@@ -255,6 +255,18 @@ def main():
         file_name = 'result_{}.csv'.format(threshold)
         #print(file_name)
         test_dataset['result'] = test_dataset['label'].apply(lambda x: 1 if x > threshold else 0)
+        
+        if True:
+            change_count = 0
+            for index, row in test_dataset.iterrows():
+                if row['openSource_sum'] > 5000:
+                    if row['openSource_sum'] / row['rdatalist_count'] > 0.8:
+                        if row['result'] == 0:
+                            change_count += 1
+                            #row['result'] = 1
+                            test_dataset.loc[index, 'result'] = 1
+            logger.info('change_count: {}'.format(change_count))
+        
         test_dataset[['rrname','result']].to_csv(file_name, index=False, header=False)
     #test_dataset['label'] = test_dataset['label'].apply(lambda x: 1 if x>0.35 else 0)
     # 提交最终结果

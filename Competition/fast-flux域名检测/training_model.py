@@ -4,7 +4,7 @@
 文件描述: 训练模型
 作    者: HanKin
 创建日期: 2022.10.26
-修改日期：2022.11.17
+修改日期：2022.11.19
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
@@ -81,12 +81,9 @@ def model_score(model_name, y_test, y_pred):
         round(recall, 4), round(precision, 4), round(score*100, 2)))
     return round(score*100, 2)
 
-def random_forest_model(X, y):
+def random_forest_model(X_train, X_test, y_train, y_test):
     """随机森林模型
     """
-
-    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
 
     RFC = RandomForestClassifier(n_jobs=-1)
     RFC.fit(X_train, y_train)
@@ -96,19 +93,64 @@ def random_forest_model(X, y):
     score = model_score('RandomForestClassifier', y_test, y_pred)
     return RFC, score
 
-def svm_model(X, y):
+def svm_model(X_train, X_test, y_train, y_test):
     """SVM模型
     """
     
-    X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-    logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
-    
-    logger.info('training model......')
     SVM = svm.SVC(kernel='linear').fit(X_train, y_train)
     y_pred = SVM.predict(X_test)
     logger.info(classification_report(y_test, y_pred))
     score = model_score('SVM', y_test, y_pred)
     return SVM, score
+
+def catboost_model(X_train, X_test, y_train, y_test):
+    """CatBoostRegressor模型
+    """
+    
+    cat_grid = {'depth':[8]
+            , 'bootstrap_type':['Bernoulli']
+            , 'od_type':['Iter']
+            , 'l2_leaf_reg':[2]
+            , 'learning_rate': [0.1]
+            , 'allow_writing_files':[False]
+            , 'silent':[True]
+            , 'od_type':['Iter']
+           }
+    #search and fit
+    #cv=20 is the best
+    catgrid = GridSearchCV(CatBoostRegressor(), param_grid=cat_grid, cv=20, scoring='neg_mean_absolute_error', n_jobs=-1, verbose = 20)
+    catgrid.fit(X_train, y_train)
+    #predict output
+    y_pred = catgrid.predict(X_test)
+    #print best params
+    print(catgrid.best_params_, catgrid.best_score_)
+
+    #查看最大值、最小值可以在线下初步确定预测效果如果
+    print(y_pred.min(), y_pred.max())
+
+    y_pred = [1 if i > 0.25 else 0 for i in y_pred] 
+
+    logger.info(classification_report(y_test, y_pred))
+    score = model_score('CatBoostRegressor', y_test, y_pred)
+    return catgrid, score
+
+def oneclasssvm_model(train_dataset, X_test, y_test):
+    """OneClassSVM模型
+    """
+    
+    train_dataset = train_dataset.query('label == 0')
+    X_train = train_dataset.drop(['rrname', 'label'], axis=1).values
+    y_train = train_dataset['label'].values
+    
+    clf = svm.OneClassSVM(nu=0.1, kernel='rbf', gamma=0.1)
+    clf.fit(X_train)
+    y_pred = clf.predict(X_test)
+    
+    y_pred = [0 if i > 0 else 1 for i in y_pred] 
+    
+    logger.info(classification_report(y_test, y_pred))
+    score = model_score('OneClassSVM', y_test, y_pred)
+    return clf, score
 
 def save_training_model(model, score, model_path=BASELINE_MODEL_PATH, score_path=BASELINE_MODEL_SCORE_PATH):
     """保存训练模型
@@ -119,7 +161,7 @@ def save_training_model(model, score, model_path=BASELINE_MODEL_PATH, score_path
         with open(score_path, 'r') as fd:
             before_score = fd.read()
     
-    before_score = 0
+    before_score = 0    # 设置一直更新保存模型
     if score > float(before_score):
         logger.info('model need to be changed, old score {}, new score {}'.format(before_score, score))
         logger.info('save model[{}]'.format(model_path))
@@ -228,24 +270,45 @@ def xgb_model(x_train, y_train, x_test):
 def cat_model(x_train, y_train, x_test):
     return cv_model(CatBoostRegressor, x_train, y_train, x_test, "cat") 
 
+def pipeline_sample(X_train, y_train, X_test):
+    """欠采样和过采样组合
+    """
+    
+    params = {'learning_rate': 0.01, 'depth': 5, 'l2_leaf_reg': 10, 'bootstrap_type': 'Bernoulli',
+                      'od_type': 'Iter', 'od_wait': 50, 'random_seed': 11, 'allow_writing_files': False}
+    model = CatBoostRegressor(iterations=20000, **params)
+    over = SMOTE(sampling_strategy=0.5)
+    under = RandomUnderSampler(sampling_strategy=0.7)
+    steps = [('o', over), ('u', under), ('model', model)]
+    pipeline = Pipeline(steps=steps)
+    pipeline.fit(X_train, y_train)
+    y_test = pipeline.predict(X_test)
+    return y_test
+
 def main():
     # 获取数据集
     train_dataset = pd.read_csv(FEATURE_TRAIN_DATASET_PATH)
     logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
     logger.info(train_dataset.info())
+    train_dataset = train_dataset.fillna(0)
     
     X = train_dataset.drop(['rrname', 'label'], axis=1).values
     y = train_dataset['label'].values
         
     # 模型训练
-    #model, score = lightgbm_model(X, y)
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    #logger.info([X_train.shape, X_test.shape, y_train.shape, y_test.shape])
+    #model, score = oneclasssvm_model(train_dataset, X, y)
     #save_training_model(model, score)
+    #return 0
     
     test_dataset = pd.read_csv(FEATURE_TEST_DATASET_PATH)
+    test_dataset = test_dataset.fillna(0)
     x_train = train_dataset.drop(['rrname', 'label'], axis=1)
     y_train = train_dataset['label']
     x_test  = test_dataset.drop(['rrname'], axis=1)
-    cat_train, cat_test = cat_model(x_train, y_train, x_test)
+    #cat_train, cat_test = cat_model(x_train, y_train, x_test)
+    cat_test = pipeline_sample(x_train, y_train, x_test)
     logger.info(cat_test.shape)
     
     test_dataset['label'] = cat_test
@@ -256,7 +319,7 @@ def main():
         #print(file_name)
         test_dataset['result'] = test_dataset['label'].apply(lambda x: 1 if x > threshold else 0)
         
-        if True:
+        if False:
             change_count = 0
             for index, row in test_dataset.iterrows():
                 if row['openSource_sum'] > 5000:

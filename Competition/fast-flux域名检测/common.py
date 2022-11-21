@@ -4,7 +4,7 @@
 文件描述: 公共文件，包含全局变量和包
 作    者: HanKin
 创建日期: 2022.10.18
-修改日期：2022.11.11
+修改日期：2022.11.18
 
 Copyright (c) 2022 HanKin. All rights reserved.
 """
@@ -28,6 +28,10 @@ from sklearn.model_selection import cross_val_score  # 模型评价：训练误�
 from sklearn.ensemble import RandomForestClassifier  # RFC随机森林分类
 from sklearn import svm                              # SVM支持向量机
 from catboost import CatBoostRegressor
+from collections import Counter
+from imblearn.pipeline import Pipeline
+from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
 from sklearn.linear_model import SGDRegressor, LinearRegression, Ridge
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
 from sklearn.decomposition import TruncatedSVD,SparsePCA
@@ -39,7 +43,7 @@ from sklearn.preprocessing import LabelEncoder
 import warnings
 warnings.filterwarnings('ignore')
 
-RAW_DATASET_PATH          = './mini_'
+RAW_DATASET_PATH          = './'
 DATASET_PATH              = './dataset/'                                               # 数据集路径
 MODEL_PATH                = './model/'                                                 # 模型路径
                                                                                        

@@ -15,6 +15,7 @@ https://pypi.tuna.tsinghua.edu.cn/simple/graphviz/
 https://pypi.tuna.tsinghua.edu.cn/simple/catboost/
 https://pypi.tuna.tsinghua.edu.cn/simple/lightgbm/
 https://pypi.tuna.tsinghua.edu.cn/simple/xgboost/
+https://pypi.tuna.tsinghua.edu.cn/simple/imbalanced-learn/
 
 nlpia这个库需要安装很多依赖，建议在线安装，只是例子中使用到。
 
@@ -155,7 +156,7 @@ Fast-Flux网络返回的IP地址是不断变化的，在一段时间内查询得
 
 
 
-
+https://zhuanlan.zhihu.com/p/462791443
 
 
 

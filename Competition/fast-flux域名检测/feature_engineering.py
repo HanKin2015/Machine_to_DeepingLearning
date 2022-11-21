@@ -254,7 +254,6 @@ def other(agg_df):
     """自然语言处理
     """
     
-    """
     small_cols = ['judgement','expired','continent','timeZone']
     for col in tqdm(small_cols):
         logger.debug(col)
@@ -290,7 +289,7 @@ def other(agg_df):
         decom_feas['rrname'] = agg_df['rrname']
 
         agg_df = agg_df.merge(decom_feas, on=['rrname'], how='left')
-    """
+
     agg_df['country_count'] = agg_df['country'].apply(lambda x: len(set(x)))
     agg_df['number_count'] = agg_df['number'].apply(lambda x: len(set(x)))
     agg_df['openSource_sum'] = agg_df['openSource'].apply(lambda x: sum(x))

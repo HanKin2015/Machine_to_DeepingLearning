@@ -10,11 +10,13 @@ Copyright (c) 2022 ParticipationDoubled. All rights reserved.
 
 import time
 from log import logger
+import dataset_pre_processing
 import feature_engineering
 import training_model
 import predict_result
 
 def main():
+    dataset_pre_processing.main()
     feature_engineering.main()
     training_model.main()
     predict_result.main()

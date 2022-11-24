@@ -37,6 +37,7 @@ def predict(test_dataset_path, model_path):
     # 模型预测结果
     rrname = test_dataset['rrname']
     X = test_dataset.drop(['rrname'], axis=1, inplace=False).values
+    
     logger.info('isnan[{} {} {}], min_max[{} {}]'.format(np.isnan(X).any(),
         np.isfinite(X).all(), np.isinf(X).all(), X.argmin(), X.argmax()))
 

@@ -55,20 +55,19 @@ def catboost_model(X_train, X_test, y_train, y_test):
     """CatBoostRegressor模型
     """
 
-    cat_grid = {'learning_rate': [0.01]
-            ,'depth': [5]
-            , 'l2_leaf_reg': [10]
+    cat_grid = {'depth': [5]
             , 'bootstrap_type': ['Bernoulli']
             , 'od_type': ['Iter']
-            , 'od_wait': [50]
-            , 'random_seed': [2022]
+            , 'l2_leaf_reg': [10]
+            , 'learning_rate': [0.01]
             , 'allow_writing_files': [False]
+            , 'od_wait': [50]
+            , 'silent': [True]
+            , 'od_type': ['Iter']
+            , 'random_seed': [2022]
            }
-    folds = 5
-    seed = 2022
-    kf = StratifiedKFold(n_splits=folds, shuffle=True, random_state=seed)
 
-    catgrid = GridSearchCV(estimator=CatBoostRegressor(), param_grid=cat_grid, cv=kf, n_jobs=-1, verbose=500)
+    catgrid = GridSearchCV(CatBoostRegressor(), param_grid=cat_grid, cv=20, scoring='neg_mean_absolute_error', n_jobs=-1, verbose=20)
     catgrid.fit(X_train, y_train)
     y_pred = catgrid.predict(X_test)
     logger.info([catgrid.best_params_, catgrid.best_score_])
@@ -91,7 +90,7 @@ def save_training_model(model, score, model_path=BASELINE_MODEL_PATH, score_path
         with open(score_path, 'r') as fd:
             before_score = fd.read()
     
-    before_score = 0    # 设置一直更新保存模型
+    #before_score = 0    # 设置一直更新保存模型
     if score > float(before_score):
         logger.info('model need to be changed, old score {}, new score {}'.format(before_score, score))
         logger.info('save model[{}]'.format(model_path))
@@ -105,11 +104,11 @@ def main():
     # 获取数据集
     train_dataset = pd.read_csv(FEATURE_TRAIN_DATASET_PATH)
     logger.info('train dataset shape: ({}, {}).'.format(train_dataset.shape[0], train_dataset.shape[1]))
-    #logger.info(train_dataset.info())
+    logger.info(train_dataset.info())
     
     X = train_dataset.drop(['rrname', 'label'], axis=1).values
     y = train_dataset['label'].values
-    logger.info('isnan[{} {} {}], min_max[{} {}]'.format(np.isnan(X).any(),
+    logger.info('isnan[{} {} {}], min_max[]'.format(np.isnan(X).any(),
         np.isfinite(X).all(), np.isinf(X).all(), X.argmin(), X.argmax()))
         
     # 模型训练

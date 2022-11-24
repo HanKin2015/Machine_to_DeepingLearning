@@ -4,108 +4,13 @@
 文件描述: 特征工程
 作    者: 重在参与快乐加倍队
 创建日期: 2022.10.18
-修改日期：2022.11.24
+修改日期：2022.11.21
 
 Copyright (c) 2022 ParticipationDoubled. All rights reserved.
 """
 
 from common import *
 
-def ip_info_processing():
-    """处理ip_info数据集
-    """
-    
-    ip_info = pd.read_csv(RAW_IP_INFO_PATH)
-    logger.info('ip_info shape <{}, {}>'.format(ip_info.shape[0], ip_info.shape[1]))
-    logger.info(ip_info.columns)
-    
-    ip_info['location'] = ip_info['location'].apply(lambda x: eval(x))
-    for col in ['continent', 'country', 'countryCode', 'province', 'city', 'district', 'lng', 'lat', 'timeZone']:
-        ip_info[col] = ip_info['location'].apply(lambda x: x[col])
-     
-    ip_info['asn'] = ip_info['asn'].apply(lambda x: eval(x))
-    for col in ['number', 'organization', 'operator']:
-        ip_info[col] = ip_info['asn'].apply(lambda x: x[col])
-
-    ip_info['networkTags'] = ip_info['networkTags'].apply(lambda x:str(x).replace('[',''))
-    ip_info['networkTags'] = ip_info['networkTags'].apply(lambda x:str(x).replace(']',''))
-    ip_info['threatTags'] = ip_info['threatTags'].apply(lambda x:str(x).replace('[',''))
-    ip_info['threatTags'] = ip_info['threatTags'].apply(lambda x:str(x).replace(']',''))
-
-    info_cols = ['judgement','networkTags','threatTags','expired','continent','country',
-            'countryCode','province','city','district','timeZone','organization','operator']
-
-    # 填充缺失值
-    for col in info_cols:
-        ip_info[col] = ip_info[col].fillna('##')
-        ip_info[col] = label_encode(ip_info[col].astype(str))
-        ip_info[col] = ip_info[col].astype(str)
-
-    ip_info['openSource'] = ip_info['openSource'].apply(lambda x: 1 if len(str(x)) > 2 else 0)
-
-    ip_info.to_csv(IP_INFO_PATH, sep=',', encoding='utf-8', index=False)
-
-def dataset_pre_processing(dataset):
-    """数据集预处理
-    """
-    
-    # 去掉列表的左右中括号
-    dataset['rdata'] = dataset['rdata'].apply(lambda x:x[1:-1])
-
-    # 去掉空格
-    dataset['rdata'] = dataset['rdata'].apply(lambda x:x.replace(' ', ''))
-
-    # 时间转换成天数
-    dataset['time_first'] = dataset['time_first'].apply(lambda x: int(x / 3600 / 24))
-    dataset['time_last'] = dataset['time_last'].apply(lambda x: int(x / 3600 / 24))
-
-    # 时间差
-    dataset['time_diff'] = dataset['time_last'] - dataset['time_first']
-    return dataset
-
-def label_encode(series):
-    """自然数编码
-    """
-    
-    unique = list(series.unique())
-    #unique.sort()
-    return series.map(dict(zip(unique, range(series.nunique()))))
-
-def feature_extraction(dataset):
-    """特征提取
-    """
-
-    # 聚合
-    agg_df = dataset.groupby(['rrname']).agg({'rdata':[list],
-                                            'count':['sum', 'max', 'min', 'std'],
-                                            'time_first':['max', 'min'],
-                                            'time_last':['max', 'min'],
-                                            'rrtype':['unique'],
-                                            'bailiwick':[list, 'nunique'],
-                                            'time_diff':['sum', 'max', 'min', 'std']}).reset_index()
-
-    # 重置列名
-    agg_df.columns = [''.join(col).strip() for col in agg_df.columns.values]
-    agg_df.reset_index(drop=True, inplace=True)
-    
-    # 去掉两边引号
-    agg_df['rdatalist'] = agg_df['rdatalist'].apply(lambda x:','.join([i[1:-1] for i in x]).replace('\'','').split(','))
-
-    agg_df['rdatalist_count']     = agg_df['rdatalist'].apply(lambda x:len(x))
-    agg_df['rdatalist_nunique']   = agg_df['rdatalist'].apply(lambda x:len(set(x)))
-    agg_df['bailiwicklist_count'] = agg_df['bailiwicklist'].apply(lambda x:len(x))
-    
-    # 自然数编码
-    for col in ['rrtypeunique']:
-        agg_df[col] = label_encode(agg_df[col].astype(str))
-    
-    # 域名长度
-    agg_df['rrname_length'] = agg_df['rrname'].apply(lambda x: len(x))
-    
-    # 域名中数字数量
-    agg_df['rrname_number_count'] = agg_df['rrname'].apply(lambda x: len([ch for ch in x if ch.isdigit()]))
-    return agg_df
-    
 def feature_processing(agg_df):
     """特征工程
     """
@@ -124,7 +29,7 @@ def feature_processing(agg_df):
     # ip_info数值特征处理
     agg_df = numerical_feature_processing(agg_df)
     logger.info('agg_df memory used {:5.2f} MB'.format(agg_df.memory_usage().sum()/1024**2))
-    #logger.info(agg_df.columns)
+    logger.info(agg_df.columns)
     return agg_df
 
 def pdns_concat_ip_info(agg_df):
@@ -141,6 +46,7 @@ def pdns_concat_ip_info(agg_df):
     threatTags_dict = dict(zip(ip_info['ip'], ip_info['threatTags']))
     expired_dict = dict(zip(ip_info['ip'], ip_info['expired']))
     openSource_dict = dict(zip(ip_info['ip'], ip_info['openSource']))
+    updateTime_diff_dict = dict(zip(ip_info['ip'], ip_info['updateTime_diff'])) 
 
     continent_dict = dict(zip(ip_info['ip'], ip_info['continent']))
     country_dict = dict(zip(ip_info['ip'], ip_info['country']))
@@ -165,6 +71,7 @@ def pdns_concat_ip_info(agg_df):
     threatTags_li = []
     expired_li = []
     openSource_li = []
+    updateTime_diff_li = []
     continent_li = []
     country_li = []
     countryCode_li = []
@@ -177,7 +84,6 @@ def pdns_concat_ip_info(agg_df):
     operator_li = []
 
     not_found_ip_count = 0
-    #agg_df['rdatalist'] = agg_df['rdatalist'].apply(lambda x: eval(x))
     for items in tqdm(agg_df['rdatalist'].values):
         # 置空临时列表
         judgement_tmp = []
@@ -185,6 +91,7 @@ def pdns_concat_ip_info(agg_df):
         threatTags_tmp = []
         expired_tmp = []
         openSource_tmp = []
+        updateTime_diff_tmp = []
         continent_tmp = []
         country_tmp = []
         countryCode_tmp = []
@@ -203,6 +110,7 @@ def pdns_concat_ip_info(agg_df):
                 threatTags_tmp.append(threatTags_dict[ip])
                 expired_tmp.append(expired_dict[ip])
                 openSource_tmp.append(int(openSource_dict[ip]))
+                updateTime_diff_tmp.append(int(updateTime_diff_dict[ip]))
                 continent_tmp.append(continent_dict[ip])
                 country_tmp.append(country_dict[ip])
                 countryCode_tmp.append(countryCode_dict[ip])
@@ -224,6 +132,7 @@ def pdns_concat_ip_info(agg_df):
         threatTags_li.append(threatTags_tmp)
         expired_li.append(expired_tmp)
         openSource_li.append(openSource_tmp)
+        updateTime_diff_li.append(updateTime_diff_tmp)
         continent_li.append(continent_tmp)
         country_li.append(country_tmp)
         countryCode_li.append(countryCode_tmp)
@@ -236,17 +145,18 @@ def pdns_concat_ip_info(agg_df):
         operator_li.append(operator_tmp)
     
     logger.info('here is {} ips which are not found'.format(not_found_ip_count))
-
+    
     # 将ip_info提取的特征添加到数据集中
     info_df = pd.DataFrame({'judgement':np.array(judgement_li),'networkTags':np.array(networkTags_li),'threatTags':np.array(threatTags_li),
-                        'expired':np.array(expired_li),'openSource':np.array(openSource_li),
+                        'expired':np.array(expired_li),'openSource':np.array(openSource_li),'updateTime_diff':np.array(updateTime_diff_li),
                         'continent':np.array(continent_li),'country':np.array(country_li),'countryCode':np.array(countryCode_li),
                         'province':np.array(province_li),'city':np.array(city_li),'district':np.array(district_li),
                         'timeZone':np.array(timeZone_li),'number':np.array(number_li),'organization':np.array(organization_li),'operator':np.array(operator_li)})
     agg_df = pd.concat([agg_df, info_df], axis=1)
     
     show_memory_info('gc info_df before')
-
+    for col in ['judgement', 'networkTags', 'threatTags', 'expired', 'openSource']:
+        exec('{}_dict.clear()'.format(col))
     del info_df
     gc.collect()
     show_memory_info('gc info_df after')
@@ -305,41 +215,21 @@ def numerical_feature_processing(agg_df):
     agg_df['country_count'] = agg_df['country'].apply(lambda x: len(set(x)))
     agg_df['number_count'] = agg_df['number'].apply(lambda x: len(set(x)))
     agg_df['openSource_sum'] = agg_df['openSource'].apply(lambda x: sum(x))
+    agg_df['updateTime_diff_max'] = agg_df['updateTime_diff'].apply(lambda x: max(x) if x else 0)
+    agg_df['updateTime_diff_min'] = agg_df['updateTime_diff'].apply(lambda x: min(x) if x else 0)
+    agg_df['updateTime_diff_mean'] = agg_df['updateTime_diff'].apply(lambda x: np.mean(x) if x else 0)
+    agg_df['updateTime_diff_sum'] = agg_df['updateTime_diff'].apply(lambda x: sum(x) if x else 0)
+    agg_df['updateTime_diff_std'] = agg_df['updateTime_diff'].apply(lambda x: np.std(x) if x else 0)
     agg_df['ip_asn'] = agg_df['rdatalist_nunique'] / agg_df['number_count']
     return agg_df
-    
+
 def main():
     """主函数
     """
 
-    # 处理ip_info数据集
-    if not os.path.exists(IP_INFO_PATH):
-        ip_info_processing()
-
     show_memory_info('initial')
     # 获取数据集
-    train_dataset = pd.read_csv(TRAIN_DATASET_PATH)
-    test_dataset  = pd.read_csv(TEST_DATASET_PATH)    
-    logger.info('train_dataset shape <{}, {}>'.format(train_dataset.shape[0], train_dataset.shape[1]))
-    logger.info('test_dataset  shape <{}, {}>'.format(test_dataset.shape[0], test_dataset.shape[1]))
-
-    # 合并训练集和测试集
-    dataset = pd.concat([train_dataset, test_dataset], axis=0, ignore_index=True)
-    show_memory_info('gc train_dataset test_dataset before')
-    del train_dataset, test_dataset
-    gc.collect()
-    show_memory_info('gc train_dataset test_dataset after')
-    
-    # 数据集预处理
-    dataset = dataset_pre_processing(dataset)
-    show_memory_info('feature_extraction before')
-
-    # 特征提取
-    agg_df = feature_extraction(dataset)
-    logger.info('agg_df memory used {:5.2f} MB'.format(agg_df.memory_usage().sum()/1024**2))
-    show_memory_info('gc dataset before')
-    del dataset
-    logger.info('agg_df shape <{}, {}>'.format(agg_df.shape[0], agg_df.shape[1]))
+    agg_df = pd.read_csv(PRE_DATASET_PATH)
     
     show_memory_info('feature_processing before')
     # 特征工程
@@ -365,7 +255,7 @@ def main():
     
     # 挑选特征
     info_cols = ['judgement','networkTags','threatTags','expired','openSource',
-            'continent','country','countryCode','province','city',
+            'updateTime_diff','continent','country','countryCode','province','city',
             'district','timeZone','number','organization','operator']
     features = [f for f in dataset.columns if f not in ['rrname', 'label', 'rdatalist', 'bailiwicklist', 'openSource_sum']+info_cols]
     train_dataset = train_dataset[features+['rrname', 'label']]

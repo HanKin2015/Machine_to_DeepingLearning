@@ -12,7 +12,6 @@ Copyright (c) 2022 ParticipationDoubled. All rights reserved.
 import time
 import os
 os.environ['NUMEXPR_MAX_THREADS'] = '64'
-import psutil
 from log import logger
 from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
@@ -49,21 +48,19 @@ warnings.filterwarnings('ignore')
 RAW_DATASET_PATH          = './'                                                        # 原始数据集路径
 DATASET_PATH              = './dataset/'                                                # 特征工程后数据集路径
 MODEL_PATH                = './model/'                                                  # 模型路径
-OUTPUT_PATH               = './output/'                                                 # 结果输出路径
+RESULT_PATH               = './output/'                                                 # 预测结果存储路径
                                                                           
 TRAIN_DATASET_PATH        = RAW_DATASET_PATH+'fastflux_dataset/train/pdns.csv'          # 训练集原始数据集路径
 FEATURE_TRAIN_DATASET_PATH= DATASET_PATH+'feature_train_dataset.csv'                    # 训练集特征工程后数据集路径
 TRAIN_LABEL_PATH          = RAW_DATASET_PATH+'fastflux_dataset/train/fastflux_tag.csv'  # 训练集标签路径
 TEST_DATASET_PATH         = RAW_DATASET_PATH+'fastflux_dataset/test/pdns.csv'           # 测试集原始数据集路径
-#TEST_DATASET_PATH         = '/home/aifirst/datasets/aichampion/fast_flux/data/files/test.csv'
 FEATURE_TEST_DATASET_PATH = DATASET_PATH+'feature_test_dataset.csv'                     # 测试集特征工程后数据集路径
-RAW_IP_INFO_PATH          = RAW_DATASET_PATH+'fastflux_dataset/ip_info_recharge.csv'    # ip_info原始数据集路径
+RAW_IP_INFO_PATH          = RAW_DATASET_PATH+'fastflux_dataset/ip_info.csv'             # ip_info原始数据集路径
 IP_INFO_PATH              = DATASET_PATH+'ip_info.csv'                                  # ip_info处理后的数据集路径
 
-RESULT_PATH               = OUTPUT_PATH+'result.csv'                                    # 预测结果文件存储路径
+RESULT_PATH               = RESULT_PATH+'result.csv'                                    # 预测结果文件存储路径
 BASELINE_MODEL_PATH       = MODEL_PATH+'model.pkl'                                      # 模型文件存储路径
 BASELINE_MODEL_SCORE_PATH = MODEL_PATH+'model.score'                                    # 模型分数存储路径
-PRE_DATASET_PATH          = DATASET_PATH+'pre_dataset.csv'
 
 # 创建数据集路径文件夹
 if not os.path.exists(DATASET_PATH):
@@ -73,19 +70,9 @@ if not os.path.exists(DATASET_PATH):
 if not os.path.exists(MODEL_PATH):
     os.makedirs(MODEL_PATH)
 
-# 创建结果输出文件夹
-if not os.path.exists(OUTPUT_PATH):
-    os.makedirs(OUTPUT_PATH)
+# 创建预测结果文件存储文件夹
+if not os.path.exists(RESULT_PATH):
+    os.makedirs(RESULT_PATH)
 
 # 线程数量
 THREAD_NUM = 64
-
-def show_memory_info(hint):
-    """显示内存使用情况
-    """
-    
-    pid = os.getpid()
-    p = psutil.Process(pid)
-    info = p.memory_full_info()
-    memory = info.uss / 1024. / 1024
-    logger.info('{} memory used {:5.2f} MB'.format(hint, memory))

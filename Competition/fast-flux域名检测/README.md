@@ -159,4 +159,8 @@ Fast-Flux网络返回的IP地址是不断变化的，在一段时间内查询得
 https://zhuanlan.zhihu.com/p/462791443
 
 
-
+# FQDN 
+FQDN：(Fully Qualified Domain Name)全限定域名：同时带有主机名和域名的名称。（通过符号“.”）
+例如：主机名是bigserver,域名是mycompany.com,那么FQDN就是bigserver.mycompany.com。
+全限定域名可以从逻辑上准确地表示出主机在什么地方，也可以说全域名是主机名的一种完全表示形式。
+从全限定域名中包含的信息可以看出主机在域名树中的位置。DNS解析流程：首先查找本机HOSTS表，有的直接使用表中定义，没有查找网络连接中设置的DNS 服务器由他来解析。

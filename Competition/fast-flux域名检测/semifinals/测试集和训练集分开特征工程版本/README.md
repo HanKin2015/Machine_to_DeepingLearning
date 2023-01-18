@@ -16,5 +16,3 @@ python main.py
 
 ## 4、调试
 取日志log/fastflux_detect.log
-
-https://zhuanlan.zhihu.com/p/36858386

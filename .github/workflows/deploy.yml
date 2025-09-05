@@ -1,0 +1,35 @@
+name: GitBook Deploy
+
+on:
+  push:
+    branches: [ main ]  # 监听 main 分支的推送
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # GitBook 对 Node 版本有要求，建议 14+
+
+      - name: 安装 GitBook 工具
+        run: |
+          npm install -g gitbook-cli
+          gitbook install  # 安装 book.json 中配置的插件
+
+      - name: 编译 GitBook
+        run: 
+            cd docs
+            gitbook build  # 生成 _book 目录（编译后的 HTML）
+
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_book  # 指定编译产物目录

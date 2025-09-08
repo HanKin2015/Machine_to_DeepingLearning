@@ -13,20 +13,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 安装 Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16  # GitBook 对 Node 版本有要求，建议 14+
-
-      - name: 安装 GitBook 工具
+      - name: 使用 Docker 编译 GitBook
         run: |
-          npm install -g gitbook-cli
-          gitbook install  # 安装 book.json 中配置的插件
-
-      - name: 编译 GitBook
-        run: 
-            cd docs
-            gitbook build  # 生成 _book 目录（编译后的 HTML）
+          # 使用包含完整依赖的 Docker 镜像
+          # 生成 _book 目录（编译后的 HTML）
+          docker run --rm -v $(pwd):/app -w /app node:10-slim sh -c "
+            npm install -g gitbook-cli &&
+            gitbook install &&
+            cd docs &&
+            gitbook build
+          "
 
       - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

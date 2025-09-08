@@ -22,7 +22,7 @@ name: GitBook Deploy
 
 on:
   push:
-    branches: [ main ]  # 监听 main 分支的推送
+    branches: [ master ]  # 监听 master 分支的推送
 
 jobs:
   build-and-deploy:
@@ -59,3 +59,23 @@ jobs:
 - 进入 GitHub 仓库 → Settings → Pages
 - 在「Source」中选择：GitHub Actions（然后你就会发现github会提供默认的两种配置yml文件）
 - 保存配置后，GitHub Pages 会自动创建并读取编译后的 HTML 文件。
+
+## 5、部署报错
+```
+Run `npm audit` for details.
+Installing GitBook 3.2.3
+/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287
+      if (cb) cb.apply(this, arguments)
+                 ^
+
+TypeError: cb.apply is not a function
+    at /opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/graceful-fs/polyfills.js:287:18
+    at FSReqCallback.oncomplete (node:fs:203:5)
+Error: Process completed with exit code 1.
+```
+这个错误通常是由于 GitBook 与高版本 Node.js 不兼容 导致的。GitBook 官方已停止维护，其依赖的 graceful-fs 等库与 Node.js 14+ 版本存在兼容性问题，具体表现为回调函数处理异常。
+
+GitBook 对 Node.js 版本较为敏感，推荐使用 Node.js 12.x（经测试兼容性最佳）。同时需要手动处理依赖冲突。修改了多个版本解决方法，经测试，未解决。
+
+替代方案（推荐）：使用社区维护版本
+由于 GitBook 官方已停止维护，长期来看建议迁移到社区维护的分支（如 gitbook-legacy）或替代工具（如 mdBook、VitePress）。

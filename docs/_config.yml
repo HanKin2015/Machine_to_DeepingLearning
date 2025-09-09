@@ -7,26 +7,68 @@ url: "https://hankin2015.github.io" # 你的 GitHub Pages 域名
 # 指定主题
 remote_theme: just-the-docs/just-the-docs # 使用 GitHub 上的主题（无需本地安装）
 # 或本地主题（下载主题文件到 _theme 文件夹后配置）：theme: just-the-docs
+search_enabled: true
+
+# 启用复制代码按钮 (保持启用)
+enable_copy_code_button: true
+
+# 配置页脚内容 (暂时移除自定义，使用默认)
+# footer_content: "版权所有 &copy; 2025 我的文档网站"
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Just the Docs on GitHub":
+    - "https://github.com/hankin2015/Machine_to_DeepingLearning/docs"
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Enable or disable the side/mobile menu globally
+# Nav menu can also be selectively enabled or disabled using page variables or the minimal layout
+nav_enabled: true
+
+# Sort order for navigation links
+# nav_sort: case_insensitive # default, equivalent to nil
+nav_sort: case_sensitive # Capital letters sorted before lowercase
+
+# External navigation links
+nav_external_links:
+  - title: Just the Docs on GitHub
+    url: https://github.com/hankin2015/Machine_to_DeepingLearning/docs
+
+# Show navigation error report
+nav_error_report: true # default is false/nil.
+
+footer_content: 'Copyright &copy; 2015-2025 Patrick Marsceill. Distributed by an <a href="https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a>'
+
+# Footer last edited timestamp
+last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/just-the-docs/just-the-docs" # the github URL for your repo
+gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
+color_scheme: nil
 
 # 必须启用远程主题插件
 plugins:
   - jekyll-remote-theme
-  - jekyll-toc  # 可选：用于生成目录
-  - jekyll-sitemap  # 可选：生成站点地图
 
-# 导航菜单配置（核心！对应 GitBook 的侧边栏）
+# _config.yml
+docs_dir: "_nonexistent_dir"  # 指定一个不存在的目录，禁用自动扫描
+
+# 导航菜单配置（Just the Docs 主题专用）
+# _config.yml
 nav:
-  - title: "入门指南"
-    children:
-      - title: "环境搭建"
-        url: /docs.en/Try
-      - title: "快速上手"
-        url: /docs.en/Try
-  - title: "核心功能"
-    children:
-      - title: "导航配置"
-        url: /docs.en/Try
-      - title: "搜索功能"
-        url: /docs.en/Try
-  - title: "关于"
-    url: /about
+  - title: "首页"          # 导航项名称
+    url: /            # 链接地址（首页通常用 /）

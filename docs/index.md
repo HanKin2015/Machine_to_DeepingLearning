@@ -5,7 +5,7 @@ title: hankin
 titleTemplate: A collection of C++20 libraries, include async_simple, coro_rpc and struct_pack.
 
 hero:
-  name: yalantinglibs
+  name: vitepress在线文档
   text: A collection of C++20 libraries.
   actions:
     - theme: brand
@@ -13,7 +13,7 @@ hero:
       link: /docs.en/GetStarted
     - theme: alt
       text: View on GitHub
-      link: https://github.com/alibaba/yalantinglibs.git
+      link: https://github.com/hankin2015/Machine_to_DeepingLearning.git
 
 features:
   - title: struct_pack

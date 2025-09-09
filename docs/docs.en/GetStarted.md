@@ -1,11 +1,38 @@
-# 1、写在前面
+# 更换在线文档的心酸史
 网页地址：https://hankin2015.github.io/Machine_to_DeepingLearning/
 
 使用gitbook+github pages+github actions进行搭建。
 
 最终发现使用docker环境能正常部署，但是会自动创建gh-pages分支发布html文件。
 
-https://ml-booknote.readthedocs.io/zh-cn/latest/index.html
+just the docs：https://hankin2015.github.io/just-the-docs/
+read the docs：https://ml-booknote.readthedocs.io/zh-cn/latest/index.html
+最终选择参考https://alibaba.github.io/async_simple/docs.en/GetStarted.html
+使用vitepress技术搭建。
+
+https://blog.csdn.net/gitblog_00608/article/details/141522735
+心累，花了两天使用just the docs去搭建在线文档，结果始终解决不了导航栏菜单。它默认只能通过在Markdown 文件添加 Front Matter（即 --- 包裹的 layout、title、nav_order 等配置）自动生成，官网也没有说明可以通过nav字段生成，但是豆包始终坚持是支持的。
+更换其他AI工具：kimi
+发现询问也是说支持，也给出了一些修改建议，但多次测试依然无结果。最终我质疑它，然后它就服软了。。。。。。
+```
+感觉你说是错误的吧，根本不支持nav字段自定义导航栏菜单列表
+
+你提出的质疑是合理的。经过再次验证和搜索结果确认，Just the Docs 主题目前并不支持通过 nav 字段在 _config.yml 中自定义顶部导航栏菜单列表。
+事实澄清：
+Just the Docs 的导航栏（顶部菜单）是自动生成的，它基于页面 title 和 parent、grand_parent 等 front-matter 自动构建，而不是通过 nav 字段手动定义。
+_config.yml 中的 nav 字段 并不是 Just the Docs 的主题配置项，即使你写了 nav，它也不会被识别或生效。你观察到的“自动搜索 markdown 文件生成导航”的行为，正是该主题的默认逻辑。
+你可能是受到了 其他 Jekyll 主题（如 Minima、GitBook 等）或文档生成工具（如 MkDocs、VuePress） 的误导，它们才支持通过 nav 字段配置导航栏。
+```
+
+然后再去质疑豆包：
+```
+我已经多次验证和搜索结果确认，Just the Docs 主题目前并不支持通过 nav 字段在 _config.yml 中自定义顶部导航栏菜单列表。
+
+你的结论是正确的！经过更细致的验证和官方文档确认，Just the Docs 主题确实不支持通过 _config.yml 中的 nav 字段直接定义顶部导航栏。之前的混淆主要源于对 Jekyll 主题通用配置的惯性认知，而该主题有其独特的导航设计逻辑。
+核心原因：Just the Docs 的导航配置采用独立文件机制
+该主题将导航配置与 _config.yml 分离，统一通过 _data/navigation.yml 文件管理所有导航（包括顶部导航和侧边栏），而非依赖 _config.yml 中的 nav 字段。这是其设计上的特殊性，也是与其他 Jekyll 主题（如 minimal-mistakes）的关键区别。
+```
+浪费了我的青春啊！！！
 
 # 2、目录
 - ACM

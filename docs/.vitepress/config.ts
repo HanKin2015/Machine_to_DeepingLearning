@@ -34,7 +34,7 @@ export default {
 
     footer: {
       message: 'This website is released under the MIT License.',
-      copyright: 'Copyright © 2022 yalantinglibs contributors'
+      copyright: 'Copyright © 2025 hankin2015 contributors'
     },
 
     editLink: {

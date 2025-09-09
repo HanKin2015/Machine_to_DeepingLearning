@@ -1,7 +1,7 @@
 # 基础配置
 title: 我的 Wiki
 description: 团队技术 Wiki
-baseurl: "/Machine_to_DeepingLearning" # 若部署到 GitHub Pages 的 repo 二级路径，需配置（如 repo 名为 my-wiki，则填 /my-wiki）
+baseurl: "" # 若部署到 GitHub Pages 的 repo 二级路径，需配置（如 repo 名为 my-wiki，则填 /my-wiki）
 url: "https://hankin2015.github.io" # 你的 GitHub Pages 域名
 
 # 指定主题
@@ -10,12 +10,13 @@ remote_theme: just-the-docs/just-the-docs@v0.10.1 # 使用 GitHub 上的主题�
 # 必须启用远程主题插件
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 # _config.yml
 docs_dir: "_nonexistent_dir"  # 指定一个不存在的目录，禁用自动扫描
 
 # 导航菜单配置（Just the Docs 主题专用）
-# _config.yml
 nav:
   - title: "首页"          # 导航项名称
+    href: /            # 链接地址（首页通常用 /）
     url: /            # 链接地址（首页通常用 /）

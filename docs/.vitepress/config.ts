@@ -1,5 +1,5 @@
 export default {
-  lang: 'en-US',
+  lang: 'zh-CN',
   title: 'hankin',
   description: 'Simple, light-weight and easy-to-use asynchronous components',
   base: '/Machine_to_DeepingLearning/',

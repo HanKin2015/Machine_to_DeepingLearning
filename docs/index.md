@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /docs.en/GetStarted
+      link: /docs.cn/GetStarted
     - theme: alt
       text: View on GitHub
       link: https://github.com/hankin2015/Machine_to_DeepingLearning.git

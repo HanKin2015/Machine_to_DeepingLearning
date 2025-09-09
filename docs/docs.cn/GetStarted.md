@@ -34,6 +34,8 @@ _config.yml 中的 nav 字段 并不是 Just the Docs 的主题配置项，即�
 ```
 浪费了我的青春啊！！！
 
+collapsed: true是折叠
+
 # 2、目录
 - ACM
 

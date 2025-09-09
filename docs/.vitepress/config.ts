@@ -136,6 +136,7 @@ function sidebarGuideZh() {
         {
           text: '快速入门',
           collapsible: true,
+          collapsed: true,
           items: [
             {text: 'Get Started', link: '/docs.cn/GetStarted'},
             {text: '无栈协程', link: '/docs.cn/无栈协程'},
@@ -154,6 +155,7 @@ function sidebarGuideZh() {
         {
           text: '工具类',
           collapsible: true,
+          collapsed: true,
           items: [
             {text: 'Future', link: '/docs.cn/Future'},
             {text: 'Lock', link: '/docs.cn/Lock'},
@@ -165,6 +167,7 @@ function sidebarGuideZh() {
         {
           text: '性能',
           collapsible: true,
+          collapsed: false,
           items: [
             {text: 'Performance', link: '/docs.cn/Performance'},
             {text: '协程性能定量分析', link: '/docs.cn/基于async_simple的协程性能定量分析'},

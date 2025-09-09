@@ -1,0 +1,32 @@
+# 基础配置
+title: 我的 Wiki
+description: 团队技术 Wiki
+baseurl: "/Machine_to_DeepingLearning" # 若部署到 GitHub Pages 的 repo 二级路径，需配置（如 repo 名为 my-wiki，则填 /my-wiki）
+url: "https://hankin2015.github.io" # 你的 GitHub Pages 域名
+
+# 指定主题
+remote_theme: just-the-docs/just-the-docs # 使用 GitHub 上的主题（无需本地安装）
+# 或本地主题（下载主题文件到 _theme 文件夹后配置）：theme: just-the-docs
+
+# 必须启用远程主题插件
+plugins:
+  - jekyll-remote-theme
+  - jekyll-toc  # 可选：用于生成目录
+  - jekyll-sitemap  # 可选：生成站点地图
+
+# 导航菜单配置（核心！对应 GitBook 的侧边栏）
+nav:
+  - title: "入门指南"
+    children:
+      - title: "环境搭建"
+        url: /docs.en/Try
+      - title: "快速上手"
+        url: /docs.en/Try
+  - title: "核心功能"
+    children:
+      - title: "导航配置"
+        url: /docs.en/Try
+      - title: "搜索功能"
+        url: /docs.en/Try
+  - title: "关于"
+    url: /about

@@ -5,6 +5,8 @@
 
 最终发现使用docker环境能正常部署，但是会自动创建gh-pages分支发布html文件。
 
+https://ml-booknote.readthedocs.io/zh-cn/latest/index.html
+
 # 2、目录
 - ACM
 

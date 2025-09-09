@@ -67,11 +67,13 @@ function nav() {
 function sidebarGuide() {
   return [ {
       text: 'async_simple',
-      collapsible: true,
+      collapsible: true, // 启用折叠
+      collapsed: false,  // 默认展开（可选，默认是true折叠）
       items: [
         {
           text: 'Quick Start',
-          collapsible: true,
+          collapsible: true, // 启用折叠
+          collapsed: false,  // 默认展开（可选，默认是true折叠）
           items: [
             {text: 'Get Started', link: '/docs.en/GetStarted'},
             {text: 'Stackless Coroutine', link: '/docs.en/StacklessCoroutine'},
@@ -89,7 +91,8 @@ function sidebarGuide() {
         },
         {
           text: 'Utils',
-          collapsible: true,
+          collapsible: true, // 启用折叠
+          collapsed: false,  // 默认展开（可选，默认是true折叠）
           items: [
             {text: 'Future', link: '/docs.en/Future'},
             {text: 'Lock', link: '/docs.en/Lock'},
@@ -100,7 +103,8 @@ function sidebarGuide() {
         },
         {
           text: 'Performance',
-          collapsible: true,
+          collapsible: true, // 启用折叠
+          collapsed: false,  // 默认展开（可选，默认是true折叠）
           items: [
             {text: 'Performance', link: '/docs.en/Performance'},
             {text: 'Quantitative Analysis of Performance', link: '/docs.en/QuantitativeAnalysisReportOfCoroutinePerformance'},

@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { generateSidebar } from 'vitepress-sidebar'
 
 const autoSidebar = generateSidebar({
-  documentRootPath: '/docs/',
+  documentRootPath: '/',
   collapsed: true,
 });
 
@@ -25,9 +25,18 @@ export default defineConfig({
   title: 'hankin',
   description: 'Simple, light-weight and easy-to-use asynchronous components',
   base: '/Machine_to_DeepingLearning/',
-  lastUpdated: true,
+
+  lastUpdated: !!process.env.CI,
   ignoreDeadLinks: false,
   outDir: "public",
+
+  // 暗黑模式自动切换
+  appearance: true,
+
+  markdown: {
+    lineNumbers: true, // 代码块显示行号（写驱动日志必备）
+  },
+
   locales: {
     "/docs.en/": {
       lang: 'en-US',
@@ -50,8 +59,26 @@ export default defineConfig({
       '/docs.cn/': sidebar,
     },
 
+    // 右侧文章目录层级
+    outline: {
+      level: [2, 4],
+      label: '目录'
+    },
+
+    // 上一页/下一页中文
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    },
+
+    // 内置本地全文搜索（中文开箱即用，不需要Algolia）
+    search: {
+      provider: 'local'
+    },
+
+    // 右上角github跳转链接
     socialLinks: [
-      {icon: 'github', link: 'https://github.com/alibaba/async_simple'}
+      { icon: 'github', link: 'https://github.com/hankin2015/GitBook' }
     ],
 
     footer: {
